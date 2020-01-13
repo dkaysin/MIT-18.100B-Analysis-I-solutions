@@ -1,0 +1,332 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[]{amsthm}
+\usepackage[]{amssymb} 
+\usepackage{amsmath}
+\usepackage{tcolorbox}
+
+\title{18.100B: Problem Set 3}
+\author{Dmitry Kaysin}
+\date\today
+
+\begin{document}
+\maketitle 
+
+\subsection*{Problem 1}
+
+\begin{tcolorbox}
+In vector spaces, metrics are usually defined in terms of norms which measure the length
+of a vector. If $V$ is a vector space defined over $\mathbb{R}$, then a norm is a function from vectors to real
+numbers, denoted by $\| \cdot \|$ satisfying:\\
+\begin{itemize}
+    \item $\|x\| \geq 0$ and $\|x\|=0 \iff x = 0$
+    \item For any $\lambda \in \mathbb{R}, \| \lambda x\| = | \lambda | \| x \| $
+    \item $\| x+y \| \leq \|x\| + \|y \|$.
+\end{itemize}
+Prove that every norm defines a metric.
+\end{tcolorbox}
+
+\begin{proof}
+
+For given two vectors $p, q \in V$ and a norm $\| \cdot \|$, metric on $V$ can be defined as $d(p, q) = \| p-q \|$. We will check the following properties of this metric:
+\begin{itemize}
+    \item $d(p, q) > 0$ if $p \neq q$; d(p,p)=0
+    \item $d(p, q) = d(q, p)$
+    \item $d(p, q) \leq d(p, r) + d(r, q)$
+\end{itemize}
+for $p, q, r \in V$.
+
+We first check that for $p \neq q : d(p, q) = \| p-q \| = \| x \| > 0$ for some $x \in V$. We also note that $d(p, p) = \| p-p \| = \| 0 \| = 0$.
+
+We then check that $d(p, q) = \| p-q \| = \| -1 \cdot (q-p) \| = |-1| \| q-p \| = d (q, p)$.
+Finally, we check that 
+$$d(p, q) \leq d(p, r) + d(r, q)$$
+Indeed
+$$\| p-q \| \leq \| p-r \| + \| r-q \|$$ 
+$$\| (p-r) + (r-q) \| \leq \| p-r \| + \| r-q \|$$ 
+which is true by the triangle inequality for norms.
+
+\end{proof}
+
+\subsection*{Problem 2}
+
+\begin{tcolorbox}
+Let $M$ be a metric space with metric $d$. Show that $d_1$ defined by
+$$ d_1 (x, y) = \frac{d(x, y)}{1 + d(x, y)} $$
+is also a metric on $M$. 
+\end{tcolorbox}
+
+\begin{proof}
+We will check whether $d_1$ satisfies properties of a metric. Let $p, q, r \in M$. Denote $a = d(p, q)$.
+
+We first check that for $p \neq q : d_1(p, q) = 0 $.
+$$ d_1(p, q) = \frac{d(x, y)}{1 + d(x, y)} = \frac{a}{1+a} > 0 $$
+
+We also check that for $p = q : d_1(p, q) = 0$.
+$$ d_1(p, q) = \frac{0}{1+0} = 0$$
+
+We then check that $d_1(p, q) = d_1(q, p)$.
+$$ d(p, q) = d(q, p) = a $$
+$$ d_1(p, q) = \frac{a}{1+a} = d_1(q, p) $$
+
+We finally check the triangle inequality for $d_1$:
+$$ d_1(p, q) \leq d_1(p, r) + d_1(r, q)$$
+Let $d(p, q) = a, \> d(p, r) = b, \> d(r, q) = c$.
+We now prove that
+$$ \frac{a}{1+a} \leq \frac{b}{1+b} + \frac{c}{1+c} $$
+$$ a(1+b)(1+c) \leq (1+a)(b+c+2bc) $$
+$$ a+ab+ac+abc \leq b+c+2bc+ab+ac+2abc $$
+$$ a \leq b+c+bc+abc $$
+Since $d$ is a metric: $a \leq b+c$:
+$$ a \leq a+bc+abc $$
+$$ 0 \leq bc+abc $$
+Which is always true because $a,b,c > 0$.
+
+Since function $d_1$ satisfies all properties of a metric, it is a metric.
+
+\end{proof}
+
+\begin{tcolorbox}
+Observe that $M$ itself is bounded in this metric.
+\end{tcolorbox}
+
+\begin{proof}
+We notice that set $D = \{ d_1(p,q) : p,q \in \mathbb{R}_{\geq 0} \}$ is bounded. $D$ is bounded from below by $0$ since metric has a property of non-negativity. $D$ is clearly bounded from above by $1$.
+\end{proof}
+
+\subsection*{Problem 3}
+
+\begin{tcolorbox}
+Let $A$ and $B$ be two subsets of a metric space $M$. Recall that $A^\circ$, the interior of $A$, is
+the set of interior points of $A$. Prove the following:
+
+a) $A^\circ \cup B^\circ \subseteq (A \cup B)^\circ $
+\end{tcolorbox}
+
+\begin{proof}
+Consider $a \in A^\circ$ and $b \in B^\circ$. By definition of interior point we can find open neighbourhoods $N(a) \subset A$ and $N(b) \subset B$.
+
+For any sets $S, X, Y$:
+$$ S \subset X \Rightarrow Y \subset (X \cup Y) $$
+Therefore, $N(a) \subset A \cup B$ and $N(b) \subset A \cup B$. Thus, both points $a$ and $b$ are interior points of $A \cup B$. This should hold not only for metric spaces.
+\end{proof}
+
+\begin{tcolorbox}
+b) $ A^\circ \cap B^\circ = (A \cap B)^\circ $
+\end{tcolorbox}
+
+\begin{proof}
+A point belongs to intersection of two sets if and only if it belongs to both sets. Consider point $x$ that belongs to intersection of interiors of $A$ and $B$ ($x \in A^\circ, x \in B^\circ$). By definition of interior point we can find open neighbourhoods $N_a(x) \subset A$ and $N_b(x) \subset B$. Thus intersection of neighbourhoods $N_a(x) \cap N_b(x)$ lies within $A \cap B$. Thus, point $x$ is an interior point of $A \cap B$, or:
+
+\begin{equation} \label{eq:1}
+A^\circ \cap B^\circ \subseteq (A \cap B)^\circ
+\end{equation}
+
+Now consider $y$, interior point of intersection of $A$ and $B$ ($y \in (A \cap B)^\circ$). Since $y$ is interior, we can find an open neighbourhood $N_{ab}(y) \in (A \cap B)$. Furthermore, $N_{ab}(y)$ must be a subset of both $A$ and $B$ and thus has open neighbourhoods in $A$ and in $B$. Therefore $y$ is an interior point of both $A$ and $B$, or:
+
+\begin{equation} \label{eq:2}
+(A \cap B)^\circ \subseteq A^\circ \cap B^\circ
+\end{equation}
+
+Considering expressions \ref{eq:1} and \ref{eq:2}, we conclude that $ A^\circ \cap B^\circ = (A \cap B)^\circ $. This should hold not only for metric spaces.
+\end{proof}
+
+\begin{tcolorbox}
+Give an example of two subsets $A$ and $B$ of the real line such that $A^\circ \cup B^\circ \neq (A \cup B)^\circ $.
+\end{tcolorbox}
+
+Answer: $A = \mathbb{Q}, \> B = \mathbb{R} \setminus \mathbb{Q}$.
+
+\begin{proof}
+Since $\mathbb{Q}$ is dense in $\mathbb{R}$, every neighbourhood of every point of both sets $\mathbb{Q}$ and $\mathbb{R} \setminus \mathbb{Q}$ contains infinitely many points of both $\mathbb{Q}$ and $\mathbb{R} \setminus \mathbb{Q}$. This means that no point of these sets is interior:
+
+$$ \mathbb{Q}^\circ = \emptyset, \>\> (\mathbb{R} \setminus \mathbb{Q})^\circ = \emptyset $$
+
+However, interior of the union of these sets is $\mathbb{R}$:
+
+$$(\mathbb{Q} \cup (\mathbb{R} \setminus \mathbb{Q}))^\circ = \mathbb{R}^\circ = \mathbb{R}$$.
+
+Therefore, $\mathbb{Q}^\circ + (\mathbb{R} \setminus \mathbb{Q})^\circ \neq (\mathbb{Q} \cup (\mathbb{R} \setminus \mathbb{Q}))^\circ. $
+\end{proof}
+
+
+\subsection*{Problem 4}
+
+\begin{tcolorbox}
+Let $A$ be a subset of a metric space $M$. Recall that $\overline{A}$, the closure of $A$, is the union of
+$A$ and its limit points. Recall that a point $x$ belongs to the boundary of $A$, $\partial A$, if every open ball centered at $x$ contains points of $A$ and points of $A^c$, the complement of $A$. Prove that:
+
+a) $\partial A = \overline{A} \cap \overline{A^c}$
+\end{tcolorbox}
+
+\begin{proof}
+
+Note: We shall prove validity of claims a)-d) for general topological spaces that do not necessarily have a metric.
+
+Consider point $p \in \partial A$. Every neighbourhood of $p$ must contain points of both $A$ and $A^c$. Thus every neighbourhood of $p$ must contain points of $A$, so $p \in \overline{A}$. Every neighbourhood of $p$ must also contain points of $A^c$, so $p \in \overline{A^c}$. Since $p$ is both an element of set $\overline{A}$ and of set $\overline{A^c}$, $p$ must be an element of $\overline{A} \cap \overline{A^c}$, so:
+\begin{equation} \label{eq:3}
+\partial A \subseteq \overline{A} \cap \overline{A^c}
+\end{equation}
+
+Now consider point $p \in \overline{A} \cap \overline{A^c}$. Point $p$ must belong to the set $\overline{A}$, thus every open neighbourhood of $p$ must contain elements of $A$. Point $p$ must also belong to the set $\overline{A^c}$, thus every open neighbourhood of $p$ must contain elements of $A^c$. We can see that every open neighbourhood of $p$ must contain elements of both $A$ and $A^c$m so $p$ must lie in the boundary of $A$, or:
+\begin{equation} \label{eq:4}
+\overline{A} \cap \overline{A^c} \subseteq \partial A
+\end{equation}
+
+Considering expressions \ref{eq:3} and \ref{eq:4} we can see that $\partial A = \overline{A} \cap \overline{A^c}$.
+\end{proof}
+
+\begin{tcolorbox}
+b) $p \in \partial A \iff p$ is in $\overline{A}$ but not in $A^\circ$ (symbolically, $\partial A = \overline{A} \setminus A^\circ$)
+\end{tcolorbox}
+
+\begin{proof}
+Consider $p \in \partial A$. Every open neighbourhood of $p$ must contain both points of $A$ and points of $A^c$. Since every open neighbourhood of $p$ must contain points of $A$, $p$ must be an element of $\overline{A}$, so:
+$$ A \subseteq \overline{A} $$
+Furthermore, since every open neighbourhood of $p$ must contain points of $A^c$, such neighbourhood cannot be a subset of A, so $p$ cannot be a interior point. Therefore
+$$ A \nsubseteq A^\circ $$
+We conclude that
+\begin{equation} \label{eq:5}
+\partial A \subseteq \overline{A} \setminus A^\circ
+\end{equation}
+
+Now consider $p \in \overline{A} \setminus A^\circ$. Since $p$ is an element of $\overline{A}$, every neighbourhood of $p$ must contain points of $A$. Since $p$ cannot be an element of $A^\circ$, every neighbourhood of $p$ includes points that belong to $A^c$. Therefore every neighbourhood of $p$ includes both points of $A$ and points of $A^c$ and we conclude that
+\begin{equation} \label{eq:6}
+\overline{A} \setminus A^\circ \subseteq \partial A
+\end{equation}
+
+Considering expressions \ref{eq:5} and \ref{eq:6} we can see that $\partial A = \overline{A} \setminus A^\circ$. 
+\end{proof}
+
+\begin{tcolorbox}
+c) $\partial A$ is a closed set
+\end{tcolorbox}
+
+\begin{proof}
+Set $\partial A$ is closed if it contains all its limit points. If the set of limit points of $\partial A$ is not $\emptyset$, consider an arbitrary limit point $p$ of $\partial A$. Now we will prove that $p$ is a boundary point of $A$. Consider $N(p)$, an arbitrary open neighbourhood of $p$. Since $p$ is a limit point, $N(p)$ must contain points of $\partial A$ other than $p$. Denote $q : q \in \partial A, q \in N(p)$ one of these points. Every open neighbourhood of $q$ must contain points that lie in $A$ and in $A^c$ by definition of boundary. Notice that $N(p)$ is an open neighbourhood of $q$. Thus $N(p)$ must include points that lie in $A$ and in $A^c$. Therefore, $p$ is a boundary point of $A$. We conclude that all limit points of $\partial A$ lie in $\partial A$, or set $\partial A$ is closed. 
+
+If the set of limit points of $\partial A$ is $\emptyset$ we note that $\emptyset \subseteq \partial A$. In this case, vacuously, $\partial A$ is a closed set.
+\end{proof}
+
+\begin{tcolorbox}
+d) $A$ is closed $\iff \partial A \subseteq A$ 
+\end{tcolorbox}
+
+\begin{proof}
+Consider $b$, a boundary point of a closed set $A$. Consider an arbitrary open neighbourhood of $b$: $N(b)$. Since $b$ is a boundary point, $N(b)$ contains at least one point of $A$ and at least one point of $A^c$. Consider an arbitrary point $p \in A$ that lies in $N(b)$. Either $p = b$ or $p \neq b$. If $p = b$, then $p = b \in A$, so $b$, a boundary point of $A$, is an element of $A$. If $p \neq b$, then $b$ must be a limit point. But then we know that a closed set contains all its limit points, thus $b$, a boundary point of $A$, is an element of $A$. We conclude that if $A$ is closed then $\partial A \subseteq A$.
+
+Now consider a set $A$ such that $\partial A \subseteq A$. Suppose $p$ is a limit point of $A$ such that $p \notin A$. Then $p \in A^c$. Therefore each open neighbourhood of $p$ must include points of $A$ (since it is a limit point of $A$) and at least one point of $A^c$, specifically $p$. But then $p$ must be a boundary point of $A$ and since $\partial A \subseteq A$, $p$ must be an element of $A$, which presents a contradiction. Therefore, $p$, a limit point of $A$ must be a point of $A$. We conclude that if $\partial A \subseteq A$ then $A$ is closed.
+
+Thus, $A$ is closed $\iff$ $\partial A \subseteq A$.
+\end{proof}
+
+\subsection*{Problem 5}
+
+\begin{tcolorbox}
+Show that, in $\mathbb{R}^n$ with the usual (Euclidean) metric, the closure of the open ball $B_R(p),
+R > 0$, is the closed ball
+$$ \{ q \in \mathbb{R}^n : d(p ,q) \leq R \}. $$
+\end{tcolorbox}
+
+\begin{proof}
+
+We claim that for every metric space $M$ with metric that is induced by a norm, closure of an open ball is a closed ball:
+$$ \overline{B_R(p)} = B_R[p] $$
+where
+$$ B_R(p) = \{ r : d(p, r) < R \} $$
+$$ B_R[p] = \{ r : d(p, r) \leq R \} $$
+and
+$ d(p, r) = \| p-r \|$ for some norm $\| \cdot \|; \> R>0 $.
+
+Set $B_R[p]$ is closed since it contains all its limit points. Suppose, there exists $x$, a limit point of $B_R[p]$, that belongs to $B_R[p]^c = \{ r: d(p, r) > R\}$. Set $B_R[p]^c$ is open, so all its points internal to itself. This means that for such $x$ we can find an open ball that is a subset of $B_R[p]^c$. But then, it cannot contain points of $B_R[p]$, which is a contradiction with $x$ being a limit point of $B_R[p]$. Thus, $B_R[p]$ contains all its limit points and is closed. We also note that set $B_R(p)m \subseteq B_R[p]$. Closure of $B_R(p)$ is the smallest closed subset that includes $B_R(p)$, therefore it is a subset of any closed set that includes $B_R(p)$, including $\subseteq B_R[p]$:
+$$ \overline{B_R(p)} \subseteq B_R[p] $$
+
+Consider $r \in B_R[p]$. We will prove that $r \in \overline{B_R(p)}$. We need to prove that $r$ is either an element or a limit point of $B_R(p)$. All $r$ such that $d(p, r) < R$ are clearly elements of $B_R(p)$. The set of remaining points is $B_R[p] \setminus B_R(p)$. All points of this set are given by $\{r: d(p, r) = R \}$. Point $r$ is a limit point of $B_R(p)$ if every open ball $B_\epsilon(r)$ contains at least one point $x$ such that $x \in B_R(p) \iff d(p, x) < R$. We can find such $x$ explicitly, provided $M$ is a normed vector space, which follows from existence of norm $\| \cdot \|$ for M.
+
+We claim that 
+$$ x = r + \frac{\epsilon}{2} \frac{1}{d(p, r)}(p-r) $$
+is such a point. To prove this we show that $d(r, x) < \epsilon$ and $d(p, x) < R$.
+
+$$ d(r, x) = \left\|r-x\right\| = \left\| r - r + \frac{\epsilon}{2}\frac{1}{d(p,r)}(p-r) \right\| = \left\| \frac{\epsilon}{2}\frac{1}{d(p,r)}(p-r) \right\| = $$
+$$ = \frac{\epsilon}{2}\frac{\|p-r\|}{d(p,r)} = \frac{\epsilon}{2} < \epsilon. $$
+Thus $x$ lies in $B_\epsilon(r)$.
+
+$$ d(p, x) = \left\|p-x\right\| = \left\| p - r - \frac{\epsilon}{2}\frac{1}{d(p,r)}(p-r) \right\| = $$
+$$ = \left\| (p - r)\left(1 - \frac{\epsilon}{2}\frac{1}{d(p,r)}\right) \right\| = \left(1 - \frac{\epsilon}{2}\frac{1}{d(p,r)}\right) d(p, r) = $$
+$$ = d(p, r) - \frac{\epsilon}{2} \leq R - \frac{\epsilon}{2} < R. $$
+Thus $x$ lies in $B_R(p)$.
+
+Therefore all points in $B_R[p]$ are either elements of $B_R(p)$ or its limit points, thus are elements of the closure of $B_R(p)$:
+$$ B_R[p] \subseteq \overline{B_R(p)} $$
+
+We conclude that:
+$$ \overline{B_R(p)} = B_R[p] $$
+
+\begin{tcolorbox}
+Give an example of a metric space for which the corresponding statement is false.
+\end{tcolorbox}
+
+This may not be the case for metrics that are not induced by a norm. For example, for discreet metric on $\mathbb{R}$, which is not induced by a norm,
+$$d(x, y) = 
+\begin{cases}
+0, & \text{ if} x = y,\\
+1, & \text{ if} x \neq y
+\end{cases}
+$$
+open ball $B_1(0) = {0}$, closed ball $B_1[0] = \mathbb{R}$ and closure of $\overline{B_1(0)} = {0}$. Clearly
+$$ \overline{B_1(0)} \subseteq B_1[0] $$
+but
+$$ \overline{B_1(0)} \neq B_1[0]. $$
+
+\end{proof}
+
+\subsection*{Problem 6}
+
+\begin{tcolorbox}
+Prove directly from the definition that the set $K \subseteq \mathbb{R}$ given by
+$$ K = \left\{ 0, 1, \frac{1}{2}, \frac{1}{3}, \dots , \frac{1}{n}, \dots \right\}$$ 
+is compact.
+\end{tcolorbox}
+
+\begin{proof}
+Let $C$ be an open cover of $K$, i.e. a collection of open sets such that:
+$$ K \subseteq \bigcup_{S \in C} S $$
+For each $k \in K$ we can find a set within the collection $C$ that contains $k$ (not necessarily unique). Denote such open set $C(k)$.
+
+Specifically, for $0 \in K$ there must exist open set $C(0)$. Since $C(0)$ is open, it must contain some open ball $B_\epsilon(0)$. We notice that $B_\epsilon(0)$ contains all points of $K$ that are less than $\epsilon$:
+$$ x \in K : x < \epsilon \Rightarrow x \in B_\epsilon(0) $$
+
+We can see that there are only finitely many points of $K$ that are greater than or equal to $\epsilon$. Such points can be covered by union of finitely many open sets $C(k)$. The rest of the points of $K$ can be covered by $B_\epsilon(0)$.
+
+Therefore the following finite collection covers $K$:
+$$ \{ C(k) : k \in K, k \geq \epsilon \}  \cup \{ B_\epsilon(0) \} $$
+We conclude that $K$ is compact.
+\end{proof}
+
+\subsection*{Problem 7}
+
+\begin{tcolorbox}
+Let $K$ be a compact subset of a metric space $M$, and let $\{ \mathcal{U}_\alpha \}_{\alpha \in A}$ be an open cover of $K$. Show that there is a positive real number $\delta$ with the property that for every $x \in K$ there is some $\alpha \in A$ with
+$$ B_\delta(x) \subseteq \mathcal{U}_\alpha $$
+\end{tcolorbox}
+
+\begin{proof}
+
+Since all sets in collection $\mathcal{U}$ are open, for each $x \in K$ there must exist an open ball $B_{\epsilon(x)}(x)$ where $\epsilon(x) > 0$ that is a subset of some $\mathcal{U}_\alpha, \alpha \in A$. Open ball with half the radius, $B_{\epsilon(x) / 2}(x)$, is also a subset of the same $\mathcal{U}_\alpha$. Collection of such open balls with half the radius, $\mathcal{H}$, is an open cover of $K$ since each $x \in K$ belongs to at least one of the open sets in collection $\mathcal{H}$.
+
+Since $K$ is compact, there must exist a finite subcover $\mathcal{F} \in \mathcal{H}$ that covers $K$. Since collection $\mathcal{F}$ is finite, we can enumerate all its sets:
+$$ B_{\epsilon(x_1) / 2}(x_1), \>\> B_{\epsilon(x_2) / 2}(x_2), \>\> \dots, \>\> B_{\epsilon(x_N) / 2}(x_N) $$
+where $N \in \mathbb{N}$. Radius of each of these open balls must be strictly greater than zero. Find the minimum of these radii:
+$$ \delta = \min \{ \epsilon(x_n) / 2 : n \in \mathbb{N}, 1 \leq n \leq N \}, $$
+which will be also strictly greater than zero. We claim that $\delta$ satisfies the desired property for $K$ and $\mathcal{U}$.
+
+We prove that for any $x \in K$ open ball $B_\delta(x)$ is a subset of at least one of the sets of the collection $\mathcal{U}$. Indeed, every $x \in K$ must belong to at least one of the sets of its open cover $\mathcal{F}$; denote such set $B_{\epsilon(x_k)/2}(x_k)$. We notice that
+$$ B_{\epsilon(x_k)/2}(x_k) \subset B_{\epsilon(x_k)}(x_k)$$
+and since $\delta \leq \epsilon(x_k)/2$:
+$$ B_\delta(x) \subset B_{\epsilon(x_k)}(x_k) \subseteq \mathcal{U}_\alpha, \text{ for some } \alpha \in A $$
+Therefore, there exists $\delta > 0$ such that for any point in $K$ there exists an open ball with radius $\delta$ that is a subset of at least one set of an open cover of $K$.
+
+\end{proof}
+
+\end{document}

@@ -1,0 +1,241 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[]{amsthm}
+\usepackage[]{amssymb} 
+\usepackage{amsmath}
+\usepackage{tcolorbox}
+
+\newtheorem{claim}{Claim}
+
+
+
+\title{18.100B: Problem Set 6}
+\author{Dmitry Kaysin}
+\date\today
+
+\begin{document}
+\maketitle 
+
+\subsection*{Problem 1}
+
+\begin{tcolorbox}
+Prove that if $\sum |a_n|$ converges, then $\sum |a_n|^2$ also converges.
+\end{tcolorbox}
+
+\begin{proof}
+Since  $\sum |a_n|$ converges $\lim_{n \to \infty} |a_n|$ must be equal to $0$, which implies that for any $\epsilon>0$ there exists $N \in \mathbb{N}$ such that $|a_n| - 0 < \epsilon$ for all $n > N$. Consider such $N$ for $\epsilon = 1$.
+
+Since series $\sum |a_n|$ converges, its subseries $\sum_{n=N+1}^{\infty}|a_n|$ must also converge. We notice that $|a_n|^2 < |a_n|$ for all $n>N$ since $|a_n| < 1$. Therefore $\sum_{n=N+1}^{\infty}|a_n|^2$ must also converge.
+
+We then notice that series $\sum |a_n|^2$ can be written as a sum of two expressions: 
+$$ \sum_{n=1}^{\infty} |a_n|^2 = \sum_{n=1}^{N} |a_n|^2 + \sum_{n=N+1}^{\infty} |a_n|^2 $$.
+
+The second expression is a convergent series, as we have just proved. The first expression must be finite since $N$ is finite.
+
+We conclude that $\sum |a_n|^2$ converges.
+\end{proof}
+
+\subsection*{Problem 2}
+
+\begin{tcolorbox}
+Prove that 
+$$ \sum_{n=1}^{\infty} \frac{1}{n(n+1)(n+2)} = \frac{1}{4} $$
+\end{tcolorbox}
+
+\begin{proof}
+We can write 
+$$ \frac{1}{n(n+1)(n+2)} = \frac{1}{2n(n+1)}-\frac{1}{2(n+1)(n+2)} $$
+Denoting 
+$$ b_n = \frac{1}{2n(n+1)} $$
+we can see that
+$$ \sum_{n=1}^{\infty} \frac{1}{n(n+1)(n+2)} =  \sum_{n=1}^{\infty} b_n - b_{n+1} = b_1 = \frac{1}{2 \cdot 1 \cdot 2} = \frac{1}{4} $$
+\end{proof}
+
+
+\subsection*{Problem 3}
+
+\begin{tcolorbox}
+Investigate the behavior (convergence and divergence) of $\sum_{n=1}^\infty a_n$ if
+
+a) $ a_n = \sqrt{n+1} - \sqrt{n}$
+\end{tcolorbox}
+
+\begin{proof}
+Using telescoping argument, we can rewrite 
+$$ \sum_{n=1}^k a_n = \sqrt{1} + \sqrt{k+1} $$
+which clearly diverges as $k \to \infty$.
+\end{proof}
+
+\begin{tcolorbox}
+b) $ a_n = \frac{\sqrt{n+1} - \sqrt{n}}{n}$
+\end{tcolorbox}
+
+\begin{proof}
+$$ a_n = \frac{\sqrt{n+1} - \sqrt{n}}{n} = \frac{n+1-n}{n(\sqrt{n+1}+\sqrt{n})} < 
+\frac{1}{n \sqrt{n}} = \frac{1}{n^{\frac{3}{2}}}
+$$
+
+Series $\sum \frac{1}{n^{\frac{3}{2}}} $ is convergent by Rudin 3.28, therefore series $\sum a_n$ is also convergent by comparison test.
+\end{proof}
+
+\begin{tcolorbox}
+c) $a_n = \frac{1}{1+\alpha^n}$ where $\alpha \geq 0$ is some fixed number
+\end{tcolorbox}
+Answer: Series $\sum a_n$ diverges for $0 \leq \alpha \leq 1$ and converges for $\alpha > 1$.
+\begin{proof}
+If $\alpha = 0$ then $a_n = 1$, therefore $\sum a_n$ diverges.
+
+If $0 < \alpha < 1$ then $\alpha^n \to 0$ and $a_n \to 1$, therefore $\sum a_n$ diverges.
+
+If $\alpha = 1$ then $\alpha^n = 1$ and $a_n = \frac{1}{2}$, therefore $\sum a_n$ diverges.
+
+If $\alpha > 1$ then $\alpha^n \to \infty$ and $a_n \to 0$. Furthermore
+$$ \frac{1}{1+\alpha^n} < \frac{1}{\alpha^n} = \left( \frac{1}{\alpha} \right)^n $$
+We notice that $\sum (\frac{1}{\alpha})^n$ is a convergent geometric series for $\alpha>1$ by Rudin 3.26. In this case $a_n$ is also convergent by comparison test.
+\end{proof}
+
+
+\subsection*{Problem 4}
+
+\begin{tcolorbox}
+Show that convergence of $\sum_{n=1}^\infty a_n$ with $a_n \geq 0$ implies convergence of 
+$$ \sum_{n=1}^\infty \frac{\sqrt{a_n}}{n} $$
+\end{tcolorbox}
+
+\begin{proof}
+Following Cauchy–Schwarz inequality we notice that
+$$ \left( \sum \sqrt{a_n} \cdot \frac{1}{n} \right)^2 \leq \sum a_n \cdot \sum \frac{1}{n^2} $$
+Since both $\sum a_n$ and $\sum \frac{1}{n^2}$ converge, $\sum_{n=1}^\infty a_n \cdot \sum_{n=1}^\infty \frac{1}{n^2}$ must be a finite number. Therefore, $\left( \sum_{n=1}^\infty \sqrt{a_n} \cdot \frac{1}{n} \right) ^ 2$ is also finite. We conclude that the series $\sum \frac{\sqrt{a_n}}{n}$ must converge.
+\end{proof}
+
+
+\subsection*{Problem 5}
+
+\begin{tcolorbox}
+Assume $a_0 \geq a_1 \geq a_2 \geq \dots$ and suppose that $\sum a_n$ converges. Prove that
+$$ \lim_{n \to \infty} (n a_n) = 0 $$
+\end{tcolorbox}
+
+\begin{proof}
+We first notice that $a_n$ is monotonically non-increasing. Since $\sum a_n$ converges, $a_n \to 0$ as $n \to \infty$. Therefore all $a_n$ are non-negative.
+
+We then notice that $a_{k} \leq a_n$ for any $n < k$. Therefore
+$$ n a_{2n} \leq \sum_{k=n+1}^{2n} a_k $$
+and 
+$$ n a_{2n-1} \leq \sum_{k=n}^{2n-1} a_k $$
+
+Since $\sum a_n$ converges, for arbitrary $\epsilon>0$ we can always find such integer $N$ that $\sum_{k=N+1}^{2N} a_k < \frac{\epsilon}{2}$ (by Rudin 3.22). We find that
+$$ N a_{(2N)} \leq \sum_{k=N+1}^{2N} a_k < \frac{\epsilon}{2} $$
+$$ (2N) a_{(2N)} < \epsilon $$
+This is equivalent to subsequence $(2n) a_{(2n)}$ converging to a limit of $0$.
+
+Furthermore, for arbitrary $\epsilon>0$ we can always find such integer $N$ that $\sum_{k=N}^{2N-1} a_k < \frac{\epsilon}{2}$. We find that
+$$ N a_{(2N-1)} \leq \sum_{k=N}^{2N-1} a_k < \frac{\epsilon}{2} $$
+$$ (2N-1) a_{(2N-1)} < (2N) a_{(2N-1)} < \epsilon $$
+This is equivalent to subsequence $(2n-1) a_{(2n-1)}$ converging to a limit of $0$.
+
+Since both even and odd subsequences of sequence $(n a_n)$ converge to $0$, $a_n$ itself must converge to $0$. 
+\end{proof}
+
+
+\subsection*{Problem 6}
+
+\begin{tcolorbox}
+If $X$ and $Y$ are metric spaces and $f : X \to Y$ is a mapping between them, show that the following statements are equivalent:
+
+a) $f^{-1} (B)$ is open in $X$ whenever $B$ is open in $Y$.
+
+b) $f^{-1} (B)$ is closed in $X$ whenever $B$ is closed in $Y$.
+
+c) $f(\overline{A}) \subseteq \overline{f(A)}$ for every subset $A$ of $X$.
+\end{tcolorbox}
+
+\begin{claim}
+For any set $B \subseteq Y$ and map $f$:
+$$ f^{-1}(B^c) = (f^{-1}(B))^c $$
+\end{claim}
+
+\begin{proof}
+Consider arbitrary $x \in f^{-1}(B^c)$:
+$$ f(x) \in B^c $$
+$$ f(x) \notin B $$
+$$ x \notin f^{-1}(B) $$
+$$ x \in (f^{-1}(B))^c $$
+Since all above steps are bidirectional ("if and only if"), we conclude that
+$$ f^{-1}(B^c) = (f^{-1}(B))^c $$
+\end{proof}
+
+We then prove equivalence of properties a) and b).
+\begin{proof}
+Suppose a) holds. Consider a closed set $B \subseteq Y$. Its complement in $Y$ must be open. Pre-image of $B^c$ must also be open by property a). Its complement, $(f^{-1}(B^c))^c$, is closed in $X$. Using Claim 1 we find that $(f^{-1}(B^c))^c = f^{-1}(B)$. Therefore $f^{-1}(B)$ must be closed.
+Proof in the other direction follows the same argument (via considering open set $B$ instead of closed set $B$).
+\end{proof}
+
+\begin{claim}
+For arbitrary $B \in Y$ and map $f$:
+$$ f(f^{-1}(B)) \subseteq B $$
+\end{claim}
+
+\begin{proof}
+Consider arbitrary $y \in f(f^{-1}(B))$. Choose $x \in f^{-1}(B)$ such that $f(x) = y$.
+$$ x \in f^{-1}(B) $$
+$$ f(x) \in B $$
+$$ y \in B $$
+\end{proof}
+
+\begin{claim}
+For arbitrary $A \in X$ and map $f$:
+$$ A \subseteq f^{-1}(f(A)) $$
+\end{claim}
+
+\begin{proof}
+Consider arbitrary $x \in A$:
+$$ f(x) \in f(A) $$
+$$ x \in f^{-1}(f(A)) $$
+\end{proof}
+
+We will now prove equivalence of properties b) and c).
+\begin{proof}
+Suppose b) holds. Consider arbitrary subset $A \subseteq X$. 
+$$ A \subseteq f^{-1}(f(A)) $$
+Furthermore we notice that
+$$ A \subseteq f^{-1}(f(A)) \subseteq f^{-1}(\overline{f(A)}) $$
+Since $\overline{f(A)}$ is closed, its pre-image $f^{-1}(\overline{f(A)})$ must also be closed by property b). Closure of $A$ is the smallest closed set containing $A$, in other words, any closed set that contains $A$ contains $\overline{A}$. Therefore:
+$$ \overline{A} \subseteq f^{-1}(\overline{f(A)}) $$
+$$ f(\overline{A}) \subseteq f(f^{-1}(\overline{f(A)})) $$
+Using Claim 2 we conclude that
+$$ f(\overline{A}) \subseteq \overline{f(A)} $$
+
+Now suppose c) holds. For arbitrary closed subset $B \subseteq Y$ consider $f^{-1}(B) \subseteq X$. Considering property c):
+$$ f(\overline{f^{-1}(B)}) \subseteq \overline{f(f^{-1}(B))} $$
+Using Claim 2:
+$$ f(\overline{f^{-1}(B)}) \subseteq \overline{B} $$
+Since $B$ is closed $B = \overline{B}$, thus:
+$$ f(\overline{f^{-1}(B)}) \subseteq B $$
+$$ f^{-1}(f(\overline{f^{-1}(B)})) \subseteq f^{-1}(B) $$
+Using Claim 3:
+$$ \overline{f^{-1}(B)} \subseteq f^{-1}(B) $$
+We conclude that $f^{-1}(B)$ is closed since it contains its closure.
+
+\end{proof}
+
+
+\subsection*{Problem 7}
+
+\begin{tcolorbox}
+Suppose that $f : \mathbb{R} \to \mathbb{R}$ satisfies
+$$ \lim_{h \to 0} (f(x+h)-f(x-h)) = 0 $$
+for every $x \in \mathbb{R}$. Does this imply that $f$ is continuous?
+\end{tcolorbox}
+Answer: No.
+\begin{proof}
+Counterexample: consider function
+$$ f(x) = \frac{1}{x^2}. $$
+It is clearly discontinuous at $x=0$. However, it satisfies the stated condition. Specifically, if we evaluate $\lim_{h \to 0} f(x+h)-f(x-h)$ at $x=0$ we find
+$$ \lim_{h \to 0} \frac{1}{(0+h)^2} - \frac{1}{(0-h)^2} = 0 $$
+as required.
+
+\end{proof}
+
+\end{document}
