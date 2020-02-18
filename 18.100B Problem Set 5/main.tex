@@ -277,10 +277,12 @@ From this we find that $L = \frac{1 \pm \sqrt{5}}{2}$. Since all $y_n$ are posit
 
 \begin{tcolorbox}
 d) The Fibonacci sequence is defined by $z_1 = 1, z_2 = 1, z_{n+2} = z_{n+1} + z_n$. Show that the
-sequence of ratios of succesive elements, $\frac{z_{n+1}}{z_n}$, converges to $\Phi$.
+sequence of ratios of successive elements, $\frac{z_{n+1}}{z_n}$, converges to $\Phi$.
 \end{tcolorbox}
 \begin{proof}
-TODO
+Consider sequence $x_n = \frac{z_{n+1}}{z_n}$. We can rewrite this as
+$$ x_n = \frac{z_{n+1}}{z_n} = \frac{z_{n}+z_{n-1}}{z_n} = 1 + \frac{z_{n-1}}{z_n} = 1 + \frac{1}{\frac{z_n}{z_{n-1}}} = 1+\frac{1}{x_{n-1}}$$
+We also notice that $x_1 = 1$. Thus, by 6b), sequence $x_n$ must converge to $\Phi$.
 \end{proof}
 
 \end{document}
