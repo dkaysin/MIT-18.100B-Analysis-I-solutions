@@ -1,0 +1,252 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[]{amsthm}
+\usepackage[]{amssymb} 
+\usepackage{amsmath}
+\usepackage{tcolorbox}
+
+\newtheorem{claim}{Claim}
+
+
+\title{18.100B: Problem Set 7}
+\author{Dmitry Kaysin}
+\date\today
+
+\begin{document}
+\maketitle 
+
+\subsection*{Problem 1}
+
+\begin{tcolorbox}
+Consider an infinite series with alternating signs
+$$ \sum_{n=0}^\infty (-1)^n a_n $$
+Prove the Leibnitz criteria for convergence:
+
+If $a_i > 0$ for all $i$, $a_i+1 \leq a_i$ and $\lim_{i \to \infty} a_i = 0$, then the series converges.
+\end{tcolorbox}
+
+Define for $n \in \mathbb{N} \cup \{0\}$:
+$$ s_n = \sum_{k=0}^{n} (-1)^k a_k $$
+
+Claim 1: Odd subsequence of $s_n$ is monotonically increasing.
+\begin{proof}
+We notice that for any $n$
+$$ s_{2n+3} = s_{2n+1} + a_{2n+2} - a_{2n+3} $$
+Since $a_{2n+3} \leq a_{2n+2}$ we conclude that for any $n$:
+$$ s_{2n+1} \leq s_{2n+3} $$
+\end{proof}
+
+Claim 2: Even subsequence of $s_n$ is monotonically decreasing.
+\begin{proof}
+$$ s_{2n+2} = s_{2n} - a_{2n+1} + a_{2n+2} $$
+Since $a_{2n+2} \leq a_{2n+1}$ we conclude that for any $n$:
+$$ s_{2n+2} \leq s_{2n} $$
+\end{proof}
+
+Claim 3: For any $n \in \mathbb{N} : s_{2n-1} < s_{2n}$.
+\begin{proof}
+$$ s_{2n} - s_{2n-1} = s_{2n-1} + (-1)^{2n} a_{2n} - s_{2n-1} = a_{2n} > 0 $$
+\end{proof}
+
+Claim 4: Any element of the odd subsequence is not greater than any element of the even subsequence.
+\begin{proof}
+Consider $n, k \in \mathbb{N}$. Assume, without loss of generality, $n > k$.
+Using Claims 1, 2 and 3 we can see that:
+$$ s_{2k-1} < s_{2n-1} < s_{2n} < s_{2k} $$
+We conclude that
+$$ s_{2k-1} < s_{2n} $$
+and
+$$ s_{2n-1} < s_{2k} $$
+\end{proof}
+
+Conclusion: Both odd and even subsequences of $s_n$ converge to the same limit, thus sequence $s_n$ converges.
+\begin{proof}
+Odd subsequence of $s_n$ is monotonically increasing and is bounded by any element of the even subsequence, therefore it converges. Using the same argument, even subsequence also converges.
+We also notice that difference between corresponding elements of odd and even sequence becomes arbitrarily small since $s_{2n} - s_{2n-1} = a_{2n}$ and $a_{2n} \to 0$. Therefore, odd and even subsequences of $x_n$ must converge to the same limit.
+\end{proof}
+
+
+\subsection*{Problem 2}
+
+\begin{tcolorbox}
+We say that a rational number $r > 0$ is written in reduced form $r = \frac{p}{q}$ if $p$ and $q$ are positive integers with no common factor. Consider the function defined on $(0, 1)$ by
+$$ f(x) =
+\begin{cases}
+    0, & \text{if $x$ is irrational}\\
+    \frac{1}{q}, & \text{if $x=\frac{p}{q}$ in reduced form}
+\end{cases}
+$$
+Prove that $f$ is continuous at every irrational $x$, but discontinuous at every rational $x$.
+\end{tcolorbox}
+
+\begin{proof}
+Consider an arbitrary irrational $x$ and an arbitrary $\epsilon>0$. We will show that there exists $\delta$-neighbourhood of $x$ such that image of all points from such neighbourhood is a subset of $B_{\epsilon}(f(x)) = B_{\epsilon}(0)$.
+
+Choose any $n \in \mathbb{N}$ such that $\frac{1}{n} < \epsilon$. For this $n$ we can always find $k \in \mathbb{N}$ such that interval
+$$ E = \left( \frac{k-1}{n}, \frac{k+1}{n} \right) $$
+contains $x$. We notice that for any rational number $\frac{p}{q} \in E$: $q > n $. Therefore:
+$$ f \left( \frac{p}{q} \right) = \frac{1}{q} < \frac{1}{n} < \epsilon $$.
+
+Consider any $\delta$ such that $B_{\delta}(x)$ is a subset of $E$. Points of $B_{\delta}(x)$ are either rational or irrational. Image of all rational points of $B_{\delta}(x)$ is a subset of $B_{\epsilon}(0)$ as proven above. Image of all irrational points in any neighbourhood of $x$ is $\{0\}$, which is definitely a subset of $B_{\epsilon}(0)$. Therefore, $f$ must be continuous at $x$. We conclude that $f$ is continuous at all irrational $x \in \mathbb{R}$.
+
+Consider an arbitrary rational $x$. We notice that $f(x)>0$. Any $\delta$-neighbourhood of $x$ contains irrationals. Image of such irrationals under $f$ is $\{0\}$, which lies outside of any $\epsilon$-neighbourhood of $f(x)$ for all $0 < \epsilon < f(x)$. Therefore $f$ cannot be continuous at rational $x \in \mathbb{R}$.
+
+\end{proof}
+
+
+\subsection*{Problem 3}
+
+\begin{tcolorbox}
+Let $f$ and $g$ be continuous mappings of a metric space $\mathcal{M}$ into a metric space $\mathcal{N}$, and let $Q \subseteq \mathcal{M}$ be a dense subset of $\mathcal{M}$.
+
+a) Prove that $f(Q)$ is dense in $f(\mathcal{M})$.
+\end{tcolorbox}
+
+We will prove that every point of $f(\mathcal{M})$ is either an element of $f(Q)$ or a limit point of $f(Q)$.
+
+\begin{proof}
+
+Consider arbitrary $x \in \mathcal{M}$. Since $Q$ is dense in $\mathcal{M}$, either $x$ is an element of $Q$ or a limit point of $Q$. In the former case, $f(x) \in f(Q)$. Now consider the latter case.
+
+Since $f$ is a continuous mapping, for any $B_{\epsilon}(f(x)) \subseteq f(\mathcal{M})$ we can always find $B_{\delta}(x) \in \mathcal{M}$ such that $f (B_{\delta}(x)) \subseteq B_{\epsilon}(f(x))$.
+
+Since $x$ is a limit point of $Q$, $B_{\delta}(x)$ must contain at least one point of $Q$ other than $x$, denote it $q$. We notice that $f(q) \in B_{\epsilon}(f(x))$. If $f(x) = f(q)$ then $f(q) \in f(Q) \iff f(x) \in f(Q)$. If $f(x) \neq f(q)$ then $B_{\epsilon}(f(x))$, which we have chosen arbitrarily, contains a point of $f(Q)$ other than $f(x)$, namely $f(q)$. We conclude that image of every point of $\mathcal{M}$ is either an element of $f(Q)$ or a limit point of $f(Q)$. Therefore, $f(Q)$ is dense in $f(\mathcal{M})$. 
+
+\end{proof}
+
+\begin{tcolorbox}
+b) Show that if $f (x) = g (x)$ for every $x \in Q$, then $f (x) = g (x)$ for every $x \in \mathcal{M}$.
+\end{tcolorbox}
+
+\begin{proof}
+Suppose there exists some $x \in \mathcal{M}$ outside $Q$ such that $f(x) \neq g(x)$. Since $\mathcal{N}$ is metric and thus Hausdorff, we can find two disjoint open balls around points $f(x)$ and $g(x)$, namely $E_f = B_{\epsilon}(f(x))$ and $E_g = B_{\epsilon}(g(x))$. Since both $f$ and $g$ are continuous, we can find open ball $B_{\delta}(x) \subseteq \mathcal{M}$ such that $f (B_{\delta}(x)) \subseteq E_f$ and $g (B_{\delta}(x)) \subseteq E_g$.
+
+Since $Q$ is dense in $\mathcal{M}$, $B_{\delta}(x)$ must contain at least one point of $Q$; denote it $q$. Under the initial assumption, $f(q)=g(q)$. However, this cannot be the case since $E_f$ and $E_g$ are disjoint. Contradiction. We conclude that no such points $x$ exist.
+
+\end{proof}
+
+
+\subsection*{Problem 4}
+
+\begin{tcolorbox}
+Suppose that $f : E \to \mathbb{R}$ is a continuous map from some subset $E \subseteq \mathbb{R}$.
+
+a) Show that it is possible to have $E$ bounded and $f(E)$ unbounded.
+\end{tcolorbox}
+\begin{proof}
+Example: $f(x) = \tan x$ for $x \in \left( -\dfrac{\pi}{2}, \dfrac{\pi}{2} \right)$.
+\end{proof}
+
+\begin{tcolorbox}
+b) Show that if $f$ is uniformly continuous and $E$ is bounded, then $f(E)$ must be bounded.
+\end{tcolorbox}
+\begin{proof}
+Consider arbitrary $\epsilon>0$. Since $f$ is uniformly continuous we can find $\delta>0$ such that images of any two points that are within $\delta$ distance of each other are within $\epsilon$ distance of each other.
+Since $E$ is bounded, we can find its finite cover $\mathcal{U}$ such that for every two points $x,y$ in every set of such cover $d(x,y) < \delta$. Since distance between images of these two points $d(f(x), f(y))$ is smaller than $\epsilon$, image of each of the set in collection $\mathcal{U}$ is bounded. Union of images of such sets covers $f(E)$ and is bounded since there is only finitely many of such images. Therefore, $f(E)$ must be bounded.
+\end{proof}
+
+\begin{tcolorbox}
+c) Show that it is possible to have $f$ uniformly continuous, $E$ unbounded, and $f(E)$ unbounded.
+\end{tcolorbox}
+\begin{proof}
+Example: $f(x) = x$.
+
+This function is indeed uniformly continuous since
+$$ d(x,y) = |x-y| $$
+$$ d(f(x),f(y)) = |x-y| $$
+and therefore for any $\epsilon > 0$ we can select $\delta < \epsilon$ such that for any $x, y$ with $d(x,y)<\delta$ we have that $d(f(x),f(y)) < \epsilon$.
+
+
+\end{proof}
+
+\subsection*{Problem 5}
+
+\begin{tcolorbox}
+Suppose that $f : \mathcal{M} \to \mathcal{N}$ is a uniformly continuous mapping between metric spaces.
+
+a) Prove that if $(x_n)$ is a Cauchy sequence in $\mathcal{M}$, then $(f (x_n))$ is a Cauchy sequence in $\mathcal{N}$.
+\end{tcolorbox}
+\begin{proof}
+Since $f$ is uniformly continuous, for arbitrary $\epsilon>0$ there exists $\delta>0$ such that for any $a,b \in \mathcal{M}$ with $d(a,b)<\delta$ we have $d(f(a),f(b))<\epsilon$. Since $x_n$ is Cauchy sequence, there exists $N\in\mathbb{N}$ such that $d(x_k, x_m) < \delta$ for all $k>N, \>m>N$. Therefore, $d(f(x_k), (x_m)) < \epsilon$. We conclude that $f(x_n)$ is Cauchy sequence.
+\end{proof}
+
+\begin{tcolorbox}
+b) Use the function $g : \mathbb{R} \to \mathbb{R}$, $g(x) = x^2$ to show that it is possible for a continuous function to send Cauchy sequences to Cauchy sequences without being uniformly continuous.
+\end{tcolorbox}
+First, we notice that $g(x)=x^2$ is continuous but not uniformly continuous. 
+\begin{proof}
+Indeed, for any $\delta>0$ we can find $x$ such that $d(g(x+\delta),g(x))$ is greater than any $\epsilon > 0$.
+$$ d(g(x+\delta),g(x)) = (x+\delta)^2 - x^2 = 2x\delta + \delta^2 $$
+$$ 2x\delta + \delta^2 > \epsilon $$
+$$ x > \frac{\epsilon -\delta^2}{2\delta} $$
+\end{proof}
+If $x_n$ is Cauchy sequence then $g(x_n)=x_n^2$ is also Cauchy sequence.
+\begin{proof}
+
+Consider arbitrary $\epsilon > 0$. Since $x_n$ is Cauchy sequence, it must be bounded and have supremum $s = \sup x_n$. Furthermore, there must exist $N \in \mathbb{N}$ such that:
+$$ d(x_k, x_m) < \frac{\epsilon}{2s} \text{ for any } k > N, \> m > N $$
+
+Consider distance between corresponding elements of $g(x_n)$. Suppose, without loss of generality, that $x_k > x_m$, then
+$$ d (g(x_k), g(x_m) = x_k^2 - x_m^2 = (x_k - x_m) (x_k + x_m) <  \frac{\epsilon}{2s} (x_k+x_m) $$
+Notice that $x_k \leq s$ and $s_m \leq s$ since $s$ is supremum of $x_n$. Therefore
+$$ d (g(x_k), g(x_m)) < \epsilon $$
+for all $k > N, m > N$. We conclude that $g(x_n)$ is Cauchy sequence.
+
+\end{proof}
+
+
+\subsection*{Problem 6}
+
+\begin{tcolorbox}
+Let $E$ be a non-empty subset of a metric space $\mathcal{M}$, define the distance from $x \in X$ to $E$ by
+$$ d_E(x) = \inf_{z \in E} d(x,z) $$
+Prove that $d_E$ is a uniformly continuous function on $X$, by showing that
+$$ | d_E(x) - d_E(y) | \leq d(x,y) $$
+\end{tcolorbox}
+\begin{proof}
+Consider arbitrary points $x,y \in X$ and arbitrary point $e \in E$. Following triangle inequality:
+$$ d(x,e) \leq d(x,y) + d(y,e) $$
+Following the definition, $d_E(x) \leq d(x,e)$, thus 
+$$ d_E(x) \leq d(x,y) + d(y,e) $$
+$$ d_E(x) - d(x,y) \leq d(y,e) $$
+This holds for any point $e$, thus for $\inf_{e \in E}(y,e) = d_E(y)$:
+$$ d_E(x) - d(x,y) \leq d_E(y) $$
+$$ d_E(x) - d(x,y) \leq d_E(y) $$
+$$ d_E(x) - d_E(y) \leq d(x,y) $$
+Switching $x$ and $y$ we find that
+$$ d_E(y) - d_E(x) \leq d(x,y) $$
+Thus
+$$ | d_E(x) - d_E(y) | \leq d(x,y) $$
+Now consider arbitrary $\epsilon > 0$. We can always choose $\delta = \epsilon$ such that for any $x,y \in X$ with $d(x,y)<\delta$ we have
+$$ d(d_E(x), d_E(y)) = |d_E(x)-d_E(y)| \leq d(x,y) < \delta = \epsilon $$
+Thus $d_E(x)$ is uniformly continuous.
+
+\end{proof}
+
+
+\subsection*{Problem 7}
+
+\begin{tcolorbox}
+Suppose $K$ and $F$ are disjoint subsets of $\mathcal{M}$, such that $F$ is closed and $K$ is compact. Prove that there exists a $\delta > 0$ such that $d (p, q) > \delta$ whenever $p \in F$ and $q \in K$.
+\end{tcolorbox}
+\begin{proof}
+Consider function $d_F=\inf_{z \in K} d(x,z)$ defined on $K$. This is a uniformly continuous and, thus, continuous function (see Problem 6).
+
+Image of compact set $K$ under continuous function $d_F$ is also compact (Rudin 4.14). Therefore, we can find minimum for $d_F(K) \subseteq \mathbb{R}$. We notice that $\min d_F(K) > 0$ because otherwise we would have at least one point $q \in K$ such that $d_F(q) = 0$ and, therefore, $q \in F$ since $F$ is closed, which cannot be the case since $F$ and $K$ are disjoint. Therefore, for any $p \in F, q \in K$:
+$$ d(p,q) \geq d_F(q) \geq \min d_F(K) > 0 $$
+or 
+$$ d(p,q) > \delta$$
+for some $\delta > 0$.
+\end{proof}
+
+\begin{tcolorbox}
+ Show that the conclusion can fail if we only assumed that $K$ was closed, instead of compact.
+\end{tcolorbox}
+\begin{proof}
+Counterexample: $F = \left\{ \left(x,\frac{1}{x}\right) : x\in\mathbb{R} \right\}$, $K = \left\{ \left(x,-\frac{1}{x}\right) : x\in\mathbb{R} \right\}$. Both $F$ and $K$ are closed in $\mathbb{R}^2$ and unbounded, thus not compact. However, for any $\delta$ we can find points $\left( z, \frac{1}{z} \right)$, $\left( z, -\frac{1}{z} \right)$ such that distance between them is less than $\delta$:
+$$ \frac{1}{x} - \left( - \frac{1}{x} \right) = \frac{2}{x} < \delta $$
+$$ x > \frac{2}{\delta}. $$
+\end{proof}
+
+\end{document}
