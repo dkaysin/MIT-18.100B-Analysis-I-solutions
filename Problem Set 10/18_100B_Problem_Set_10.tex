@@ -7,6 +7,12 @@
 \usepackage{mathrsfs}
 \usepackage{tcolorbox}
 
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+
+
 \newtheorem{claim}{Claim}
 
 \title{18.100B: Problem Set 10}
@@ -20,34 +26,43 @@
 \subsection*{Problem 1}
 
 \begin{tcolorbox}
-Let $(f_n)$ be the sequence of functions on $\mathbb{R}$ defined as follows
-$$ f_0(t) = \sin t \>\>\> \text{ and } \>\>\> f_{n+1}(t) = \frac{2}{3}f_n(t)+1 \>\>\> \text{ for $n \in \mathbb{N}$} $$
-Show that $f_n \to 3$ uniformly on $\mathbb{R}$. What can you say if we choose $f_0(t) = t^2$?
+Let $(f_n)$ be the sequence of functions on $\R$ defined as follows
+\[ f_0(t) = \sin t \>\>\> \text{ and } \>\>\> f_{n+1}(t) = \frac{2}{3}f_n(t)+1 \>\>\> \text{ for $n \in \N$} \]
+Show that $f_n \to 3$ uniformly on $\R$. What can you say if we choose $f_0(t) = t^2$?
 
-Hint: Consider first the map $T(x) = \frac{2}{3}x + 1$ on $\mathbb{R}$.
- \end{tcolorbox}
+Hint: Consider first the map $T(x) = \frac{2}{3}x + 1$ on $\R$.
+\end{tcolorbox}
+
 \begin{proof}
-We first note that $T$ is a contraction mapping on $\mathbb{R}$, i.e. for any $a,b \in \mathbb{R}$:
-$$ T(a) - T(b) = \frac{2}{3}a+1 - \frac{2}{3}b-1 = \frac{2}{3}(a-b) $$
+
+We first note that $T$ is a contraction mapping on $\R$, i.e. for any $a,b \in \R$:
+\[ T(a) - T(b) = \frac{2}{3}a+1 - \frac{2}{3}b-1 = \frac{2}{3}(a-b) \]
 Therefore, there exists a fixed point of $T$, denote it $L_t$.
 
 Consider sequence of functions that is identical to $f_n(t)$ but with arbitrary starting element $x$:
-$$ g_0(x) = x \>\>\> \text{ and } \>\>\> g_{n+1}(x) = T(g_n(x)) \>\>\> \text{ for $n \in \mathbb{N}$} $$
+\[ g_0(x) = x \quad \text{ and } \quad g_{n+1}(x) = T(g_n(x)) \quad \text{ for $n \in \N$} \]
 Sequence $g_n(x)$ must converge to $L_x$:
-$$ \lim g_n(x) = L_x = T(L_x) $$
+\[ \lim g_n(x) = L_x = T(L_x) \]
 Furthermore:
-$$ \lim f_{n}(x) = \lim f_{n+1}(x) = \lim \left( \frac{2}{3}f_n(x)+1 \right) $$
-$$ L_x = \frac{2}{3} L_x +1 $$
-$$ L_x = 3 $$
+\begin{gather*}
+    \lim f_{n}(x) = \lim f_{n+1}(x) = \lim \left( \frac{2}{3}f_n(x)+1 \right) \\
+    L_x = \frac{2}{3} L_x +1 \\
+    L_x = 3    
+\end{gather*}
 Therefore, $g_n(x)$ converges to $3$ pointwise.
 
 We can see that $g_n$ is monotone by considering the difference between subsequent elements of sequence $g_n$:
-$$ g_{n+1}(x) - g_n(x) = \frac{2}{3}g_n(x) + 1 - g_n(x) = \frac{3-g_n(x)}{3} $$
-Specifically, $g_n$ is monotonically increasing in case $g_n(0) < 3$ and monotonically decreasing if $g_n(0) > 0$. Each $g_n$ is a polynomial, thus continuous. Limit function $g(x)=3$ is also continuous. From this we conclude that sequence $g_n$ converges uniformly if domain of each $g_n$ is compact.
+\[ g_{n+1}(x) - g_n(x) = \frac{2}{3}g_n(x) + 1 - g_n(x) = \frac{3-g_n(x)}{3} \]
+Specifically, $g_n$ is monotonically increasing in case $g_n(0) < 3$ and monotonically decreasing if $g_n(0) > 0$.
+Each $g_n$ is a polynomial, thus continuous.
+Limit function $g(x)=3$ is also continuous.
+From this we conclude that sequence $g_n$ converges uniformly if domain of each $g_n$ is compact.
 
-If range of $g_n$ is compact, then domain of $g_{n+1}$ must be also compact since $g_n$ is continuous. By induction, if range of $g_0$ is compact, domains of all $g_n$ are also compact and thus $g_n$ converges uniformly.
+If range of $g_n$ is compact, then domain of $g_{n+1}$ must be also compact since $g_n$ is continuous.
+By induction, if range of $g_0$ is compact, domains of all $g_n$ are also compact and thus $g_n$ converges uniformly.
 
-This is the case for $g_n(\sin t)$, therefore $g_n(\sin t) \to 3$ uniformly. However, this is not the case for $g_n(t^2)$ since range of $g_n(t^2) = t^2$ is $[0,\infty)$, thus not compact.
+This is the case for $g_n(\sin t)$, therefore $g_n(\sin t) \to 3$ uniformly.
+However, this is not the case for $g_n(t^2)$ since range of $g_n(t^2) = t^2$ is $[0,\infty)$, thus not compact.
 
 \end{proof}
 
@@ -55,47 +70,62 @@ This is the case for $g_n(\sin t)$, therefore $g_n(\sin t) \to 3$ uniformly. How
 \subsection*{Problem 2}
 
 \begin{tcolorbox}
-Suppose $\varphi : [0, \infty) \to \mathbb{R}$ is continuous and satisfies
-$$ 0 \leq \varphi(t) \leq \frac{t}{2+t} \quad (t \geq 0)$$
-Define the sequence $(f_n)$ by setting $f_0(t) = \varphi(t)$ and $f_{n+1}(t) = \varphi(f_n(t))$ for $t \geq 0$ and $n \in \mathbb{N}$.
+Suppose $\varphi : [0, \infty) \to \R$ is continuous and satisfies
+\[ 0 \leq \varphi(t) \leq \frac{t}{2+t} \quad (t \geq 0)\]
+Define the sequence $(f_n)$ by setting $f_0(t) = \varphi(t)$ and $f_{n+1}(t) = \varphi(f_n(t))$ for $t \geq 0$ and $n \in \N$.
 Prove that the series $F(t) = \sum_{n=0}^{\infty} f_n(t)$ converges for every $t \geq 0$ and that $F$ is continuous on $n=[0, \infty)$.
 \end{tcolorbox}
+
 \begin{proof}
+
 We first note that $f_n(t)$ is decreasing:
-$$ \frac{f_{n+1}(t)}{f_n(t)} = \frac{\varphi(f_n(t))}{f_n(t)} \leq \frac{f_n(t)}{f_n(t)(2+f_n(t))} = \frac{1}{2+f_n(t)} \leq \frac{1}{2} $$
+\[
+\frac{f_{n+1}(t)}{f_n(t)} = \frac{\varphi(f_n(t))}{f_n(t)} \leq \frac{f_n(t)}{f_n(t)(2+f_n(t))} = \frac{1}{2+f_n(t)} \leq \frac{1}{2} 
+\]
 and 
-$$ f_{n+1}(t) \leq \frac{1}{2} f_n(t) $$
+\[ f_{n+1}(t) \leq \frac{1}{2} f_n(t) \]
 We also note that $f_1(t) \leq 1$, therefore:
-$$ f_{n+1}(t) \leq \frac{1}{2^n} f_1(t) \leq \frac{1}{2^n} $$
+\[ f_{n+1}(t) \leq \frac{1}{2^n} f_1(t) \leq \frac{1}{2^n} \]
 
 We apply Weierstrass M-test (Rudin 7.10) to examine convergence of the series $s(t) = \sum_{n=0}^{\infty} f_n(t)$:
-$$ f_{n+1}(t) \leq \frac{1}{2^n} \text{ and $\sum_{n=0}^{\infty} \frac{1}{2^n} \to 0$ as $n \to \infty$} $$
+\[
+f_{n+1}(t) \leq \frac{1}{2^n} \text{ and $\sum_{n=0}^{\infty} \frac{1}{2^n} \to 0$ as $n \to \infty$}
+\]
 We conclude that $s(t) \to F(t)$ uniformly.
 
-Since $\varphi(t)$ is continuous each $f_n(t)$ must be continuous; thus partial sums of $s(t)$ must also be continuous. Sequence of continuous functions converges uniformly to a continuous function. Thus, $F(t)$ is continuous.
+Since $\varphi(t)$ is continuous each $f_n(t)$ must be continuous; thus partial sums of $s(t)$ must also be continuous.
+Sequence of continuous functions converges uniformly to a continuous function.
+Thus, $F(t)$ is continuous.
+
 \end{proof}
 
 
 \subsection*{Problem 3}
 
 \begin{tcolorbox}
-Does $f(t) = \sum_{k=1}^{\infty} \sin^2 \left( \frac{t}{k} \right)$ define a differentiable function on $\mathbb{R}$?
+Does $f(t) = \sum_{k=1}^{\infty} \sin^2 \left( \frac{t}{k} \right)$ define a differentiable function on $\R$?
 \end{tcolorbox}
+
 \begin{proof}
-Choose an arbitrary closed interval $[a,b] \subseteq \mathbb{R}$ and denote $s = \max(|a|,|b|)$. Denote $g_k(t) = \sin^2 \left( \frac{t}{k} \right)$. First we notice that for each $g_k(t)$ on $[a,b]$:
-$$ |g_k(t)| = \left| \sin \left( \frac{t}{k} \right)^2 \right| \leq \left( \frac{t}{k} \right)^2 \leq \frac{s^2}{k^2} $$
+
+Choose an arbitrary closed interval $[a,b] \subseteq \R$ and denote $s = \max(|a|,|b|)$.
+Denote $g_k(t) = \sin^2 \left( \frac{t}{k} \right)$. First we notice that for each $g_k(t)$ on $[a,b]$:
+\[ |g_k(t)| = \left| \sin \left( \frac{t}{k} \right)^2 \right| \leq \left( \frac{t}{k} \right)^2 \leq \frac{s^2}{k^2} \]
 Here we use the fact that $|\sin x| \leq |x|$.
 Series $\sum_{k=1}^{\infty} \frac{s^2}{k^2} = s^2 \sum_{k=1}^{\infty} \frac{1}{k^2}$ converges, therefore $f_k(t)$ converges pointwise on $[a,b]$.
 
 Function $g_k$ is differentiable on $[a,b]$ for any $k$:
-$$ g'_k(t) = \frac{2}{k} \sin \left( \frac{t}{k} \right) \cos \left( \frac{t}{k} \right) $$
+\[ g'_k(t) = \frac{2}{k} \sin \left( \frac{t}{k} \right) \cos \left( \frac{t}{k} \right) \]
 Thus any partial sum of $f_k$ is also differentiable on $[a,b]$.
 
 We notice that for each $g'_k(t)$ on $[a,b]$:
-$$ \left| \frac{2}{k} \sin \left( \frac{t}{k} \right) \cos \left( \frac{t}{k} \right) \right| \leq \left| \frac{2t}{k^2} \right| \leq \frac{2s}{k^2} $$
+\[
+\left| \frac{2}{k} \sin \left( \frac{t}{k} \right) \cos \left( \frac{t}{k} \right) \right| \leq \left| \frac{2t}{k^2} \right| \leq \frac{2s}{k^2}
+\]
 Series $\sum_{k=1}^{\infty} \frac{s}{k^2} = s \sum_{k=1}^{\infty} \frac{1}{k^2}$ converges, therefore $\sum g'_k(t)$ converges uniformly on $[a,b]$.
 
-By Rudin 7.17 we have that $f$ is differentiable on $[a,b]$. Therefore, $f$ is differentiable on $\mathbb{R}$.
+By Rudin 7.17 we have that $f$ is differentiable on $[a,b]$. Therefore, $f$ is differentiable on $\R$.
+
 \end{proof}
 
 
@@ -103,40 +133,46 @@ By Rudin 7.17 we have that $f$ is differentiable on $[a,b]$. Therefore, $f$ is d
 
 \begin{tcolorbox}
 Suppose $(f_n)$ is a sequence of continuous functions such that $f_n \to f$ uniformly on a set $E$. Prove that
-$$ \lim_{n \to \infty} f_n(x_n) = f(x) $$
+\[ \lim_{n \to \infty} f_n(x_n) = f(x) \]
 for every sequence of points $x_n \in E$ such that $x_n \to x$, and $x \in E$. Is the converse of this true?
 \end{tcolorbox}
+
 \begin{proof}
+
 Fix $\epsilon>0$. Since $f_n \to f$ uniformly, there must exist $M$ such that for all $m>M$ for any $z \in E$:
-$$ \lVert f_m(z) - f(z) \rVert \leq \frac{\epsilon}{2} $$
+\[ \norm{ f_m(z) - f(z) } \leq \frac{\epsilon}{2} \]
 
 By Rudin 7.12 $f$ must be continuous. Since $f$ is continuous, and $x_n \to x$ there exists $K$ such that for all $k \geq K$:
-$$ \lVert f(x_k) - f(x) \rVert \leq \frac{\epsilon}{2} $$
+\[ \norm{ f(x_k) - f(x) } \leq \frac{\epsilon}{2} \]
 
 Combining the above:
-$$ \lVert f_m(x_k) - f(x) \rVert \leq \lVert f_m(x_k) - f(x_k) \rVert + \lVert f(x_k) - f(x) \rVert \leq \epsilon $$
+\[ \norm{ f_m(x_k) - f(x) } \leq \norm{ f_m(x_k) - f(x_k) } + \norm{ f(x_k) - f(x) } \leq \epsilon \]
 
 Taking $N = \max(M,K)$ we have that for all $n \geq N$:
-$$ \lVert f_n(x_n) - f(x) \rVert \leq \epsilon, $$
+\[ \norm{ f_n(x_n) - f(x) } \leq \epsilon, \]
 which proves that $\lim_{n \to \infty} f_n(x_n) = f(x)$.
+
 \end{proof}
 
 Now consider the converse. As we will see, the fact that for every convergent sequence $x_n \to x$ the following holds:
-$$ \lim_{n \to \infty} f_n(x_n) = f(x), $$
+\[ \lim_{n \to \infty} f_n(x_n) = f(x), \]
 it does not necessarily imply that convergent sequence of continuous functions $f_n$ converges uniformly, even if the limit function of $f_n$ is continuous.
 
 \begin{proof}
+
 Counterexample: Consider sequence of functions $\frac{x^2}{n}$, which converges to $0$.
 
-Take arbitrary convergent sequence $x_n \to x$ with $x_n,x \in \mathbb{R}$. Fix $\epsilon>0$. Since $x_n \to x$ there exists $M$ such that for all $m \geq M$:
-$$ \lVert x_m - x \rVert \leq \epsilon $$
-$$ \lVert x_m \rVert \leq \lVert x \rVert + \epsilon $$
-
+Take arbitrary convergent sequence $x_n \to x$ with $x_n,x \in \R$. Fix $\epsilon>0$. Since $x_n \to x$ there exists $M$ such that for all $m \geq M$:
+\begin{gather*}
+    \norm{ x_m - x } \leq \epsilon \\
+    \norm{ x_m } \leq \norm{ x } \norm{ + \epsilon }
+\end{gather*}
 We will now prove that $f_n(x_n) \to f(x)$:
-$$ \lVert f_m(x_m) - f(x) \rVert = \left\lVert \frac{x_m^2}{m} - 0 \right\rVert \leq \frac{(\lVert x \rVert + \epsilon)^2}{m}. $$
+\[ \norm{ f_m(x_m) - f(x) } = \norm{ \frac{x_m^2}{m} - 0 } \leq \frac{(\norm{ x } + \epsilon)^2}{m}. \]
 The last expression can be set arbitrarily close to $0$ by choosing sufficiently high $m$.
 
-However, it is easy to see that convergence of $\frac{x^2}{n}$ is not uniform on $\mathbb{R}$.
+However, it is easy to see that convergence of $\frac{x^2}{n}$ is not uniform on $\R$.
+
 \end{proof}
 
 
@@ -147,98 +183,120 @@ Suppose $(f_n)$ is a sequence of real-valued functions that are Riemann-integrab
 
 a) $f_n \to 0$ uniformly on every compact subset of $[0,\infty)$;
 
-b) $0 \leq f_n(t) \leq e^{-t}$ for all $t \geq 0$ and $n \in \mathbb{N}$.
+b) $0 \leq f_n(t) \leq e^{-t}$ for all $t \geq 0$ and $n \in \N$.
 
 Prove that
-$$ \lim_{n \to \infty} \int_0^\infty f_n(t) dt = 0,$$
+\[ \lim_{n \to \infty} \int_0^\infty f_n(t) dt = 0, \]
 
 where the improper integral $\int_0^\infty f_n(t) dt$ is defined as  $\lim_{b\to\infty} \int_0^b f_n(t) dt$.
 \end{tcolorbox}
+
 \begin{proof}
+
 Fix sufficiently small $\epsilon \in (0,1)$. Denote $\epsilon_s = \sqrt{\epsilon}$. Since $f_n \to 0$ uniformly, there exists $M$ such that for all $m \geq M$:
-$$ | f_m(t) - 0 | \leq \epsilon_s $$
+\[ | f_m(t) - 0 | \leq \epsilon_s \]
 
 Consider point $x$ such that $e^{-x} = \epsilon_s$:
-$$ x = - \ln(\epsilon_s) $$
+\[ x = - \ln(\epsilon_s) \]
 
 We notice that
-$$ \left| \int_0^\infty f_m \right| 
+\[
+\left| \int_0^\infty f_m \right| 
 = \left| \int_0^x f_m + \int_x^\infty f_m \right|
-\leq \left| \int_0^x f_m \right| + \left| \int_x^\infty f_m \right| $$
+\leq \left| \int_0^x f_m \right| + \left| \int_x^\infty f_m \right|
+\]
 
 We evaluate the first summand:
-$$ \left| \int_0^x f_m(t) dt \right| \leq | x \epsilon_s | 
+\[
+\left| \int_0^x f_m(t) dt \right| \leq | x \epsilon_s | 
 = | - \ln(\epsilon_s) \epsilon_s | 
-=  - \ln(\epsilon_s) \epsilon_s $$
+=  - \ln(\epsilon_s) \epsilon_s
+\]
 
 We evaluate the second summand. Since $f_n(t) \leq e^{-t}$:
-$$ \left| \int_x^\infty f_m \right| 
+\[
+\left| \int_x^\infty f_m \right| 
 \leq \left | \int_x^\infty e^{-t} dt \right|
 = \left| \int_{- \ln(\epsilon_s)}^\infty e^{-t} dt \right|
-= \left| 0 - e^{ - \ln \epsilon_s} \right| = \epsilon_s $$
+= \left| 0 - e^{ - \ln \epsilon_s} \right| = \epsilon_s
+\]
 
 We conclude that 
-$$ \left| \int_0^\infty f_m \right| 
+\[
+\left| \int_0^\infty f_m \right| 
 \leq - \ln(\epsilon_s) \epsilon_s + \epsilon_s
-= \epsilon_s (1-\ln(\epsilon_s)) $$
+= \epsilon_s (1-\ln(\epsilon_s))
+\]
 We notice that for $0 < \epsilon < 1$:
-$$ \epsilon_s (1-\ln(\epsilon_s)) < \epsilon_s^2 < \epsilon $$
+\[ \epsilon_s (1-\ln(\epsilon_s)) < \epsilon_s^2 < \epsilon \]
 
 Therefore $\int_0^\infty f_n \to 0$ as $n \to \infty$.
+
 \end{proof}
 
 \begin{tcolorbox}
 Moreover, give an explicit example for a sequence $(f_n)$, so that condition b) does not hold and the conclusion above fails.
 \end{tcolorbox}
+
 Answer: $g_n(t) = \frac{1}{n(x+1)}$.
+
 \begin{proof}
+
 Sequence of functions $g_n$ is Riemann-integrable on all compact subintervals of $[0,\infty)$ and converges uniformly to $0$.
 However each improper integral $\int_0^\infty g_n$ diverges, therefore the conclusion of $\int_0^\infty g_n$ having a limit as $n \to \infty$ fails.
+
 \end{proof}
 
 
 \subsection*{Problem 6}
 
 \begin{tcolorbox}
-Suppose $(f_n)$ is an equicontinuous sequence of functions on a compact set $K$, and $f_n \to f$ pointwise on $K$. Prove that $f_n \to f$ uniformly on $K$.
+Suppose $(f_n)$ is an equicontinuous sequence of functions on a compact set $K$, and $f_n \to f$ pointwise on $K$.
+Prove that $f_n \to f$ uniformly on $K$.
 \end{tcolorbox}
+
 \begin{proof}
-Fix $\epsilon>0$. Since $f_n$ is equicontinuous, there exists $\delta>0$ such that for all $n \in \mathbb{N}$ and $a, b \in K$ with $d(a,b)<\delta$ we have:
+
+Fix $\epsilon>0$. Since $f_n$ is equicontinuous, there exists $\delta>0$ such that for all $n \in \N$ and $a, b \in K$ with $d(a,b)<\delta$ we have:
 \begin{equation}
-\lVert f_n(a) - f_n(b) \rVert < \frac{\epsilon}{3}
+    \norm{ f_n(a) - f_n(b) } < \frac{\epsilon}{3}
 \end{equation}
 We also note that:
 \begin{equation}
-\lVert f(a) - f(b) \rVert
-= \lVert \lim_{n\to\infty} f_n(a) - \lim_{n\to\infty} f_n(b) \rVert 
-= \lim_{n\to\infty} \lVert f_n(a) - f_n(b) \rVert
-\leq \frac{\epsilon}{3}
+    \norm{ f(a) - f(b) }
+    = \norm{ \lim_{n\to\infty} f_n(a) - \lim_{n\to\infty} f_n(b) } 
+    = \lim_{n\to\infty} \norm{ f_n(a) - f_n(b) }
+    \leq \frac{\epsilon}{3}
 \end{equation}
 
-Consider open cover of $K$ by open balls $B_\delta(x)$ with center $t$ and radius $\delta$. Denote such cover $\mathcal{U}_t$ (indexed over center points of $\delta$-balls). Since $K$ is compact, there exists finite subcover of $\mathcal{U}_t$; denote it $\mathcal{U}_{t_k}$. Since $f_n \to f$ pointwise, for each $t_k$ we can find $N_k$ such that for all $n_k \geq N_k$ we have:
-$$ \lVert f_{n_k}(t_k) - f(t_k) \rVert < \frac{\epsilon}{3} $$
+Consider open cover of $K$ by open balls $B_\delta(x)$ with center $t$ and radius $\delta$. Denote such cover $\mathcal{U}_t$ (indexed over center points of $\delta$-balls).
+Since $K$ is compact, there exists finite subcover of $\mathcal{U}_t$; denote it $\mathcal{U}_{t_k}$. Since $f_n \to f$ pointwise, for each $t_k$ we can find $N_k$ such that for all $n_k \geq N_k$ we have:
+\[ \norm{ f_{n_k}(t_k) - f(t_k) } < \frac{\epsilon}{3} \]
 
 Since there are finitely many $t_k$, we can select the largest $N_k$, denote it $M$. For each $m \geq M$ we have:
 \begin{equation}
-\lVert f_m(t_k) - f(t_k) \rVert < \frac{\epsilon}{3}
+    \norm{ f_m(t_k) - f(t_k) } < \frac{\epsilon}{3}
 \end{equation}
-For arbitrary point $x$ in open $\delta$-ball with center $t$ we have:
-$$ \lVert x - t \rVert < \delta $$
+Consider arbitrary point $x \in K$.
+It must belong to at least one of the sets from $\mathcal{U}_k$.
+Choose one such open $\delta$-ball with center $t$, then we have:
+\[ \norm{ x - t } < \delta \]
 By (1) we have:
-$$ \lVert f_m(x) - f_m(t) \rVert < \frac{\epsilon}{3} $$
+\[ \norm{ f_m(x) - f_m(t) } < \frac{\epsilon}{3} \]
 By (2) we have:
-$$ \lVert f(t) - f(x) \rVert < \frac{\epsilon}{3} $$
+\[ \norm{ f(t) - f(x) } < \frac{\epsilon}{3} \]
 By (3) we have:
-$$ \lVert f_m(t) - f(t) \rVert < \frac{\epsilon}{3} $$
+\[ \norm{ f_m(t) - f(t) } < \frac{\epsilon}{3} \]
 Finally, we notice that:
-$$ \lVert f_m(x) - f(x) \rVert 
+\[
+\norm{ f_m(x) - f(x) } 
 \leq
-\lVert f_m(x) - f_m(t) \rVert 
-+ \lVert f(t) - f(x) \rVert 
-+ \lVert f_m(t) - f(t) \rVert
+\norm{ f_m(x) - f_m(t) } 
++ \norm{ f(t) - f(x) } 
++ \norm{ f_m(t) - f(t) }
 <
 \epsilon
-$$
+\]
 Therefore, $f_n \to f$ uniformly.
 
 \end{proof}
@@ -249,8 +307,11 @@ Therefore, $f_n \to f$ uniformly.
 \begin{tcolorbox}
 Show that any uniformly bounded sequence of differentiable functions on a compact interval with uniformly bounded derivatives has a convergent subsequence.
 \end{tcolorbox}
+
 Denote sequence of functions $(f_n)$ over compact interval $K$. Suppose $|f'_n(x)| \leq M$.
+
 \begin{proof}
+
 We have the result by the Arzela-Ascoli theorem (Rudin 7.25) if the following conditions hold:\\
 1) Each $f_n$ is continuous;\\
 2) Each $f_n$ is pointwise bounded;\\
@@ -259,10 +320,12 @@ We have the result by the Arzela-Ascoli theorem (Rudin 7.25) if the following co
 Condition 1 holds since each $f_n$ is differentiable, thus continuous. Condition 2 holds since sequence $(f_n)$ is uniformly bounded.
 
 Next we will prove condition 3. Fix $\epsilon>0$. Consider two arbitrary points $a,b \in K, b > a$ such that $d(a,b) < \frac{\epsilon}{M}$. By Mean Value Theorem there exists $c \in K$ such that:
-$$ f_n'(c) = \frac{f_n(b) - f_n(a)}{b - a}, $$
+\[ f_n'(c) = \frac{f_n(b) - f_n(a)}{b - a}, \]
 from which we have:
-$$ f_n(b) - f_n(a) = (b - a) f_n'(c) < \frac{\epsilon}{M} M = \epsilon $$
+\[ f_n(b) - f_n(a) = (b - a) f_n'(c) < \frac{\epsilon}{M} M = \epsilon \]
 We conclude that sequence $(f_n)$ is equicontinuous. Thus, $(f_n)$ has a convergent subsequence.
+
 \end{proof}
+
 
 \end{document}
