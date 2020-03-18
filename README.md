@@ -3,4 +3,6 @@ https://ocw.mit.edu/courses/mathematics/18-100b-analysis-i-fall-2010/study-mater
 
 Analysis I covers fundamentals of mathematical analysis: metric spaces, convergence of sequences and series, continuity, differentiability, Riemann integral, sequences and series of functions, uniformity, interchange of limit operations. For many students 18.100 is the first course requiring them to construct and write out carefully reasoned proofs. 18.100 course comes in several variants. Option B places more emphasis on point-set topology and n-space.
 
-Typeset in LaTeX using Overleaf.
+Textbook: Rudin, Principles of Mathematical Analysis
+
+Solutions typeset in LaTeX using Overleaf.
