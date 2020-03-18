@@ -10,6 +10,7 @@
 \newtheorem{claim}{Claim}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
 \newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
 
 
@@ -23,7 +24,7 @@
 \subsection*{Problem 1}
 
 \begin{tcolorbox}
-Let $f_n(x) = \frac{1}{nx+1}$ and $g_n(x) = \frac{x}{nx+1}$ for $x \in (0, 1)$ and $n \in \mathbb{N}$.
+Let $f_n(x) = \frac{1}{nx+1}$ and $g_n(x) = \frac{x}{nx+1}$ for $x \in (0, 1)$ and $n \in \N$.
 Prove that $f_n$ converges pointwise but not uniformly on $(0, 1)$, and that $g_n$ converges uniformly on $(0, 1)$.
 \end{tcolorbox}
 
@@ -50,7 +51,7 @@ Therefore, $g(x)$ converges uniformly.
 \subsection*{Problem 2}
 
 \begin{tcolorbox}
-Let $f_n (x) = \frac{x}{1 + nx^2}$ if $x \in \mathbb{R}$ and $n \in \mathbb{N}$.
+Let $f_n (x) = \frac{x}{1 + nx^2}$ if $x \in \R$ and $n \in \N$.
 Find the limit function $f$ of the sequence $(f_n)$ and the limit function $g$ of the sequence $(f'_n)$. 
 \end{tcolorbox}
 
@@ -64,7 +65,7 @@ We check $x=0$ separately and confirm that
 
 To find limit function of $f'_n$ we consider derivative function of $f_n$:
 \[ f'_n = \frac{(1+nx^2) - x (2xn)}{(1+nx^2)^2} = \frac{1-nx^2}{1+2nx^2+n^2x^4} \]
-We consider two cases ($x=0$ and $x\neq0$) and use L'Hospital's rule, which is valid since both numerator and denominator of $f'_n$ are differentiable on $\mathbb{R}$.
+We consider two cases ($x=0$ and $x\neq0$) and use L'Hospital's rule, which is valid since both numerator and denominator of $f'_n$ are differentiable on $\R$.
 \[
     g
     = \lim_{n\to\infty } f'_n 
@@ -84,21 +85,21 @@ Prove that $f'(x)$ exists for every $x$ but that $f'(0) \neq g(0)$. For what val
 
 \begin{proof}
 
-Derivative of constant function $f$ exists and is equal to $0$ for any $x \in \mathbb{R}$, including $x=0$.
+Derivative of constant function $f$ exists and is equal to $0$ for any $x \in \R$, including $x=0$.
 Thus, $f'(x) = g(x)$ for any $x\neq0$. However, $g(0)=1$.
 
 \end{proof}
 
 \begin{tcolorbox}
-In what subintervals of $\mathbb{R}$ does $f_n \to f$ uniformly?
-In what subintervals of $\mathbb{R}$ does $f'_n \to g$ uniformly?
+In what subintervals of $\R$ does $f_n \to f$ uniformly?
+In what subintervals of $\R$ does $f'_n \to g$ uniformly?
 \end{tcolorbox}
 
 \begin{proof}
 
-For any $n$ function $f_n$ is continuous  on $\mathbb{R}$ and the following holds:
+For any $n$ function $f_n$ is continuous  on $\R$ and the following holds:
 \[ f_n(x) \to 0 \text{ as } x \to \pm \infty; \>\>\>\> f(0) = 0 \]
-Derivative of $f_n$ is also continuous on $\mathbb{R}$, thus we can find minimum and maximum of $f_n$ by setting $f'_n$ to $0$:
+Derivative of $f_n$ is also continuous on $\R$, thus we can find minimum and maximum of $f_n$ by setting $f'_n$ to $0$:
 \begin{gather*}
     \frac{1-nx^2}{1+2nx^2+n^2x^4} = 0 \\
     nx^2 = 1 \\
@@ -109,10 +110,10 @@ More specifically, $f_n$ at $x=\frac{1}{\sqrt{n}}$ attains its global maximum.
 Maximum of $f_n$ is:
 \[ f^{\text{max}}_n = \frac{1}{\sqrt{n}(1+\frac{n}{n})} = \frac{1}{2\sqrt{n}} \]
 
-Denote $s_n = \sup_{x\in\mathbb{R}} |f_n(x)-f(x)|$.
+Denote $s_n = \sup_{x\in\R} |f_n(x)-f(x)|$.
 Based on the above, $s_n = f_n \left( \frac{1}{\sqrt{n}} \right) = \frac{1}{2\sqrt{n}}$.
 
-For any $\epsilon>0$ we can find $n\in\mathbb{N}$ such that $s_n < \epsilon$, thus $f_n$ converges uniformly to $f$ on $\mathbb{R}$.
+For any $\epsilon>0$ we can find $n\in\N$ such that $s_n < \epsilon$, thus $f_n$ converges uniformly to $f$ on $\R$.
 
 Since $f'_n(0)=1$ and $f'_n$ is continuous, image of every open neighbourhood of $x=0$ contains points arbitrarily close to $1$.
 For such points $|f'_n(x)-f(x)|$ is arbitrarily close to $1$ and thus $s_n = 1$.
@@ -137,14 +138,14 @@ Prove that in this case $f$ is also bounded.
 
 \begin{proof}
 
-Choose arbitrary $\epsilon>0$. Since $f_n$ converges to $f$  uniformly, there exists some $N \in \mathbb{N}$ such that for all $m \geq N$ and $x \in E$ the following holds:
+Choose arbitrary $\epsilon>0$. Since $f_n$ converges to $f$  uniformly, there exists some $N \in \N$ such that for all $m \geq N$ and $x \in E$ the following holds:
 \[ |f_m(x)-f(x)| \leq \epsilon \]
 Since $f_m(x)$ is bounded, $f(x)$ must also be bounded.
 We also have finitely many functions $f_k(x)$ such that $k<N$.
 For each $x \in E$ consider an upper bound of $|f_n(x)|$, which can be constructed as follows:
 \[ g(x) = \max \> ( \> \max |f_k(x)|, \>\> |f(x)| + \epsilon \> ) \]
 Since each $f_n(x)$ is bounded and $f(x)$ is bounded, $g(x)$ must also be bounded.
-Any upper bound of $g(x)$, for example $M = \sup_{x\in E} g(x)$ is an upper bound for any $|f_n(x)|$ $(x \in E, n \in \mathbb{N})$ by construction. 
+Any upper bound of $g(x)$, for example $M = \sup_{x\in E} g(x)$ is an upper bound for any $|f_n(x)|$ $(x \in E, n \in \N)$ by construction. 
 Therefore, $f_n$ is uniformly bounded.
 
 \end{proof}
@@ -185,7 +186,7 @@ Since for any fixed $x$ sequences $f_n(x) \to f(x)$ and $g_n(x) \to g(x)$ as $n 
 \[ \lim f_n(x) + g_n(x) = \lim f_n(x) + \lim g_n(x) \]
 
 Fix $\epsilon>0$.
-By the uniformity of convergence, for $\epsilon$ there exist $K, M \in \mathbb{N}$ such that for all $x \in E$:
+By the uniformity of convergence, for $\epsilon$ there exist $K, M \in \N$ such that for all $x \in E$:
 \[ | f_k(x) - f(x) | \leq \frac{\epsilon}{2} \]
 for $k \geq K$ and
 \[ | g_m(x) - g(x) | \leq \frac{\epsilon}{2} \]
@@ -203,12 +204,12 @@ b) If each $f_n$ and each $g_n$ is bounded on $E$, prove that $f_n g_n \to f g$ 
 
 \begin{proof}
 
-Since each $f_n$ and $g_n$ are bounded, and from uniformity of convergence, by Problem 3 we have that $f_n$ and $g_n$ are uniformly bounded, i.e. there exist some $M_f$ and $M_g$ such that $|f_n| \leq M_f$, $|f| \leq M_f$, $|g_n| \leq M_g$, $|g| \leq M_g$ for all $n \in \mathbb{N}$.
+Since each $f_n$ and $g_n$ are bounded, and from uniformity of convergence, by Problem 3 we have that $f_n$ and $g_n$ are uniformly bounded, i.e. there exist some $M_f$ and $M_g$ such that $|f_n| \leq M_f$, $|f| \leq M_f$, $|g_n| \leq M_g$, $|g| \leq M_g$ for all $n \in \N$.
 
 Fix $\epsilon>0$. From the uniformity of convergence of $f_n$ and $g_n$ we have
 \[ |f_k - f| \leq \frac{\epsilon}{M_f + M_g} \]
 \[ |g_k - g| \leq \frac{\epsilon}{M_f + M_g} \]
-for all $k > N$ for some $N \in \mathbb{N}$.
+for all $k > N$ for some $N \in \N$.
 
 We will now show that all elements of sequence $f_n(x) g_n(x)$ after the $N$-th one are within $\epsilon$ of $f(x)g(x)$ for arbitrary $x \in E$:
 \begin{equation*}
@@ -228,11 +229,11 @@ Therefore, $f_n g_n \to fg$ uniformly.
 
 \begin{tcolorbox}
 Define two sequences $(f_n)$ and $(g_n)$ as follows:
-\[ f_n(x) = x \left( 1+\frac{1}{n} \right) \text{ if $x\in\mathbb{R}, n \geq 1$} \]
+\[ f_n(x) = x \left( 1+\frac{1}{n} \right) \text{ if $x\in\R, n \geq 1$} \]
 \[ g_n(x) =
 \begin{cases}
     \frac{1}{n}, & \text{ if $x=0$ or $x$ is irrational} \\
-    q+\frac{1}{n}, & \text{ if $x\in \mathbb{Q}$ and $x=\frac{p}{q}$ in reduced form}
+    q+\frac{1}{n}, & \text{ if $x\in \Q$ and $x=\frac{p}{q}$ in reduced form}
 \end{cases}
 \]
 Show that, on any interval $[a, b]$ both $f_n$ and $g_n$ converge uniformly, but $f_n g_n$ does not converge uniformly.
@@ -282,7 +283,7 @@ For rational $x \neq 0$:
     |f_n(x) g_n(x) - f(x) g(x) | & = \left| \frac{p}{q} \left( 1+\frac{1}{n} \right) \left( q+\frac{1}{n} \right) - p \right| \\
     & = \left| \frac{p}{qn} + \frac{p}{qn^2} + \frac{p}{n} \right| = \frac{1}{n} \left| x + \frac{x}{n} + p \right|
 \end{align*}
-For any interval $[a,b]$ and sufficiently large $n\in\mathbb{N}$ we can always find $x=\frac{p}{q} \in [a,b]$ such that $p \geq n$.
+For any interval $[a,b]$ and sufficiently large $n\in\N$ we can always find $x=\frac{p}{q} \in [a,b]$ such that $p \geq n$.
 Thus, above expression cannot be less than $1$ for some values of $x$. 
 Therefore, $f_n g_n$ does not converge uniformly to $f g$ on interval $[a,b]$.
 
@@ -300,7 +301,7 @@ Let $g$ be continuous on $[-M, M]$, prove that $g \circ f_n \to g \circ f$ unifo
 
 Since $g$ is continuous on a compact set, it must be uniformly continuous (Rudin 4.19).
 Fix $\epsilon>0$. There must exist $\delta>0$ such that for any $|f_n(x)-f(x)| \leq \delta$ it must hold that $|g \circ f_n(x)-g \circ f(x)| \leq \epsilon$.
-Since $f_n \to f$ uniformly, there exists $n \in \mathbb{N}$ such that for all $x \in E$ and all $m \geq N$:
+Since $f_n \to f$ uniformly, there exists $n \in \N$ such that for all $x \in E$ and all $m \geq N$:
 \[ |f_m(x)-f(x)| \leq \delta \]
 Therefore:
 \[ |g \circ f_m(x)-g \circ f(x)| \leq \epsilon \]
