@@ -8,119 +8,166 @@
 \usepackage{tcolorbox}
 
 \newtheorem{claim}{Claim}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
 
 
 \title{18.100B: Problem Set 9}
 \author{Dmitry Kaysin}
-\date\today
-
+\date{February 2020}
 \begin{document}
 \maketitle 
+
 
 \subsection*{Problem 1}
 
 \begin{tcolorbox}
-Let $f_n(x) = \frac{1}{nx+1}$ and $g_n(x) = \frac{x}{nx+1}$ for $x \in (0, 1)$ and $n \in \mathbb{N}$. Prove that $f_n$ converges pointwise but not uniformly on $(0, 1)$, and that $g_n$ converges uniformly on $(0, 1)$.
+Let $f_n(x) = \frac{1}{nx+1}$ and $g_n(x) = \frac{x}{nx+1}$ for $x \in (0, 1)$ and $n \in \mathbb{N}$.
+Prove that $f_n$ converges pointwise but not uniformly on $(0, 1)$, and that $g_n$ converges uniformly on $(0, 1)$.
 \end{tcolorbox}
+
 \begin{proof}
+
 We can see that $f_n(x) = \frac{1}{nx+1}$ converges pointwise, since for any $x \in (0,1)$:
-$$ \lim_{n \to \infty} \frac{1}{nx+1} = 0 $$
+\[ \lim_{n \to \infty} \frac{1}{nx+1} = 0 \]
 However, $f$ is not uniformly convergent since for any $N > 1$ we can find point $x_N = \frac{1}{N}$ such that $f_N(x_N) = \frac{1}{2}$ and
 $$ | f_N(x_N) - f(x_N) | = \frac{1}{2} $$
 Clearly, for any $\epsilon < \frac{1}{2}$ criterion of uniform convergence fails at $a_N$ for any $N > 1$.
 
 We can also see that $g_n(x) = \frac{x}{nx+1}$ converges pointwise, since for any $x \in (0,1)$:
-$$ \lim_{n \to \infty} \frac{x}{nx+1} = \lim_{n \to \infty} \frac{1}{n+\frac{1}{x}} = 0 $$
+\[ \lim_{n \to \infty} \frac{x}{nx+1} = \lim_{n \to \infty} \frac{1}{n+\frac{1}{x}} = 0 \]
 Then we notice that
-$$ x < 1 \>\> \Rightarrow \>\> \frac{1}{n+\frac{1}{x}} < \frac{1}{n+1} \>\> \Rightarrow \>\> \frac{x}{nx+1} < \frac{1}{n+1} $$
-Therefore, for any $\epsilon>0$ we can choose $N$ such that $ \frac{1}{N+1} < \epsilon$. Then, for any $x \in (0,1)$ and for any $m \geq N$:
-$$ | g_m(x) - 0 | = g_m(x) < \frac{1}{m+1} \leq \frac{1}{N+1} < \epsilon. $$
+\[ x < 1 \>\> \Rightarrow \>\> \frac{1}{n+\frac{1}{x}} < \frac{1}{n+1} \>\> \Rightarrow \>\> \frac{x}{nx+1} < \frac{1}{n+1} \]
+Therefore, for any $\epsilon>0$ we can choose $N$ such that $ \frac{1}{N+1} < \epsilon$.
+Then, for any $x \in (0,1)$ and for any $m \geq N$:
+\[ | g_m(x) - 0 | = g_m(x) < \frac{1}{m+1} \leq \frac{1}{N+1} < \epsilon. \]
 Therefore, $g(x)$ converges uniformly.
+
 \end{proof}
 
 
 \subsection*{Problem 2}
 
 \begin{tcolorbox}
-Let $f_n (x) = \frac{x}{1 + nx^2}$ if $x \in \mathbb{R}$ and $n \in \mathbb{N}$. Find the limit function $f$ of the sequence $(f_n)$ and the limit function $g$ of the sequence $(f'_n)$. 
+Let $f_n (x) = \frac{x}{1 + nx^2}$ if $x \in \mathbb{R}$ and $n \in \mathbb{N}$.
+Find the limit function $f$ of the sequence $(f_n)$ and the limit function $g$ of the sequence $(f'_n)$. 
 \end{tcolorbox}
+
 \begin{proof}
+
 We notice that
-$$ \frac{x}{1 + nx^2} = \frac{1}{\frac{1}{x}+nx}, $$
-which for arbitrary $x \neq 0$ goes to $0$ as $n$ goes to infinity. We check $x=0$ separately and confirm that
-$$ f = \lim_{n\to\infty} f_n = \lim_{n\to\infty} \frac{x}{1 + nx^2} = 0 $$
+\[ \frac{x}{1 + nx^2} = \frac{1}{\frac{1}{x}+nx}, \]
+which for arbitrary $x \neq 0$ goes to $0$ as $n$ goes to infinity.
+We check $x=0$ separately and confirm that
+\[ f = \lim_{n\to\infty} f_n = \lim_{n\to\infty} \frac{x}{1 + nx^2} = 0 \]
 
 To find limit function of $f'_n$ we consider derivative function of $f_n$:
-$$ f'_n = \frac{(1+nx^2) - x (2xn)}{(1+nx^2)^2} = \frac{1-nx^2}{1+2nx^2+n^2x^4} $$
+\[ f'_n = \frac{(1+nx^2) - x (2xn)}{(1+nx^2)^2} = \frac{1-nx^2}{1+2nx^2+n^2x^4} \]
 We consider two cases ($x=0$ and $x\neq0$) and use L'Hospital's rule, which is valid since both numerator and denominator of $f'_n$ are differentiable on $\mathbb{R}$.
-$$ g = \lim_{n\to\infty } f'_n = \lim_{n\to\infty } \frac{1-nx^2}{1+2nx^2+n^2x^4} = \begin{cases}
-    1, & \text{ for $x = 0$} \\
-    \lim_{n\to\infty} \frac{-x^2}{2x^2+2nx^4} = 0, & \text{ otherwise}
-\end{cases}
-$$
+\[
+    g
+    = \lim_{n\to\infty } f'_n 
+    = \lim_{n\to\infty } \frac{1-nx^2}{1+2nx^2+n^2x^4} 
+    =
+    \begin{cases}
+        1, & \text{ for $x = 0$} \\
+        \lim_{n\to\infty} \frac{-x^2}{2x^2+2nx^4} = 0, & \text{ otherwise}
+    \end{cases}
+\]
+
 \end{proof}
 
 \begin{tcolorbox}
 Prove that $f'(x)$ exists for every $x$ but that $f'(0) \neq g(0)$. For what values of $x$ is $f'(x) = g(x)$? 
 \end{tcolorbox}
+
 \begin{proof}
-Derivative of constant function $f$ exists and is equal to $0$ for any $x \in \mathbb{R}$, including $x=0$. Thus, $f'(x) = g(x)$ for any $x\neq0$. However, $g(0)=1$.
+
+Derivative of constant function $f$ exists and is equal to $0$ for any $x \in \mathbb{R}$, including $x=0$.
+Thus, $f'(x) = g(x)$ for any $x\neq0$. However, $g(0)=1$.
+
 \end{proof}
 
 \begin{tcolorbox}
-In what subintervals of $\mathbb{R}$ does $f_n \to f$ uniformly? In what subintervals of $\mathbb{R}$ does $f'_n \to g$ uniformly?
+In what subintervals of $\mathbb{R}$ does $f_n \to f$ uniformly?
+In what subintervals of $\mathbb{R}$ does $f'_n \to g$ uniformly?
 \end{tcolorbox}
+
 \begin{proof}
 
 For any $n$ function $f_n$ is continuous  on $\mathbb{R}$ and the following holds:
-$$ f_n(x) \to 0 \text{ as } x \to \pm \infty; \>\>\>\> f(0) = 0 $$
+\[ f_n(x) \to 0 \text{ as } x \to \pm \infty; \>\>\>\> f(0) = 0 \]
 Derivative of $f_n$ is also continuous on $\mathbb{R}$, thus we can find minimum and maximum of $f_n$ by setting $f'_n$ to $0$:
-$$ \frac{1-nx^2}{1+2nx^2+n^2x^4} = 0 $$
-$$ nx^2 = 1 $$
-$$ x = \pm \frac{1}{\sqrt{n}} $$
-More specifically, $f_n$ at $x=\frac{1}{\sqrt{n}}$ attains its global maximum. Maximum of $f_n$ is:
-$$ f^{\text{max}}_n = \frac{1}{\sqrt{n}(1+\frac{n}{n})} = \frac{1}{2\sqrt{n}} $$
+\begin{gather*}
+    \frac{1-nx^2}{1+2nx^2+n^2x^4} = 0 \\
+    nx^2 = 1 \\
+    x = \pm \frac{1}{\sqrt{n}}
+\end{gather*}
 
-Denote $s_n = \sup_{x\in\mathbb{R}} |f_n(x)-f(x)|$. Based on the above, $s_n = f_n \left( \frac{1}{\sqrt{n}} \right) = \frac{1}{2\sqrt{n}}$.
+More specifically, $f_n$ at $x=\frac{1}{\sqrt{n}}$ attains its global maximum.
+Maximum of $f_n$ is:
+\[ f^{\text{max}}_n = \frac{1}{\sqrt{n}(1+\frac{n}{n})} = \frac{1}{2\sqrt{n}} \]
+
+Denote $s_n = \sup_{x\in\mathbb{R}} |f_n(x)-f(x)|$.
+Based on the above, $s_n = f_n \left( \frac{1}{\sqrt{n}} \right) = \frac{1}{2\sqrt{n}}$.
 
 For any $\epsilon>0$ we can find $n\in\mathbb{N}$ such that $s_n < \epsilon$, thus $f_n$ converges uniformly to $f$ on $\mathbb{R}$.
 
-Since $f'_n(0)=1$ and $f'_n$ is continuous, image of every open neighbourhood of $x=0$ contains points arbitrarily close to $1$. For such points $|f'_n(x)-f(x)|$ is arbitrarily close to $1$ and thus $s_n = 1$. Clearly, $f'_n$ cannot be uniformly convergent on any set that has $x=0$ as a limit point.
+Since $f'_n(0)=1$ and $f'_n$ is continuous, image of every open neighbourhood of $x=0$ contains points arbitrarily close to $1$.
+For such points $|f'_n(x)-f(x)|$ is arbitrarily close to $1$ and thus $s_n = 1$.
+Clearly, $f'_n$ cannot be uniformly convergent on any set that has $x=0$ as a limit point.
 
 Otherwise we have:
-$$ | f'_n(x) - f(x) | = \left| \frac{1-nx^2}{(1+nx^2)^2} \right|, $$
+\[ | f'_n(x) - f(x) | = \left| \frac{1-nx^2}{(1+nx^2)^2} \right|, \]
 which can be made arbitrarily small for any $x$ by setting $n$ sufficiently large (degree of the polynomial in the denominator is larger than the degree of the polynomial in the numerator).
 
 \end{proof}
 
+
 \subsection*{Problem 3}
 
 \begin{tcolorbox}
-Let $\mathcal{M}$ be a metric space and $(f_n)$ a sequence of functions defined on a subset $E \subseteq \mathcal{M}$. We say that $(f_n)$ is uniformly bounded if there exists a constant $M$ such that $|f_n (x)| \leq M$ for every $n \in N$ and $x \in E$.
+Let $\mathcal{M}$ be a metric space and $(f_n)$ a sequence of functions defined on a subset $E \subseteq \mathcal{M}$.
+We say that $(f_n)$ is uniformly bounded if there exists a constant $M$ such that $|f_n (x)| \leq M$ for every $n \in N$ and $x \in E$.
 
-Prove that if $(f_n)$ is a sequence of bounded real valued functions that converges uniformly to a function $f$, then $(f_n)$ is uniformly bounded. Prove that in this case $f$ is also bounded.
+Prove that if $(f_n)$ is a sequence of bounded real valued functions that converges uniformly to a function $f$, then $(f_n)$ is uniformly bounded.
+Prove that in this case $f$ is also bounded.
 \end{tcolorbox}
+
 \begin{proof}
+
 Choose arbitrary $\epsilon>0$. Since $f_n$ converges to $f$  uniformly, there exists some $N \in \mathbb{N}$ such that for all $m \geq N$ and $x \in E$ the following holds:
-$$ |f_m(x)-f(x)| \leq \epsilon $$
-Since $f_m(x)$ is bounded, $f(x)$ must also be bounded. We also have finitely many functions $f_k(x)$ such that $k<N$. For each $x \in E$ consider an upper bound of $|f_n(x)|$, which can be constructed as follows:
-$$ g(x) = \max \> ( \> \max |f_k(x)|, \>\> |f(x)| + \epsilon \> ) $$
-Since each $f_n(x)$ is bounded and $f(x)$ is bounded, $g(x)$ must also be bounded. Any upper bound of $g(x)$, for example $M = \sup_{x\in E} g(x)$ is an upper bound for any $|f_n(x)|$ $(x \in E, n \in \mathbb{N})$ by construction. Therefore, $f_n$ is uniformly bounded.
+\[ |f_m(x)-f(x)| \leq \epsilon \]
+Since $f_m(x)$ is bounded, $f(x)$ must also be bounded.
+We also have finitely many functions $f_k(x)$ such that $k<N$.
+For each $x \in E$ consider an upper bound of $|f_n(x)|$, which can be constructed as follows:
+\[ g(x) = \max \> ( \> \max |f_k(x)|, \>\> |f(x)| + \epsilon \> ) \]
+Since each $f_n(x)$ is bounded and $f(x)$ is bounded, $g(x)$ must also be bounded.
+Any upper bound of $g(x)$, for example $M = \sup_{x\in E} g(x)$ is an upper bound for any $|f_n(x)|$ $(x \in E, n \in \mathbb{N})$ by construction. 
+Therefore, $f_n$ is uniformly bounded.
+
 \end{proof}
 
 \begin{tcolorbox}
 If $(f_n)$ is a sequence of bounded functions converging pointwise to $f$, need $f$ be bounded?
 \end{tcolorbox}
+
 Not necessarily.
+
 \begin{proof}
+
 Counterexample: Consider function
-$$ f_n(x) =
-\begin{cases}
-    |x|, & \text{ if $x \leq n$} \\
-    n, & \text{ otherwise}
-\end{cases}
-$$
-Each function $f_n(x)$ is bounded (by $n)$. Limit function of $f(x)$ is $|x|$, which is unbounded.
+\[
+    f_n(x) =
+    \begin{cases}
+        |x|, & \text{ if $x \leq n$} \\
+        n, & \text{ otherwise}
+    \end{cases}
+\]
+Each function $f_n(x)$ is bounded (by $n)$.
+Limit function of $f(x)$ is $|x|$, which is unbounded.
+
 \end{proof}
 
 
@@ -131,37 +178,47 @@ Prove that if $f_n \to f$ uniformly and $g_n \to g$ uniformly on a set $E$ then:
 
 a) $f_n + g_n \to f + g$ uniformly on $E$.
 \end{tcolorbox}
-\begin{proof}
-Since for any fixed $x$ sequences $f_n(x) \to f(x)$ and $g_n(x) \to g(x)$ as $n \to \infty$:
-$$ \lim f_n(x) + g_n(x) = \lim f_n(x) + \lim g_n(x) $$
 
-Fix $\epsilon>0$. By the uniformity of convergence, for $\epsilon$ there exist $K, M \in \mathbb{N}$ such that for all $x \in E$:
-$$ | f_k(x) - f(x) | \leq \frac{\epsilon}{2} $$
+\begin{proof}
+
+Since for any fixed $x$ sequences $f_n(x) \to f(x)$ and $g_n(x) \to g(x)$ as $n \to \infty$:
+\[ \lim f_n(x) + g_n(x) = \lim f_n(x) + \lim g_n(x) \]
+
+Fix $\epsilon>0$.
+By the uniformity of convergence, for $\epsilon$ there exist $K, M \in \mathbb{N}$ such that for all $x \in E$:
+\[ | f_k(x) - f(x) | \leq \frac{\epsilon}{2} \]
 for $k \geq K$ and
-$$ | g_m(x) - g(x) | \leq \frac{\epsilon}{2} $$
+\[ | g_m(x) - g(x) | \leq \frac{\epsilon}{2} \]
 for $m \geq M$. 
 Suppose, without loss of generality, that $K \geq M$, then by Triangle inequality:
-$$ | (f_k(x) + g_k(x)) - (f(x) + g(x)) | \leq |f_k(x)-f(x)| + |g_k(x)-g(x)| \leq \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon $$
+\[ | (f_k(x) + g_k(x)) - (f(x) + g(x)) | \leq |f_k(x)-f(x)| + |g_k(x)-g(x)| \leq \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon \]
 
 We conclude that $f_n(x) + g_n(x) \to f(x)+g(x)$ uniformly on $E$.
+
 \end{proof}
 
 \begin{tcolorbox}
 b) If each $f_n$ and each $g_n$ is bounded on $E$, prove that $f_n g_n \to f g$ uniformly.
 \end{tcolorbox}
+
 \begin{proof}
+
 Since each $f_n$ and $g_n$ are bounded, and from uniformity of convergence, by Problem 3 we have that $f_n$ and $g_n$ are uniformly bounded, i.e. there exist some $M_f$ and $M_g$ such that $|f_n| \leq M_f$, $|f| \leq M_f$, $|g_n| \leq M_g$, $|g| \leq M_g$ for all $n \in \mathbb{N}$.
 
 Fix $\epsilon>0$. From the uniformity of convergence of $f_n$ and $g_n$ we have
-$$ |f_k - f| \leq \frac{\epsilon}{M_f + M_g} $$
-$$ |g_k - g| \leq \frac{\epsilon}{M_f + M_g} $$
+\[ |f_k - f| \leq \frac{\epsilon}{M_f + M_g} \]
+\[ |g_k - g| \leq \frac{\epsilon}{M_f + M_g} \]
 for all $k > N$ for some $N \in \mathbb{N}$.
 
 We will now show that all elements of sequence $f_n(x) g_n(x)$ after the $N$-th one are within $\epsilon$ of $f(x)g(x)$ for arbitrary $x \in E$:
-$$ |f_k g_k - fg| = |f_k g_k - f_k g + f_k g - fg| = |f_k(g_k-g) + g(f_k-f)| \leq $$
-$$ \leq |f_k| |g_k-g| + |g| |f_k-f| \leq |f_k| \left( \frac{\epsilon}{M_f + M_g} \right) + |g| \left( \frac{\epsilon}{M_f + M_g} \right) = $$
-$$ = \frac{\epsilon}{M_f + M_g} (|f_k|+|g|) \leq \frac{\epsilon}{M_f + M_g} (M_f+M_g) = \epsilon $$
-
+\begin{equation*}
+\begin{split}
+    |f_k g_k - fg| & = |f_k g_k - f_k g + f_k g - fg| = |f_k(g_k-g) + g(f_k-f)| \\
+    & \leq |f_k| |g_k-g| + |g| |f_k-f| \\
+    & \leq |f_k| \left( \frac{\epsilon}{M_f + M_g} \right) + |g| \left( \frac{\epsilon}{M_f + M_g} \right) \\
+    & = \frac{\epsilon}{M_f + M_g} (|f_k|+|g|) \leq \frac{\epsilon}{M_f + M_g} (M_f+M_g) = \epsilon
+\end{split}
+\end{equation*}
 Therefore, $f_n g_n \to fg$ uniformly.
 
 \end{proof}
@@ -171,55 +228,63 @@ Therefore, $f_n g_n \to fg$ uniformly.
 
 \begin{tcolorbox}
 Define two sequences $(f_n)$ and $(g_n)$ as follows:
-$$ f_n(x) = x \left( 1+\frac{1}{n} \right) \text{ if $x\in\mathbb{R}, n \geq 1$}$$
-$$ g_n(x) =
+\[ f_n(x) = x \left( 1+\frac{1}{n} \right) \text{ if $x\in\mathbb{R}, n \geq 1$} \]
+\[ g_n(x) =
 \begin{cases}
     \frac{1}{n}, & \text{ if $x=0$ or $x$ is irrational} \\
     q+\frac{1}{n}, & \text{ if $x\in \mathbb{Q}$ and $x=\frac{p}{q}$ in reduced form}
 \end{cases}
-$$
+\]
 Show that, on any interval $[a, b]$ both $f_n$ and $g_n$ converge uniformly, but $f_n g_n$ does not converge uniformly.
 \end{tcolorbox}
+
 \begin{proof}
+
 We can see that $f_n(x)$ converges pointwise to $f(x) = x$. For $x \in [a,b]$ we have
-$$ | f_n(x) - f(x) | = \left| x + \left( 1+\frac{1}{n} \right) - x \right| = \left| \frac{x}{n} \right| \leq \frac{\max(|a|,|b|)}{n}, $$
-which can be made arbitrarily small by setting $n$ sufficiently large. Therefore, $f_n \to f$ uniformly. We also note that $f_n$ and $f$ are bounded on $[a,b]$.
+\[ | f_n(x) - f(x) | = \left| x + \left( 1+\frac{1}{n} \right) - x \right| = \left| \frac{x}{n} \right| \leq \frac{\max(|a|,|b|)}{n}, \]
+which can be made arbitrarily small by setting $n$ sufficiently large. 
+Therefore, $f_n \to f$ uniformly. We also note that $f_n$ and $f$ are bounded on $[a,b]$.
 
 We examine pointwise convergence of $g_n(x)$.
 
 For $x=0$ and irrational $x$:
-$$ g^a_x = \lim g_n(x) = \lim \frac{1}{n} = 0 $$
+\[ g^a_x = \lim g_n(x) = \lim \frac{1}{n} = 0. \]
 
 For rational $x \neq 0$ (in reduced form: $x = \frac{p}{q}$):
-$$ g^b_x = \lim g_n(x) = \lim q+\frac{1}{n} = q. $$
+\[ g^b_x = \lim g_n(x) = \lim q+\frac{1}{n} = q. \]
 
 For both rational and irrational $x \in [a,b]$ we have:
-$$ |g_n(x) - g(x)| = \frac{1}{n}, $$
-which can be made arbitrarily small by setting $n$ sufficiently large. Therefore, $g_n \to g$ uniformly. However, we note that neither $f_n$ nor $f$ are bounded on $[a,b]$ since neighbourhood of any irrational number contains infinitely many rationals with arbitrarily large denominator in reduced form.
-
-\begin{equation*}
+\[ |g_n(x) - g(x)| = \frac{1}{n}, \]
+which can be made arbitrarily small by setting $n$ sufficiently large. 
+Therefore, $g_n \to g$ uniformly. However, we note that neither $f_n$ nor $f$ are bounded on $[a,b]$ since neighbourhood of any irrational number contains infinitely many rationals with arbitrarily large denominator in reduced form.
+\[
 \begin{aligned}
-f_n(x) g_n(x) 
-& =
+    f_n(x) g_n(x) 
+    & =
     \begin{cases}
         x \left( 1+\frac{1}{n} \right) \frac{1}{n}, & \text{ if $x=0$ or $x$ is irrational} \\
         \frac{p}{q} \left( 1+\frac{1}{n} \right) (q+\frac{1}{n}), & \text{ otherwise}
     \end{cases} \\\\
-& =
+    & =
     \begin{cases}
         \frac{x}{n} \left( 1+\frac{1}{n} \right), & \text{ if $x=0$ or $x$ is irrational} \\
         \frac{p}{qn} \left( 1+\frac{1}{n}+\frac{1}{q} \right), & \text{ otherwise}
     \end{cases}
 \end{aligned}
-\end{equation*}
+\]
 
 For irrational $x$ and $x=0$:
-$$ |f_n(x) g_n(x) - f(x) g(x) | = \left| \frac{x}{n} \left( 1+\frac{1}{n} \right) - x \cdot 0 \right| \leq \left| \> \max(a,b) \left( \frac{1}{n}+\frac{1}{n^2} \right) \right|, $$
+\[ |f_n(x) g_n(x) - f(x) g(x) | = \left| \frac{x}{n} \left( 1+\frac{1}{n} \right) - x \cdot 0 \right| \leq \left| \> \max(a,b) \left( \frac{1}{n}+\frac{1}{n^2} \right) \right|, \]
 which can be made arbitrarily small by setting $n$ sufficiently large.
 
 For rational $x \neq 0$:
-$$ |f_n(x) g_n(x) - f(x) g(x) | = \left| \frac{p}{q} \left( 1+\frac{1}{n} \right) \left( q+\frac{1}{n} \right) - p \right| = \left| \frac{p}{qn} + \frac{p}{qn^2} + \frac{p}{n} \right| = \frac{1}{n} \left| x + \frac{x}{n} + p \right| $$
-For any interval $[a,b]$ and sufficiently large $n\in\mathbb{N}$ we can always find $x=\frac{p}{q} \in [a,b]$ such that $p \geq n$. Thus, above expression cannot be less than $1$ for some values of $x$. Therefore, $f_n g_n$ does not converge uniformly to $f g$ on interval $[a,b]$.
+\begin{align*}
+    |f_n(x) g_n(x) - f(x) g(x) | & = \left| \frac{p}{q} \left( 1+\frac{1}{n} \right) \left( q+\frac{1}{n} \right) - p \right| \\
+    & = \left| \frac{p}{qn} + \frac{p}{qn^2} + \frac{p}{n} \right| = \frac{1}{n} \left| x + \frac{x}{n} + p \right|
+\end{align*}
+For any interval $[a,b]$ and sufficiently large $n\in\mathbb{N}$ we can always find $x=\frac{p}{q} \in [a,b]$ such that $p \geq n$.
+Thus, above expression cannot be less than $1$ for some values of $x$. 
+Therefore, $f_n g_n$ does not converge uniformly to $f g$ on interval $[a,b]$.
 
 \end{proof}
 
@@ -227,13 +292,18 @@ For any interval $[a,b]$ and sufficiently large $n\in\mathbb{N}$ we can always f
 \subsection*{Problem 6}
 
 \begin{tcolorbox}
-Assume that $(f_n)$ is a uniformly bounded sequence of functions converging uniformly to $f$ on a set $E$, define $M$ as in Problem 3. Let $g$ be continuous on $[-M, M]$, prove that $g \circ f_n \to g \circ f$ uniformly on $E$.
+Assume that $(f_n)$ is a uniformly bounded sequence of functions converging uniformly to $f$ on a set $E$, define $M$ as in Problem 3.
+Let $g$ be continuous on $[-M, M]$, prove that $g \circ f_n \to g \circ f$ uniformly on $E$.
 \end{tcolorbox}
+
 \begin{proof}
-Since $g$ is continuous on a compact set, it must be uniformly continuous (Rudin 4.19). Fix $\epsilon>0$. There must exist $\delta>0$ such that for any $|f_n(x)-f(x)| \leq \delta$ it must hold that $|g \circ f_n(x)-g \circ f(x)| \leq \epsilon$. Since $f_n \to f$ uniformly, there exists $n \in \mathbb{N}$ such that for all $x \in E$ and all $m \geq N$:
-$$ |f_m(x)-f(x)| \leq \delta $$
+
+Since $g$ is continuous on a compact set, it must be uniformly continuous (Rudin 4.19).
+Fix $\epsilon>0$. There must exist $\delta>0$ such that for any $|f_n(x)-f(x)| \leq \delta$ it must hold that $|g \circ f_n(x)-g \circ f(x)| \leq \epsilon$.
+Since $f_n \to f$ uniformly, there exists $n \in \mathbb{N}$ such that for all $x \in E$ and all $m \geq N$:
+\[ |f_m(x)-f(x)| \leq \delta \]
 Therefore:
-$$ |g \circ f_m(x)-g \circ f(x)| \leq \epsilon $$
+\[ |g \circ f_m(x)-g \circ f(x)| \leq \epsilon \]
 We conclude that $g \circ f_n \to f g$ uniformly.
 \end{proof}
 
@@ -242,36 +312,62 @@ We conclude that $g \circ f_n \to f g$ uniformly.
 
 \begin{tcolorbox}
 a) Show that the sequence of polynomials defined inductively by
-$$ P_0(x) = 0 $$ 
-$$ P_{n+1}(x) = P_n(x) + \frac{1}{2} \left( x-P_n^2(x) \right) $$
+\begin{gather*}
+    P_0(x) = 0, \\
+    P_{n+1}(x) = P_n(x) + \frac{1}{2} \left( x-P_n^2(x) \right)    
+\end{gather*}
 converges uniformly on the interval $[0, 1]$ to the function $f(x) = \sqrt{x}$.
 \end{tcolorbox}
-\begin{proof}
-We first notice that $P_n$ is increasing:
-$$ \sqrt{x} \geq P_n(x) \>\> \Rightarrow \>\> x \geq P_n^2(x) \>\> \Rightarrow \>\> \frac{1}{2} \left( x - P_n^2(x) \right) = P_{n+1}(x) - P_n(x) \geq 0 $$
 
-We then notice that if $P_n \leq \sqrt{x}$ then $P_{n+1} \leq \sqrt{x}$. This is true for $n=0$. We proceed by induction on $n$. Suppose $0 \leq P_n \leq \sqrt{x} \leq 1$, then
-$$ P_{n+1}(x) = P_n(x) + \frac{1}{2} \left( x-P_n^2(x) \right) $$
-$$ P_{n+1}(x) \leq \sqrt{x} + \frac{1}{2} \left( x-P_n^2(x) \right) $$
-$$ 0 \leq \frac{1}{2} \left( x-P_n^2(x) \right) \leq \sqrt{x} - P_{n+1}(x) $$
-$$ P_{n+1}(x) \leq \sqrt{x} $$
+\begin{proof}
+
+We first notice that $P_n$ is increasing:
+\[
+    \sqrt{x} \geq P_n(x) \>\> 
+    \Rightarrow \>\> x \geq P_n^2(x) \>\> 
+    \Rightarrow \>\> \frac{1}{2} \left( x - P_n^2(x) \right) 
+    = P_{n+1}(x) - P_n(x) \geq 0
+\]
+
+We then notice that if $P_n \leq \sqrt{x}$ then $P_{n+1} \leq \sqrt{x}$. This is true for $n=0$.
+We proceed by induction on $n$.
+Suppose $0 \leq P_n \leq \sqrt{x} \leq 1$, then
+\begin{gather*}
+    P_{n+1}(x) = P_n(x) + \frac{1}{2} \left( x-P_n^2(x) \right) \\
+    P_{n+1}(x) \leq \sqrt{x} + \frac{1}{2} \left( x-P_n^2(x) \right) \\
+    0 \leq \frac{1}{2} \left( x-P_n^2(x) \right) \leq \sqrt{x} - P_{n+1}(x) \\
+    P_{n+1}(x) \leq \sqrt{x}
+\end{gather*}
 Therefore $\sqrt{x}$ is an upper bound for $P_n(x)$.
 
-Monotonic and bounded sequence $P_n(x)$ must converge for each $x$. Suppose $P_n(x) \to L_x$. We have:
-$$ L_x =  \lim P_{n+1}(x) = \lim \left( P_n(x) + \frac{1}{2} ( x - P_n(x)^2 ) \right) = L_x + \frac{1}{2} ( x - L_x^2 ) $$
-$$ x - L_x^2 = 0 $$
-$$ L_x = \pm \sqrt{x} $$
-Limit of $P_n$ cannot be negative, so we conclude that $P_n$ converges to $f(x) = +\sqrt{x}$ pointwise. Moreover, each $P_n(x)$ must be continuous since it is a polynomial and $f(x) = +\sqrt{x}$ is also continuous on $[0,1]$. Monotonically increasing sequence of continious functions over a compact set ($[0,1]$) converging pointwise to a continous function converges uniformly. Therefore, $P_n(x) \to +\sqrt{x}$ uniformly.
+Monotonic and bounded sequence $P_n(x)$ must converge for each $x$.
+Suppose $P_n(x) \to L_x$. We have:
+\begin{gather*}
+    L_x =  \lim P_{n+1}(x) = \lim \left( P_n(x) + \frac{1}{2} ( x - P_n(x)^2 ) \right) = L_x + \frac{1}{2} ( x - L_x^2 ) \\
+    x - L_x^2 = 0 \\
+    L_x = \pm \sqrt{x}
+\end{gather*}
+Limit of $P_n$ cannot be negative, so we conclude that $P_n$ converges to $f(x) = +\sqrt{x}$ pointwise.
+Moreover, each $P_n(x)$ must be continuous since it is a polynomial and $f(x) = +\sqrt{x}$ is also continuous on $[0,1]$.
+Monotonically increasing sequence of continious functions over a compact set ($[0,1]$) converging pointwise to a continous function converges uniformly. 
+Therefore, $P_n(x) \to +\sqrt{x}$ uniformly.
+
 \end{proof}
 
 \begin{tcolorbox}
 b) Deduce that there exists a sequence of polynomials converging uniformly on $[-1, 1]$ to the function $f(x) = |x|$.
 \end{tcolorbox}
+
 \begin{proof}
+
 Sequence of polynomials defined on $[0,1]$ as recurrence relation:
-$$ P_0(x) = 0 $$ 
-$$ P_{n+1}(x) = P_n(x) + \frac{1}{2} \left( x^2-P_n^2(x) \right) $$
-converges to $|x|$. This is easy to see since $P_n(x)$ as defined in Problem 7a) converges to the positive root of $\sqrt{x}$. Thus $P_n(x^2)$ converges to $+\sqrt{x^2} = |x|$ on $[0,1]$.
+\begin{gather*}
+    P_0(x) = 0, \\
+    P_{n+1}(x) = P_n(x) + \frac{1}{2} \left( x^2-P_n^2(x) \right)
+\end{gather*}
+converges to $|x|$.
+This is easy to see since $P_n(x)$ as defined in Problem 7a) converges to the positive root of $\sqrt{x}$.
+Thus $P_n(x^2)$ converges to $+\sqrt{x^2} = |x|$ on $[0,1]$.
 
 \end{proof}
 
