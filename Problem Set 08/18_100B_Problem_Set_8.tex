@@ -5,13 +5,17 @@
 \usepackage[]{amssymb} 
 \usepackage{amsmath}
 \usepackage{tcolorbox}
+\usepackage{mathtools}
+
+\newcommand{\R}{\mathbb{R}}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
 
 \newtheorem{claim}{Claim}
 
 
 \title{18.100B: Problem Set 8}
 \author{Dmitry Kaysin}
-\date\today
+\date{January 2020}
 
 \begin{document}
 \maketitle 
@@ -19,16 +23,26 @@
 \subsection*{Problem 1}
 
 \begin{tcolorbox}
-Let $f : [0, \infty) \to \mathbb{R}$ be continuous, and suppose
-$$ f(x^2) = f(x) $$ 
-holds for every $x \geq 0$. Prove that $f$ has to be a constant function.
+Let $f : [0, \infty) \to \R$ be continuous, and suppose
+\[ f(x^2) = f(x) \]
+holds for every $x \geq 0$.
+Prove that $f$ has to be a constant function.
 \end{tcolorbox}
-\begin{proof}
-Consider sequence $a^x_n = \{ x, x^2, x^4, \dots \}$ for $x \in [0, 1)$. We notice that $a^x_n \to 0$. Image of any element of $a^x_n$ under $f$ must be the same value $f(x)$, thus $\lim f(a^x_n) = f(x)$. Since $f$ is continuous at $0$,  $\lim f(a^x_n)$ must be equal to $f(0)$. Therefore
-$$ f(x) = f(0) \text{ for all } x \in [0, 1)$$
 
-Consider sequence $b^x_n = \{ x, x^{\frac{1}{2}}, x^{\frac{1}{4}}, \dots \}$ for any $x \in (0, \infty) \setminus \{1\}$. We notice that $b^x_n \to 1$. Image of any element of $b^x_n$ under $f$ must be the same value $f(x)$, thus $\lim f(b^x_n) = f(x)$. Since $f$ is continuous at $1$,  $\lim f(b^x_n)$ must be equal to $f(1)$. Therefore
-$$ f(x) = f(1) \text{ for all } x \in (0, \infty) \setminus \{1\}$$
+\begin{proof}
+
+Consider sequence $a^x_n = \{ x, x^2, x^4, \dots \}$ for $x \in [0, 1)$.
+We notice that $a^x_n \to 0$.
+Image of any element of $a^x_n$ under $f$ must be the same value $f(x)$, thus $\lim f(a^x_n) = f(x)$.
+Since $f$ is continuous at $0$,  $\lim f(a^x_n)$ must be equal to $f(0)$. Therefore
+\[ f(x) = f(0) \text{ for all } x \in [0, 1) \]
+
+Consider sequence $b^x_n = \{ x, x^{\frac{1}{2}}, x^{\frac{1}{4}}, \dots \}$ for any $x \in (0, \infty) \setminus \{1\}$.
+We notice that $b^x_n \to 1$.
+Image of any element of $b^x_n$ under $f$ must be the same value $f(x)$, thus $\lim f(b^x_n) = f(x)$.
+Since $f$ is continuous at $1$,  $\lim f(b^x_n)$ must be equal to $f(1)$. 
+Therefore
+\[ f(x) = f(1) \text{ for all } x \in (0, \infty) \setminus \{1\} \]
 
 We conclude that for any $x \in [0, \infty) : f(x) = f(0) = f(1)$, thus $f$ must be constant.
 
@@ -38,17 +52,24 @@ We conclude that for any $x \in [0, \infty) : f(x) = f(0) = f(1)$, thus $f$ must
 \subsection*{Problem 2}
 
 \begin{tcolorbox}
-Suppose $f$ is defined and differentiable for every $x > 0$, and $f'(x) \to 0$ as $x \to + \infty$. Put $g(x) = f(x+1)-f(x)$. Prove that $g(x) \to 0$ as $x \to +\infty$.
+Suppose $f$ is defined and differentiable for every $x > 0$, and $f'(x) \to 0$ as $x \to + \infty$.
+Put $g(x) = f(x+1) - f(x)$.
+Prove that $g(x) \to 0$ as $x \to +\infty$.
 \end{tcolorbox}
-\begin{proof}
-Consider arbitrary $\epsilon>0$. Since $f'(x) \to 0$ as $x\to +\infty$, there exists $a$ such that for all $x>a : | f'(x)| < \epsilon$.
 
-Now consider arbitrary point $b > a$. We note that $f(x)$ is continuous and differentiable on $(b,b+1)$, thus applying Mean Value Theorem (Rudin 5.10):
-$$ g(b) = f(b+1) - f(b) = (b+1-b) f'(z) = f'(z) $$
+\begin{proof}
+
+Consider arbitrary $\epsilon>0$.
+Since $f'(x) \to 0$ as $x\to +\infty$, there exists $a$ such that for all $x>a : | f'(x)| < \epsilon$.
+
+Now consider arbitrary point $b > a$.
+We note that $f(x)$ is continuous and differentiable on $(b,b+1)$, thus applying Mean Value Theorem (Rudin 5.10):
+\[ g(b) = f(b+1) - f(b) = (b+1-b) f'(z) = f'(z) \]
 for some $z \in (b,b+1)$.
 Since $z > b > a$, $f'(z) < \epsilon$, therefore
-$$ | g(b) | < \epsilon $$
+\[ | g(b) | < \epsilon \]
 We conclude that there exists $a$ such that for all points $b>a$ absolute value of function $g$ at $b$ is less than $\epsilon$, which is exactly the definition of $g(x) \to 0$ as $x \to +\infty$.
+
 \end{proof}
 
 
@@ -56,104 +77,150 @@ We conclude that there exists $a$ such that for all points $b>a$ absolute value 
 
 \begin{tcolorbox}
 If
-$$ C_0 + \frac{C_1}{2} + \cdots + \frac{C_{n-1}}{n} + \frac{C_n}{n+1} = 0 $$
+\[ C_0 + \frac{C_1}{2} + \cdots + \frac{C_{n-1}}{n} + \frac{C_n}{n+1} = 0 \]
 where $C_0, \dots , C_n$ are real constants, prove that the equation
-$$ C_0 + C_1 x + \cdots + C_{n-1} x^{n-1} + C_n x^n = 0 $$
+\[ C_0 + C_1 x + \cdots + C_{n-1} x^{n-1} + C_n x^n = 0 \]
 has at least one real root between $0$ and $1$.
 \end{tcolorbox}
+
 \begin{proof}
+
 Consider polynomial $C(x)$ such that
-$$ C'(x) = C_0 + C_1 x + \cdots + C_{n-1} x^{n-1} + C_n x^n, $$ specifically:
-$$ C(x) = C_0 x + C_1 \frac{x^2}{2} + \cdots + C_{n-1} \frac{x^n}{n} + C_n \frac{x^{n+1}}{n+1} $$
+\[ C'(x) = C_0 + C_1 x + \cdots + C_{n-1} x^{n-1} + C_n x^n, \]
+specifically:
+\[ C(x) = C_0 x + C_1 \frac{x^2}{2} + \cdots + C_{n-1} \frac{x^n}{n} + C_n \frac{x^{n+1}}{n+1} \]
 Evaluate $C(x)$ at $x=0$ and $x=1$:
-$$ C(0) = 0 $$
-$$ C(1) = C_0 + \frac{C_1}{2} + \cdots + \frac{C_{n-1}}{n} + \frac{C_n}{n+1} = 0 $$
+\begin{gather*}
+    C(0) = 0 \\
+    C(1) = C_0 + \frac{C_1}{2} + \cdots + \frac{C_{n-1}}{n} + \frac{C_n}{n+1} = 0
+\end{gather*}
 By Mean Value Theorem
-$$ 0 = C(1) - C(0) = C'(z) $$
+\[ 0 = C(1) - C(0) = C'(z) \]
 for some $z \in (0,1)$, which is equivalent to the original equation having a root between $0$ and $1$.
+
 \end{proof}
+
 
 \subsection*{Problem 4}
 
 \begin{tcolorbox}
-Suppose $f$ is a real function defined on $\mathbb{R}$. We call $x \in \mathbb{R}$ a fixed point of $f$ if $f(x) = x$.
+Suppose $f$ is a real function defined on $\R$.
+We call $x \in \R$ a fixed point of $f$ if $f(x) = x$.
 
 a) If $f$ is differentiable and $f'(t) \neq 1$ for every real $t$, prove that $f$ has at most one fixed point.
 \end{tcolorbox}
+
 \begin{proof}
+
 Suppose there exist two fixed points of $f$, namely $x_1$ and $x_2$ and without loss of generality $x_2 > x_1$.
 Applying Mean Value Theorem:
-$$ f(x_2) - f(x_1) = (x_2 - x_1) f'(z) $$
+\[ f(x_2) - f(x_1) = (x_2 - x_1) f'(z) \]
 for some $z \in (x_1, x_2)$. Using definition of fixed point:
-$$ (x_2 - x_1) = (x_2 - x_1) f'(z) $$
-$$ 1 = f'(z) $$
+\begin{gather*}
+    (x_2 - x_1) = (x_2 - x_1) f'(z) \\
+    1 = f'(z)
+\end{gather*}
 for some $z$, which contradicts the original assumption.
+
 \end{proof}
 
 \begin{tcolorbox}
 b) Show that the function $f$ defined by
-$$ f(t) = t+(1+e^t)^{-1} $$ 
+\[ f(t) = t+(1+e^t)^{-1} \]
 has no fixed point, although $0 < f'(t) < 1$ for all real $t$.
 \end{tcolorbox}
+
 \begin{proof}
-We notice that $f(t) > t$ for any $t \in \mathbb{R}$:
-$$  t+(1+e^t)^{-1} - t = (1+e^t)^{-1} > 0 $$
-for any $t \in \mathbb{R}$.
-Therefore, no point of $\mathbb{R}$ can be a fixed point of $f$.
+
+We notice that $f(t) > t$ for any $t \in \R$:
+\[  t+(1+e^t)^{-1} - t = (1+e^t)^{-1} > 0 \]
+for any $t \in \R$.
+Therefore, no point of $\R$ can be a fixed point of $f$.
+
 \end{proof}
 
 \begin{tcolorbox}
 However, if there is a constant $A < 1$ such that $|f'(t)| \leq A$ for all real $t$, prove that a fixed point $x$ of $f$ exists, and that $x = \lim x_n$, where $x_1$ is an arbitrary real number and
-$$ x_{n+1} = f(x_n) $$
+\[ x_{n+1} = f(x_n) \]
 for $n = 1,2,3,\dots$
 \end{tcolorbox}
+
 \begin{proof}
+
 First we notice from MVT that
-$$ f(b)-f(a) = (b-a) f'(z) $$
+\[ f(b)-f(a) = (b-a) f'(z) \]
 for some $z \in (a,b)$. Since $|f'(z)| \leq A < 1$, $f$ is a contraction mapping, i.e. $|f(b)-f(a)| \leq A |b-a|$.
 
 Next we consider difference between any two successive elements of sequence $x_n$:
-$$ d_n = |x_{n+1} - x_{n}| = |f(x_{n}) - f(x_{n-1})| \leq A |x_{n}-x_{n-1}| < |x_{n}-x_{n-1}| $$
+\[
+    d_n = |x_{n+1} - x_{n}| 
+    = |f(x_{n}) - f(x_{n-1})| \leq A |x_{n}-x_{n-1}| 
+    < |x_{n}-x_{n-1}|
+\]
 Moreover:
-$$ d_n \leq A^{n-1} |x_2 - x_1| $$
-Since $0<A<1$ and $|x_2-x_1|$ is finite, for any $\epsilon>0$ we can find $n$ such that $d_n < \epsilon$. Therefore, $d_n \to 0$ and $x_n$ is Cauchy sequence. Since $\mathbb{R}$ is complete, $x_n$ must converge, denote $p = \lim x_n$. Then we notice:
-$$ p = \lim x_n = \lim f(x_{n-1}) = f (\lim x_{n-1}) = f(p), $$
-where the third equality holds because $f$ is differentiable and, thus, continuous. We conclude that $p$ is a fixed point of $f$.
+\[ d_n \leq A^{n-1} |x_2 - x_1| \]
+Since $0<A<1$ and $|x_2-x_1|$ is finite, for any $\epsilon>0$ we can find $n$ such that $d_n < \epsilon$.
+Therefore, $d_n \to 0$ and $x_n$ is Cauchy sequence.
+Since $\R$ is complete, $x_n$ must converge, denote $p = \lim x_n$.
+Then we notice:
+\[ p = \lim x_n = \lim f(x_{n-1}) = f (\lim x_{n-1}) = f(p), \]
+where the third equality holds because $f$ is differentiable and, thus, continuous.
+We conclude that $p$ is a fixed point of $f$.
+
 \end{proof}
 
 
 \subsection*{Problem 5}
 
 \begin{tcolorbox}
-Let $f$ be a continuous real function on $\mathbb{R}$, of which it is known that $f'(x)$ exists for all $x \neq 0$
+Let $f$ be a continuous real function on $\R$, of which it is known that $f'(x)$ exists for all $x \neq 0$
 and that $f'(x) \to 3$ as $x \to 0$. Does it follow that $f'(0)$ exists?
 \end{tcolorbox}
+
 \begin{proof}
+
 By definition:
-$$ f'(0) = \lim_{x \to 0} \frac{f(x)-f(0)}{x} $$
-Numerator is differentiable in the punctured neighbourhood of $0$. Denominator is differentiable and is not equal to $0$ in the punctured neighbourhood of $0$. Applying L'Hospital's rule:
-$$ \lim_{x \to 0} \frac{f(x)-f(0)}{x} = \lim_{x \to 0} \frac{f'(x)-0}{1} =  \lim_{x \to 0} f'(x) = 3 $$
+\[ f'(0) = \lim_{x \to 0} \frac{f(x)-f(0)}{x} \]
+Numerator is differentiable in the punctured neighbourhood of $0$.
+Denominator is differentiable and is not equal to $0$ in the punctured neighbourhood of $0$.
+Applying L'Hospital's rule:
+\[ \lim_{x \to 0} \frac{f(x)-f(0)}{x} = \lim_{x \to 0} \frac{f'(x)-0}{1} =  \lim_{x \to 0} f'(x) = 3 \]
 Thus, $f'(0)$ exists and is equal to $3$.
+
 \end{proof}
 
 
 \subsection*{Problem 6}
 
 \begin{tcolorbox}
-Let $f$ be a real function on $[a, b]$ and suppose $n \geq 2$ is an integer, $f^{(n-1)}$ is continuous on $[a, b]$, and $f^{(n)}(x)$ exists for all $x \in (a, b)$. Moreover, assume there exists $x_0 \in (a, b)$ such that
-$$ f'(x_0) = f''(x_0) = \cdots = f^{(n-1)}(x_0) = 0, \>\> f^{(n)}(x_0) = A \neq 0$$
-Prove the following criteria: If $n$ is even, then $f$ has a local minimum at $x_0$ when $A > 0$, and $f$ has a local maximum at $x_0$ when $A < 0$. If $n$ is odd, then $f$ does not have a local minimum or maximum at $x_0$.
+Let $f$ be a real function on $[a, b]$ and suppose $n \geq 2$ is an integer, $f^{(n-1)}$ is continuous on $[a, b]$, and $f^{(n)}(x)$ exists for all $x \in (a, b)$.
+Moreover, assume there exists $x_0 \in (a, b)$ such that
+\[ f'(x_0) = f''(x_0) = \cdots = f^{(n-1)}(x_0) = 0, \>\> f^{(n)}(x_0) = A \neq 0 \]
+Prove the following criteria:
+If $n$ is even, then $f$ has a local minimum at $x_0$ when $A > 0$, and $f$ has a local maximum at $x_0$ when $A < 0$.
+If $n$ is odd, then $f$ does not have a local minimum or maximum at $x_0$.
 \end{tcolorbox}
+
 \begin{proof}
+
 By Taylor's theorem:
-$$ f(x) = f(x_0) + f'(x_0)(x-x_0) + \frac{f''(x_0)}{2}(x-x_0)^2 + \cdots $$
-$$ \cdots + \frac{f^{(n-1)}(x_0)}{(n-1)!}(x-x_0)^{n-1} + \frac{f^{(n)}(z)}{n!}(x-x_0)^n = $$
-$$ = f(x_0) + \frac{f^{(n)}(z)}{n!}(x-x_0)^n $$
+\begin{multline*}
+    f(x) = f(x_0) + f'(x_0)(x-x_0) + \frac{f''(x_0)}{2}(x-x_0)^2 + \cdots \\
+    \cdots + \frac{f^{(n-1)}(x_0)}{(n-1)!}(x-x_0)^{n-1} + \frac{f^{(n)}(z)}{n!}(x-x_0)^n \\
+    = f(x_0) + \frac{f^{(n)}(z)}{n!}(x-x_0)^n    
+\end{multline*}
 for some $z$ between $x_0$ and $x$.
 If $n$ is even, the sign of the second term of the above expression is determined solely by the sign of $f^{(n)}(z)$.
-Since $f^{(n)}$ is differentiable at $x_0$, it must be also continuous at $x_0$. If $f^{(n)}(x_0) = A > 0$, there exists some neighbourhood of $x_0$ where all $f^{(n)}(x)>0$. For any $x$ in such neighbourhood, $f(x) > f(x_0)$; therefore $x_0$ is a local minimum. Conversely, if $f^{(n)}(x_0) = A < 0$, there exists some neighbourhood of $x_0$ where all $f^{(n)}(x)<0$. For any $x$ in such neighbourhood, $f(x-x_0) < f(x_0)$; therefore $x_0$ is a local maximum.
+Since $f^{(n)}$ is differentiable at $x_0$, it must be also continuous at $x_0$.
+If $f^{(n)}(x_0) = A > 0$, there exists some neighbourhood of $x_0$ where all $f^{(n)}(x)>0$.
+For any $x$ in such neighbourhood, $f(x) > f(x_0)$; therefore $x_0$ is a local minimum.
+Conversely, if $f^{(n)}(x_0) = A < 0$, there exists some neighbourhood of $x_0$ where all $f^{(n)}(x)<0$.
+For any $x$ in such neighbourhood, $f(x-x_0) < f(x_0)$; therefore $x_0$ is a local maximum.
 
-However, if $n$ is odd, expression $\frac{f^{(n)}(z)}{n!}(x-x_0)^n$ changes sign when going from $x < x_0$ to $x > x_0$. Therefore, in any neighbourhood of $x_0$ there are points $x$ such that $f(x)>f(x_0)$ and there are points $x$ such that $f(x)<f(x_0)$. Therefore, $x_0$ can be neither local minimum nor local maximum.
+However, if $n$ is odd, expression $\frac{f^{(n)}(z)}{n!}(x-x_0)^n$ changes sign when going from $x < x_0$ to $x > x_0$.
+Therefore, in any neighbourhood of $x_0$ there are points $x$ such that $f(x)>f(x_0)$ and there are points $x$ such that $f(x)<f(x_0)$.
+Therefore, $x_0$ can be neither local minimum nor local maximum.
+
 \end{proof}
 
 
@@ -163,31 +230,33 @@ However, if $n$ is odd, expression $\frac{f^{(n)}(z)}{n!}(x-x_0)^n$ changes sign
 For $f(x) = |x|^3$, compute $f'(x), f''(x)$ for all real $x$, and show that $f^{(3)}(0)$ does not exist.
 \end{tcolorbox}
 
-$$ f(x) = |x|^3 = |x^3| = \begin{cases}
+\begin{align*}
+    f(x) =
+    |x|^3 = |x^3| = & \begin{cases}
         x^3, & \text{ if $x \geq 0$} \\
         -x^3, & \text{ if $x < 0$}
-    \end{cases}
-$$
-
-$$ f'(x) = \begin{cases}
+    \end{cases} \\
+    f'(x) = &
+    \begin{cases}
         3x^2, & \text{ if $x \geq 0$} \\
         -3x^2, & \text{ if $x < 0$}
-    \end{cases}
-$$
-
-$$ f''(x) = \begin{cases}
+    \end{cases} \\
+    f''(x) = &
+    \begin{cases}
         6x, & \text{ if $x \geq 0$} \\
         -6x, & \text{ if $x < 0$}
-    \end{cases}
-$$
-
-$$ f^{(3)}(x) = \begin{cases}
+    \end{cases} \\
+    f^{(3)}(x) = & 
+    \begin{cases}
         6, & \text{ if $x > 0$} \\
-        -6, & \text{ if $x < 0$}
+        -6 & \text{ if $x < 0$}
     \end{cases}
-$$
-We notice that $f^{(3)}(0)$ does not exist since right-hand and left-hand derivatives of $f''(x)$ as $x \to 0$ differ:
-$$ f_{x \to 0^+}^{(3)}(x) = \lim_{x \to 0^+} \frac{f''(x)-f''(0)}{x-0} = \lim_{x \to 0^+} \frac{6x}{x} = 6$$
-$$ f_{x \to 0^-}^{(3)}(x) = \lim_{x \to 0^-} \frac{f''(x)-f''(0)}{x-0} = \lim_{x \to 0^-} \frac{-6x}{x} = -6$$
+\end{align*}
+We notice that $f^{(3)}(0)$ does not exist since right-hand and left-hand derivatives of $f''(x)$ differ at $x=0$:
+\begin{align*}
+    f_{x \to 0^+}^{(3)}(x) & = \lim_{x \to 0^+} \frac{f''(x)-f''(0)}{x-0} = \lim_{x \to 0^+} \frac{6x}{x} = 6 \\
+    f_{x \to 0^-}^{(3)}(x) & = \lim_{x \to 0^-} \frac{f''(x)-f''(0)}{x-0} = \lim_{x \to 0^-} \frac{-6x}{x} = -6
+\end{align*}
+
 
 \end{document}
