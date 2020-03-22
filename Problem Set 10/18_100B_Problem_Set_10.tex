@@ -6,18 +6,18 @@
 \usepackage{amsmath}
 \usepackage{mathrsfs}
 \usepackage{tcolorbox}
+\usepackage{mathtools}
 
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
-\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
-
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
 
 \newtheorem{claim}{Claim}
 
 \title{18.100B: Problem Set 10}
 \author{Dmitry Kaysin}
-\date\today
+\date{February 2020}
 
 \begin{document}
 \maketitle 
@@ -140,16 +140,16 @@ for every sequence of points $x_n \in E$ such that $x_n \to x$, and $x \in E$. I
 \begin{proof}
 
 Fix $\epsilon>0$. Since $f_n \to f$ uniformly, there must exist $M$ such that for all $m>M$ for any $z \in E$:
-\[ \norm{ f_m(z) - f(z) } \leq \frac{\epsilon}{2} \]
+\[ \norm*{ f_m(z) - f(z) } \leq \frac{\epsilon}{2} \]
 
 By Rudin 7.12 $f$ must be continuous. Since $f$ is continuous, and $x_n \to x$ there exists $K$ such that for all $k \geq K$:
-\[ \norm{ f(x_k) - f(x) } \leq \frac{\epsilon}{2} \]
+\[ \norm*{ f(x_k) - f(x) } \leq \frac{\epsilon}{2} \]
 
 Combining the above:
-\[ \norm{ f_m(x_k) - f(x) } \leq \norm{ f_m(x_k) - f(x_k) } + \norm{ f(x_k) - f(x) } \leq \epsilon \]
+\[ \norm*{ f_m(x_k) - f(x) } \leq \norm*{ f_m(x_k) - f(x_k) } + \norm*{ f(x_k) - f(x) } \leq \epsilon \]
 
 Taking $N = \max(M,K)$ we have that for all $n \geq N$:
-\[ \norm{ f_n(x_n) - f(x) } \leq \epsilon, \]
+\[ \norm*{ f_n(x_n) - f(x) } \leq \epsilon, \]
 which proves that $\lim_{n \to \infty} f_n(x_n) = f(x)$.
 
 \end{proof}
@@ -164,11 +164,11 @@ Counterexample: Consider sequence of functions $\frac{x^2}{n}$, which converges 
 
 Take arbitrary convergent sequence $x_n \to x$ with $x_n,x \in \R$. Fix $\epsilon>0$. Since $x_n \to x$ there exists $M$ such that for all $m \geq M$:
 \begin{gather*}
-    \norm{ x_m - x } \leq \epsilon \\
-    \norm{ x_m } \leq \norm{ x } \norm{ + \epsilon }
+    \norm*{ x_m - x } \leq \epsilon \\
+    \norm*{ x_m } \leq \norm*{ x } \norm*{ + \epsilon }
 \end{gather*}
 We will now prove that $f_n(x_n) \to f(x)$:
-\[ \norm{ f_m(x_m) - f(x) } = \norm{ \frac{x_m^2}{m} - 0 } \leq \frac{(\norm{ x } + \epsilon)^2}{m}. \]
+\[ \norm*{ f_m(x_m) - f(x) } = \norm*{ \frac{x_m^2}{m} - 0 } \leq \frac{(\norm*{ x } + \epsilon)^2}{m}. \]
 The last expression can be set arbitrarily close to $0$ by choosing sufficiently high $m$.
 
 However, it is easy to see that convergence of $\frac{x^2}{n}$ is not uniform on $\R$.
@@ -259,41 +259,41 @@ Prove that $f_n \to f$ uniformly on $K$.
 
 Fix $\epsilon>0$. Since $f_n$ is equicontinuous, there exists $\delta>0$ such that for all $n \in \N$ and $a, b \in K$ with $d(a,b)<\delta$ we have:
 \begin{equation}
-    \norm{ f_n(a) - f_n(b) } < \frac{\epsilon}{3}
+    \norm*{ f_n(a) - f_n(b) } < \frac{\epsilon}{3}
 \end{equation}
 We also note that:
 \begin{equation}
-    \norm{ f(a) - f(b) }
-    = \norm{ \lim_{n\to\infty} f_n(a) - \lim_{n\to\infty} f_n(b) } 
-    = \lim_{n\to\infty} \norm{ f_n(a) - f_n(b) }
+    \norm*{ f(a) - f(b) }
+    = \norm*{ \lim_{n\to\infty} f_n(a) - \lim_{n\to\infty} f_n(b) } 
+    = \lim_{n\to\infty} \norm*{ f_n(a) - f_n(b) }
     \leq \frac{\epsilon}{3}
 \end{equation}
 
 Consider open cover of $K$ by open balls $B_\delta(x)$ with center $t$ and radius $\delta$. Denote such cover $\mathcal{U}_t$ (indexed over center points of $\delta$-balls).
 Since $K$ is compact, there exists finite subcover of $\mathcal{U}_t$; denote it $\mathcal{U}_{t_k}$. Since $f_n \to f$ pointwise, for each $t_k$ we can find $N_k$ such that for all $n_k \geq N_k$ we have:
-\[ \norm{ f_{n_k}(t_k) - f(t_k) } < \frac{\epsilon}{3} \]
+\[ \norm*{ f_{n_k}(t_k) - f(t_k) } < \frac{\epsilon}{3} \]
 
 Since there are finitely many $t_k$, we can select the largest $N_k$, denote it $M$. For each $m \geq M$ we have:
 \begin{equation}
-    \norm{ f_m(t_k) - f(t_k) } < \frac{\epsilon}{3}
+    \norm*{ f_m(t_k) - f(t_k) } < \frac{\epsilon}{3}
 \end{equation}
 Consider arbitrary point $x \in K$.
 It must belong to at least one of the sets from $\mathcal{U}_k$.
 Choose one such open $\delta$-ball with center $t$, then we have:
-\[ \norm{ x - t } < \delta \]
+\[ \norm*{ x - t } < \delta \]
 By (1) we have:
-\[ \norm{ f_m(x) - f_m(t) } < \frac{\epsilon}{3} \]
+\[ \norm*{ f_m(x) - f_m(t) } < \frac{\epsilon}{3} \]
 By (2) we have:
-\[ \norm{ f(t) - f(x) } < \frac{\epsilon}{3} \]
+\[ \norm*{ f(t) - f(x) } < \frac{\epsilon}{3} \]
 By (3) we have:
-\[ \norm{ f_m(t) - f(t) } < \frac{\epsilon}{3} \]
+\[ \norm*{ f_m(t) - f(t) } < \frac{\epsilon}{3} \]
 Finally, we notice that:
 \[
-\norm{ f_m(x) - f(x) } 
+\norm*{ f_m(x) - f(x) } 
 \leq
-\norm{ f_m(x) - f_m(t) } 
-+ \norm{ f(t) - f(x) } 
-+ \norm{ f_m(t) - f(t) }
+\norm*{ f_m(x) - f_m(t) } 
++ \norm*{ f(t) - f(x) } 
++ \norm*{ f_m(t) - f(t) }
 <
 \epsilon
 \]
