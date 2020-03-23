@@ -10,13 +10,15 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\set}{ \{ }{ \} }
 
 \newtheorem{claim}{Claim}
 
 
 \title{18.100B: Problem Set 7}
 \author{Dmitry Kaysin}
-\date{February 2020}
+\date{December 2019}
 
 \begin{document}
 \maketitle 
@@ -31,7 +33,7 @@ Prove the Leibnitz criteria for convergence:
 If $a_i > 0$ for all $i$, $a_i+1 \leq a_i$ and $\lim_{i \to \infty} a_i = 0$, then the series converges.
 \end{tcolorbox}
 
-Define for $n \in \N \cup \{0\}$:
+Define for $n \in \N \cup \set{0}$:
 \[ s_n = \sum_{k=0}^{n} (-1)^k a_k \]
 
 Claim 1: Odd subsequence of $s_n$ is monotonically increasing.
@@ -120,14 +122,14 @@ Therefore:
 Consider any $\delta$ such that $B_{\delta}(x)$ is a subset of $E$.
 Points of $B_{\delta}(x)$ are either rational or irrational.
 Image of all rational points of $B_{\delta}(x)$ is a subset of $B_{\epsilon}(0)$ as proven above.
-Image of all irrational points in any neighbourhood of $x$ is $\{0\}$, which is definitely a subset of $B_{\epsilon}(0)$.
+Image of all irrational points in any neighbourhood of $x$ is $\set{0}$, which is definitely a subset of $B_{\epsilon}(0)$.
 Therefore, $f$ must be continuous at $x$.
 We conclude that $f$ is continuous at all irrational $x \in \R$.
 
 Consider an arbitrary rational $x$.
 We notice that $f(x)>0$.
 Any $\delta$-neighbourhood of $x$ contains irrationals.
-Image of such irrationals under $f$ is $\{0\}$, which lies outside of any $\epsilon$-neighbourhood of $f(x)$ for all $0 < \epsilon < f(x)$.
+Image of such irrationals under $f$ is $\set{0}$, which lies outside of any $\epsilon$-neighbourhood of $f(x)$ for all $0 < \epsilon < f(x)$.
 Therefore $f$ cannot be continuous at rational $x \in \R$.
 
 \end{proof}
@@ -218,8 +220,8 @@ Example: $f(x) = x$.
 
 This function is indeed uniformly continuous since
 \begin{gather*}
-    d(x,y) = |x-y| \\
-    d(f(x),f(y)) = |x-y|    
+    d(x,y) = \abs{x-y} \\
+    d(f(x),f(y)) = \abs{x-y}    
 \end{gather*}
 and therefore for any $\epsilon > 0$ we can select $\delta < \epsilon$ such that for any $x, y$ with $d(x,y)<\delta$ we have that $d(f(x),f(y)) < \epsilon$.
 
@@ -284,7 +286,7 @@ We conclude that $g(x_n)$ is Cauchy sequence.
 Let $E$ be a non-empty subset of a metric space $\mathcal{M}$, define the distance from $x \in X$ to $E$ by
 \[ d_E(x) = \inf_{z \in E} d(x,z) \]
 Prove that $d_E$ is a uniformly continuous function on $X$, by showing that
-\[ | d_E(x) - d_E(y) | \leq d(x,y) \]
+\[ \abs{ d_E(x) - d_E(y) } \leq d(x,y) \]
 \end{tcolorbox}
 
 \begin{proof}
@@ -305,10 +307,10 @@ This holds for any point $e$, thus for $\inf_{e \in E}(y,e) = d_E(y)$:
 Switching $x$ and $y$ we find that
 \[ d_E(y) - d_E(x) \leq d(x,y) \]
 Thus
-\[ | d_E(x) - d_E(y) | \leq d(x,y) \]
+\[ \abs{ d_E(x) - d_E(y) } \leq d(x,y) \]
 Now consider arbitrary $\epsilon > 0$.
 We can always choose $\delta = \epsilon$ such that for any $x,y \in X$ with $d(x,y)<\delta$ we have
-\[ d(d_E(x), d_E(y)) = |d_E(x)-d_E(y)| \leq d(x,y) < \delta = \epsilon \]
+\[ d(d_E(x), d_E(y)) = \abs{d_E(x)-d_E(y)} \leq d(x,y) < \delta = \epsilon \]
 Thus $d_E(x)$ is uniformly continuous.
 
 \end{proof}
@@ -342,7 +344,7 @@ for some $\delta > 0$.
 
 \begin{proof}
 
-Counterexample: $F = \left\{ \left(x,\frac{1}{x}\right) : x\in\R \right\}$, $K = \left\{ \left(x,-\frac{1}{x}\right) : x\in\R \right\}$.
+Counterexample: $F = \set*{ \left(x,\frac{1}{x}\right) : x\in\R }$, $K = \set*{ \left(x,-\frac{1}{x}\right) : x\in\R }$.
 Both $F$ and $K$ are closed in $\R^2$ and unbounded, thus not compact.
 However, for any $\delta$ we can find points $\left( z, \frac{1}{z} \right)$, $\left( z, -\frac{1}{z} \right)$ such that distance between them is less than $\delta$:
 \begin{gather*}

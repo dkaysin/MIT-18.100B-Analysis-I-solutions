@@ -5,122 +5,175 @@
 \usepackage[]{amssymb} 
 \usepackage{amsmath}
 \usepackage{tcolorbox}
+\usepackage{mathtools}
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\vect}[1]{\mathbf{#1}}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\set}{ \{ }{ \} }
 
 
 \title{18.100B: Problem Set 4}
 \author{Dmitry Kaysin}
-\date\today
-
+\date{November 2019}
 \begin{document}
 \maketitle 
+
 
 \subsection*{Problem 1}
 
 \begin{tcolorbox}
 Give an example of an open cover of the set
-$$ E = \{ (x_1, x_2) \in \mathbb{R}^2 : x_1^2 + x_2^2 < 1 \} \subseteq \mathbb{R}^2 $$
-which has no finite subcover. (As usual, $\mathbb{R}^2$ is equipped with standard Euclidean metric.)
+\[ E = \set{ (x_1, x_2) \in \R^2 : x_1^2 + x_2^2 < 1 } \subseteq \R^2 \]
+which has no finite subcover.
+(As usual, $\R^2$ is equipped with standard Euclidean metric.)
 \end{tcolorbox}
 
 Answer: Denote 
-$$ A(r) = \{ (x_1, x_2) \in \mathbb{R}^2 : x_1^2 + x_2^2 < r \} $$
+\[ A(r) = \set*{ (x_1, x_2) \in \R^2 : x_1^2 + x_2^2 < r } \]
 Then 
-$$ \mathcal{U} = \{ A(r) : 0 \leq r < 1, r \in \mathbb{R} \}$$
+\[ \mathcal{U} = \set*{ A(r) : 0 \leq r < 1, r \in \R } \]
 is a cover of $E$, which has no finite subcover.
 
 \begin{proof}
 
-First we prove that $\mathcal{U}$ is an open cover of $E$. Indeed, every $A(r)$ is an open ball $B_{r^2}(0)$, thus an open set; every pair $(x_1, x_2) \in E$ is at least in one of elements of $\mathcal{U}$, for example in $A(\frac{x_1^2+x_2^2+1}{2})$.
+First we prove that $\mathcal{U}$ is an open cover of $E$.
+Indeed, every $A(r)$ is an open ball $B_{r^2}(0)$, thus an open set;
+every pair $(x_1, x_2) \in E$ is at least in one of elements of $\mathcal{U}$, for example in $A(\frac{x_1^2+x_2^2+1}{2})$.
 
-Suppose, a finite subcover of $\mathcal{U}$ exists, denote it $\mathcal{S}$. It must include finitely many sets of the form $A(r)$. Denote $s$ the largest $r$ of these sets. It is easy to see that there exist pairs $(x_1, x_2) \in E$ such that $s < x_1^2 + x_2^2 < 1$, which do not belong to one of the sets of the collection $\mathcal{S}$, thus $\mathcal{S}$ is not a subcover of $\mathcal{U}$. Contradiction. Therefore, no finite cover of $\mathcal{U}$ exists.
+Suppose, a finite subcover of $\mathcal{U}$ exists, denote it $\mathcal{S}$.
+It must include finitely many sets of the form $A(r)$.
+Denote $s$ the largest $r$ of these sets. It is easy to see that there exist pairs $(x_1, x_2) \in E$ such that $s < x_1^2 + x_2^2 < 1$, which do not belong to one of the sets of the collection $\mathcal{S}$, thus $\mathcal{S}$ is not a subcover of $\mathcal{U}$.
+Contradiction.
+Therefore, no finite cover of $\mathcal{U}$ exists.
 
 \end{proof}
+
 
 \subsection*{Problem 2}
 
 \begin{tcolorbox}
-Consider $\mathbb{R}^k$ and let $\|\mathbf{x}\| = (x_1^2 + \dots + x_k^2)^{1/2}$ be the Euclidean norm. Show that if $d(\mathbf{x}, \mathbf{y}) = \|\mathbf{x}\| + \|\mathbf{y}\|$ when $\mathbf{x} \neq \mathbf{y}$ and $d(\mathbf{x}, \mathbf{x}) = 0$, then $(\mathbb{R}^k, d)$ is a metric space.
+Consider $\R^k$ and let $\norm{ \vect{x} } = (x_1^2 + \dots + x_k^2)^{1/2}$ be the Euclidean norm.
+Show that if $d(\vect{x}, \vect{y}) = \norm{ \vect{x} } + \norm{ \vect{y} }$ when $\vect{x} \neq \vect{y}$ and $d(\vect{x}, \vect{x}) = 0$, then $(\R^k, d)$ is a metric space.
 \end{tcolorbox}
 
 \begin{proof}
-We check that $d(\mathbf{x}, \mathbf{y}) = \|\mathbf{x}\| + \|\mathbf{y}\|$ is a metric.
+We check that $d(\vect{x}, \vect{y}) = \norm{ \vect{x} } + \norm{ \vect{y} }$ is a metric.
 
-We first check the identity property. If $\mathbf{x} = \mathbf{y}$ then $d(\mathbf{x}, \mathbf{y}) = d(\mathbf{x}, \mathbf{x}) = 0$ straight from the definition of $d$. Now assume $d(\mathbf{x}, \mathbf{y}) = 0$. Since norm $\| \cdot \|$ is non-negative, for any $\mathbf{x}, \mathbf{y}$ : $\|\mathbf{x}\| + \|\mathbf{y}\| = 0$ only when $\|\mathbf{x}\| = \|\mathbf{y}\| = 0$. Thus, $d(\mathbf{x}, \mathbf{y}) = 0 \Rightarrow \mathbf{x} = \mathbf{y}$. We conclude that $d(\mathbf{x}, \mathbf{y}) = 0 \iff \mathbf{x} = \mathbf{y}$.
+We first check the identity property.
+If $\vect{x} = \vect{y}$ then $d(\vect{x}, \vect{y}) = d(\vect{x}, \vect{x}) = 0$ from the definition of $d$.
+Now assume $d(\vect{x}, \vect{y}) = 0$.
+Since norm $\norm{ \cdot }$ is non-negative, for any $\vect{x}, \vect{y}$ : $\norm{ \vect{x} } + \norm{ \vect{y} } = 0$ only when $\norm{ \vect{x} } = \norm{ \vect{y} } = 0$.
+Thus, $d(\vect{x}, \vect{y}) = 0 \Rightarrow \vect{x} = \vect{y}$. We conclude that $d(\vect{x}, \vect{y}) = 0 \iff \vect{x} = \vect{y}$.
 
 We then check symmetry of $d$:
-$$ d(\mathbf{x}, \mathbf{y}) = \|\mathbf{x}\| + \|\mathbf{y}\| = \|\mathbf{y}\| + \|\mathbf{x}\| = d(\mathbf{y}, \mathbf{x}) $$
+\[ d(\vect{x}, \vect{y}) = \norm{ \vect{x} } + \norm{ \vect{y} } = \norm{ \vect{y} } + \norm{ \vect{x} } = d(\vect{y}, \vect{x}) \]
 
 Finally, we check that triangle inequality holds.
-$$ d(\mathbf{x}, \mathbf{z}) \leq d(\mathbf{x}, \mathbf{y}) + d(\mathbf{y}, \mathbf{z}) $$
-$$ \|\mathbf{x}\| + \|\mathbf{z}\| \leq \|\mathbf{x}\| + \|\mathbf{y}\| + \|\mathbf{y}\| + \|\mathbf{z}\| $$
-$$ 0 \leq 2\|\mathbf{y}\| $$
-which is true by non-negativity of $\| \cdot \|$.
+\begin{gather*}
+    d(\vect{x}, \vect{z}) \leq d(\vect{x}, \vect{y}) + d(\vect{y}, \vect{z}) \\
+    \norm{ \vect{x} } + \norm{ \vect{z} } \leq \norm{ \vect{x} } + \norm{ \vect{y} } + \norm{ \vect{y} } + \norm{ \vect{z} } \\
+    0 \leq 2\norm{ \vect{y} }
+\end{gather*}
+which is true by non-negativity of $\norm{ \cdot }$.
 
-We conclude that $d$ is a metric and $(\mathbb{R}^k, d)$ is a metric space.
+We conclude that $d$ is a metric and $(\R^k, d)$ is a metric space.
 \end{proof}
 
 \begin{tcolorbox}
-Are there open sets in $\mathbb{R}^k$ with this new metric $d(\mathbf{x}, \mathbf{y})$ that are not open with respect to the Euclidean metric $d_\text{Euclid}(\mathbf{x}, \mathbf{y}) = \|\mathbf{x} - \mathbf{y}\|$ on $\mathbb{R}^k$? Or vice versa?
+Are there open sets in $\R^k$ with this new metric $d(\vect{x}, \vect{y})$ that are not open with respect to the Euclidean metric $d_\text{Euclid}(\vect{x}, \vect{y}) = \norm{ \vect{x} - \vect{y} }$ on $\R^k$? Or vice versa?
 \end{tcolorbox}
 
 \begin{proof}
-Consider open ball $B_r(\mathbf{p}) = \{ \mathbf{x} : d(\mathbf{p}, \mathbf{x}) < r \}$ where $0 < r < \|\mathbf{p}\|$ for $\mathbf{p} \neq \mathbf{0}$:
-$$ d(\mathbf{p}, \mathbf{x}) < r < \|\mathbf{p}\| $$
-$$ \|\mathbf{p}\| + \|\mathbf{x}\| < \|\mathbf{p}\| \> \text{ or } \> \mathbf{x} = \mathbf{p} $$
-$$ \|\mathbf{x}\| < 0 \> \text{ or } \> \mathbf{x} = \mathbf{p} $$
-So, in metric space $(\mathbb{R}^k, d)$ open ball $B_r(\mathbf{p})$ for $0 < r < \|\mathbf{p}\|$ and $\mathbf{p} \neq \mathbf{0}$ is a single point $\{\mathbf{p}\}$. This implies that set $\{\mathbf{p}\} : \mathbf{p} \in \mathbb{R}^k, \mathbf{p} \neq 0$ is open in $(\mathbb{R}^k, d)$. Obviously, $\{\mathbf{p}\}$ is not open in $(\mathbb{R}^k, d_\text{Euclid})$. We also note that $\{ \mathbf{0} \}$ is not open in $(\mathbb{R}^k, d)$. Indeed, there is no such open ball $B_r(\mathbf{0}), r>0$ that is contained in $\{ \mathbf{0} \}$.
 
-Conversely, every set $A$ that is open in $(\mathbb{R}^k, d_\text{Euclid})$ is open in $(\mathbb{R}^k, d)$. Indeed, for any $\mathbf{p} \in A, \mathbf{p} \neq \mathbf{0}$ we can always find open ball $B_r(\mathbf{p})$ such that $B_r(\mathbf{p}) \subseteq \{ \mathbf{p} \} \subseteq A$. For $\mathbf{p} = \mathbf{0}$ metrics $d$ and $d_\text{Euclid}$ are identical, so if $\mathbf{p}$ is interior in $(\mathbb{R}^k, d_\text{Euclid})$, it must be interior in $(\mathbb{R}^k, d)$.
+Consider open ball $B_r(\vect{p}) = \set{ \vect{x} : d(\vect{p}, \vect{x}) < r }$ where $0 < r < \norm{ \vect{p} }$ for $\vect{p} \neq \vect{0}$:
+\begin{gather*}
+    d(\vect{p}, \vect{x}) < r < \norm{ \vect{p} } \\
+    \norm{ \vect{p} } + \norm{ \vect{x} } < \norm{ \vect{p} } \> \text{ or } \> \vect{x} = \vect{p} \\
+    \norm{ \vect{x} } < 0 \> \text{ or } \> \vect{x} = \vect{p}
+\end{gather*}
+
+So, in metric space $(\R^k, d)$ open ball $B_r(\vect{p})$ for $0 < r < \norm{ \vect{p} }$ and $\vect{p} \neq \vect{0}$ is a single point $\set{ \vect{p} }$.
+This implies that set $\set{ \vect{p} } : \vect{p} \in \R^k, \vect{p} \neq 0$ is open in $(\R^k, d)$.
+Obviously, $\norm{ \vect{p} }$ is not open in $(\R^k, d_\text{Euclid})$. We also note that $\set{ \vect{0} }$ is not open in $(\R^k, d)$.
+Indeed, there is no such open ball $B_r(\vect{0}), r>0$ that is contained in $\set{ \vect{0} }$.
+
+Conversely, every set $A$ that is open in $(\R^k, d_\text{Euclid})$ is open in $(\R^k, d)$.
+Indeed, for any $\vect{p} \in A, \vect{p} \neq \vect{0}$ we can always find open ball $B_r(\vect{p})$ such that $B_r(\vect{p}) \subseteq \set{ \vect{p} } \subseteq A$.
+For $\vect{p} = \vect{0}$ metrics $d$ and $d_\text{Euclid}$ are identical, so if $\vect{p}$ is interior in $(\R^k, d_\text{Euclid})$, it must be interior in $(\R^k, d)$.
 \end{proof}
+
 
 \subsection*{Problem 3}
 
 \begin{tcolorbox}
-Let $X$ be an infinite set and consider the metric function on $X$ given by $d(x, y) = 1$ when
-$x \neq y$ and $d(x, x) = 0$. Which sets in $X$ are compact?
+Let $X$ be an infinite set and consider the metric function on $X$ given by $d(x, y) = 1$ when $x \neq y$ and $d(x, x) = 0$.
+Which sets in $X$ are compact?
 \end{tcolorbox}
 
 \begin{proof}
 
 Open ball in $(X, d)$ is:
-$$ B_r(p)=
-\begin{cases}
-X, & \text{ if } r \geq 1 \\
-\{ p \}, & \text{ if } 0 < r < 1
-\end{cases}
-$$
-Therefore, every singleton set $\{ p \}$ is open in $(X, d)$. Moreover, every subset $E \in X$ is open since every point in such set has open ball that is a subset of $E$, namely all balls with radius $0 < r < 1$. Therefore we can construct an open cover $\mathcal{U}$ of an arbitrary subset $E \in X$ as a union of singleton sets corresponding to each element of $E$. No subcover exists for such cover $\mathcal{U}$ since each element of $E$ is an element of only one set of the collection $\mathcal{U}$. Thus, the only subcover of $\mathcal{U}$ is $\mathcal{U}$ itself. This means that if $E$ is infinite, no finite open subcover of $E$ exists.
+\[
+    B_r(p)=
+    \begin{cases}
+    X, & \text{ if } r \geq 1 \\
+    \set{ p }, & \text{ if } 0 < r < 1
+    \end{cases}
+\]
+Therefore, every singleton set $\set{ p }$ is open in $(X, d)$. 
+Moreover, every subset $E \in X$ is open since every point in such set has open ball that is a subset of $E$, namely all balls with radius $0 < r < 1$.
+Therefore we can construct an open cover $\mathcal{U}$ of an arbitrary subset $E \in X$ as a union of singleton sets corresponding to each element of $E$.
+No subcover exists for such cover $\mathcal{U}$ since each element of $E$ is an element of only one set of the collection $\mathcal{U}$.
+Thus, the only subcover of $\mathcal{U}$ is $\mathcal{U}$ itself.
+This means that if $E$ is infinite, no finite open subcover of $E$ exists.
 
-If $E$ is finite, for each $p \in E$ we can choose set $S(p)$ from $\mathcal{U}$, the open cover of $E$, such that $p \in S$, and there will be only finitely many such sets $S(p)$. Clearly, $S(p)$ is a finite open subcover of $E$.
+If $E$ is finite, for each $p \in E$ we can choose set $S(p)$ from $\mathcal{U}$, the open cover of $E$, such that $p \in S$, and there will be only finitely many such sets $S(p)$.
+Clearly, $S(p)$ is a finite open subcover of $E$.
 
 Therefore, all finite sets are compact and all infinite sets are not compact in $(X, d)$.
 
 \end{proof}
 
+
 \subsection*{Problem 4}
 
 \begin{tcolorbox}
-Regard $\mathbb{Q}$, the set of all rational numbers, as a metric space with $d(x, y) = |x - y|$. Define
-the set $E = \{x \in \mathbb{Q} : -3 < x^2 < 3\}$. Show that $E$ is closed and bounded in $\mathbb{Q}$, but that $E$ is not compact. Is $E$ open in $\mathbb{Q}$?
+Regard $\Q$, the set of all rational numbers, as a metric space with $d(x, y) = \abs{ x-y }$.
+Define the set $E = \set{x \in \Q : -3 < x^2 < 3}$.
+Show that $E$ is closed and bounded in $\Q$, but that $E$ is not compact.
+Is $E$ open in $\Q$?
 \end{tcolorbox}
 
 \begin{proof}
 
-Set $E$ is closed in $\mathbb{Q}$ if and only if it contains all its limit points. 
+Set $E$ is closed in $\Q$ if and only if it contains all its limit points. 
 
-Consider the case where $p \geq \sqrt{3}$ (for other cases the argument is analogous). Since $p \in \mathbb{Q}$ and $\sqrt{3}$ is irrational: $p \geq \sqrt{3} \iff p > \sqrt{3}$. For every such $p$ we can find open ball $B_r(p)$ with radius $r = \frac{d(p,\sqrt{3})}{2}$ that does not contain any points of $E$. Therefore, if $p$ is a limit point of $E$, $p$ cannot lie in the given subset of $E^c$, specifically in $\{x : x \geq \sqrt{3} \}$. The same argument applies to other subsets of $E^c$. Therefore, all limit points of $E$ lie in $E$. Thus, $E$ is closed.
+Consider the case where $p \geq \sqrt{3}$ (for other cases the argument is analogous).
+Since $p \in \Q$ and $\sqrt{3}$ is irrational: $p \geq \sqrt{3} \iff p > \sqrt{3}$.
+For every such $p$ we can find open ball $B_r(p)$ with radius $r = \frac{d(p,\sqrt{3})}{2}$ that does not contain any points of $E$. 
+Therefore, if $p$ is a limit point of $E$, $p$ cannot lie in the given subset of $E^c$, specifically in $\set{x : x \geq \sqrt{3} }$.
+The same argument applies to other subsets of $E^c$.
+Therefore, all limit points of $E$ lie in $E$. Thus, $E$ is closed.
 
-Set $E$ is bounded in $\mathbb{Q}$ since for all $p \in E$ : $1 < p < 2$.
+Set $E$ is bounded in $\Q$ since for all $p \in E$ : $1 < p < 2$.
 
-We also notice that set $A(a,b) = \{x \in \mathbb{Q} : a < x < b \}$ is open in $\mathbb{Q}$ for every $a,b \in \mathbb{R}$ since for every $p \in A(a,b)$ we can find open ball $B_r(p)$ in $\mathbb{Q}$ with radius
-$$ r = \frac{\min\{ \> d(a, p), \> d(b, p) \> \}}{2} $$
-that is a subset of $A(a,b)$. Thus, we notice that $E = A(\sqrt{2}, \sqrt{3})$ is open.
+We also notice that set $A(a,b) = \set{x \in \Q : a < x < b }$ is open in $\Q$ for every $a,b \in \R$ since for every $p \in A(a,b)$ we can find open ball $B_r(p)$ in $\Q$ with radius
+\[ r = \frac{\min\set{ \> d(a, p), \> d(b, p) \> }}{2} \]
+that is a subset of $A(a,b)$.
+Thus, we conclude that $E = A(\sqrt{2}, \sqrt{3})$ is open.
 
 Consider the following open cover of $E$:
-$$ \mathcal{U} = \left\{ \mathcal{U}(n) , n \in \mathbb{N} \right\} $$
+\[ \mathcal{U} = \set*{ \mathcal{U}(n) , n \in \N } \]
 where
-$$ \mathcal{U}(n) = A \left( \sqrt{2+\frac{1}{n}}, \sqrt{3 - \frac{1}{n}} \right). $$
-Any point in $E$ is an element of at least one set from the collection $\mathcal{U}$. For this cover no finite subcover of $E$ exists.
+\[ \mathcal{U}(n) = A \left( \sqrt{2+\frac{1}{n}}, \sqrt{3 - \frac{1}{n}} \right). \]
+Any point in $E$ is an element of at least one set from the collection $\mathcal{U}$.
+For this cover no finite subcover of $E$ exists.
 
 \end{proof}
 
@@ -132,13 +185,17 @@ Prove that the union of two compact sets is always compact.
 \end{tcolorbox}
 
 \begin{proof}
-Consider two compact sets $E_1, E_2$, their union $E = E_1 \cup E_2$ and $\mathcal{U} = \{ \mathcal{U}_\alpha \}$, an arbitrary open cover of $E$. Each point of $E$ is an element of at least one set of the collection $\mathcal{U}$. Therefore, each point of $E_1$ and $E_2$ is also an element of at least one set of the collection $\mathcal{U}$. Denote $\mathcal{S}_1$ an open cover of $E_1$:
-$$ \mathcal{S}_1 = \{ \mathcal{U}_\alpha : E_1 \cup \mathcal{U}_\alpha \neq \emptyset \} $$
+
+Consider two compact sets $E_1, E_2$, their union $E = E_1 \cup E_2$ and $\mathcal{U} = \set{ \mathcal{U}_\alpha }$, an arbitrary open cover of $E$.
+Each point of $E$ is an element of at least one set of the collection $\mathcal{U}$.
+Therefore, each point of $E_1$ and $E_2$ is also an element of at least one set of the collection $\mathcal{U}$.
+Denote $\mathcal{S}_1$ an open cover of $E_1$:
+\[ \mathcal{S}_1 = \set{ \mathcal{U}_\alpha : E_1 \cup \mathcal{U}_\alpha \neq \emptyset } \]
 and denote $\mathcal{S}_2$ an open cover of $E_2$:
-$$ \mathcal{S}_2 = \{ \mathcal{U}_\alpha : E_2 \cup \mathcal{U}_\alpha \neq \emptyset \} $$
+\[ \mathcal{S}_2 = \set{ \mathcal{U}_\alpha : E_2 \cup \mathcal{U}_\alpha \neq \emptyset } \]
 Since $E_1$ and $E_2$ are compact, there exist their finite subcovers $\mathcal{F}_1$ and $\mathcal{F}_2$:
-$$ \mathcal{F}_1 \subset \mathcal{S}_1 : \> E_1 \subset \bigcup_{\mathcal{F}_1}$$
-$$ \mathcal{F}_2 \subset \mathcal{S}_2 : \> E_2 \subset \bigcup_{\mathcal{F}_2}$$
+\[ \mathcal{F}_1 \subset \mathcal{S}_1 : \> E_1 \subset \bigcup_{\mathcal{F}_1} \]
+\[ \mathcal{F}_2 \subset \mathcal{S}_2 : \> E_2 \subset \bigcup_{\mathcal{F}_2} \]
 Union $\mathcal{F}_1 \cup \mathcal{F}_2$ is a finite cover of $E_1 \cup E_2 = E$, therefore $E$ is compact.
 
 \end{proof}
@@ -149,29 +206,41 @@ Does this assertion also hold for their intersection?
 Answer: Yes, for Hausdorff spaces. No, for general topological spaces.
 
 \begin{proof}
-Compact set of metric space is closed by Rudin 2.34 (more generally, this is the case for Hausdorff spaces). Intersection of closed set and compact set is compact by corollary to Rudin 2.35. Therefore, intersection of compact sets in metric space is compact. This might not be the case for general topological (non-Hausdorff) spaces.
+
+Compact set of metric space is closed by Rudin 2.34 (more generally, this is the case for Hausdorff spaces).
+Intersection of closed set and compact set is compact by corollary to Rudin 2.35.
+Therefore, intersection of compact sets in metric space is compact.
+This might not be the case for general topological (non-Hausdorff) spaces.
+
 \end{proof}
 
 
 \subsection*{Problem 6}
 
 \begin{tcolorbox}
-The terms limit and limit point are often a source of confusion for people not thoroughly
-accustomed to them. For instance, the constant sequence $\{1, 1, . . . , 1, . . .\}$ is convergent with
-limit $1$; but as a subset of the real line its values are just equal to the set $\{1\}$, which cannot
-have a limit point (why?).
+The terms limit and limit point are often a source of confusion for people not thoroughly accustomed to them.
+For instance, the constant sequence $\set{ 1, 1, \dots , 1, \dots }$ is convergent with limit $1$; but as a subset of the real line its values are just equal to the set $\set{1}$, which cannot have a limit point (why?).
 \end{tcolorbox}
 
 \begin{proof}
-Every neighbourhood of limit point $p$ of $E$ should contain points of $E$ other than $p$. This is impossible for $\{1\}$, however, since any neighbourhood of $1$ includes only one point of $\{1\}$, $1$ itself.
+
+Every neighbourhood of limit point $p$ of $E$ should contain points of $E$ other than $p$.
+This is impossible for $\set{1}$, however, since any neighbourhood of $1$ includes only one point of $\set{1}$, $1$ itself.
+
 \end{proof}
 
 \begin{tcolorbox}
-To clarify the notions of limit and limit point prove the following statement: If a convergent sequence in a metric space has infinitely many distinct points, then its limit is a limit point of the set of points of the sequence.
+To clarify the notions of limit and limit point prove the following statement:
+If a convergent sequence in a metric space has infinitely many distinct points, then its limit is a limit point of the set of points of the sequence.
 \end{tcolorbox}
 
 \begin{proof}
-Limit of a convergent sequence $\{ a_n \}$ is point $a$ such that for arbitrary $\epsilon > 0$ there exists $N \in \mathbb{N}$ such that for all $n > N$: $d(a, a_n) < \epsilon$. We notice that all such $\{ a_n : n > N \}$ are points of the open ball $B_\epsilon(a)$. Since the choice of $\epsilon$ was arbitrary, any open ball around $a$ contains infinitely many points of the sequence $a_n$. Since all points of the $a_n$ are distinct, they all cannot be equal to $a$, so there must be points of $a_n$ within the open ball $B_\epsilon(a)$ that are distinct from $a$. This means that $a$ satisfies the definition of a limit point for the set of points of the sequence.
+
+Limit of a convergent sequence $\set{ a_n }$ is point $a$ such that for arbitrary $\epsilon > 0$ there exists $N \in \N$ such that for all $n > N$: $d(a, a_n) < \epsilon$.
+We notice that all such $\set{ a_n : n > N }$ are points of the open ball $B_\epsilon(a)$.
+Since the choice of $\epsilon$ was arbitrary, any open ball around $a$ contains infinitely many points of the sequence $a_n$.
+Since all points of the $a_n$ are distinct, they all cannot be equal to $a$, so there must be points of $a_n$ within the open ball $B_\epsilon(a)$ that are distinct from $a$.
+This means that $a$ satisfies the definition of a limit point for the set of points of the sequence.
 
 \end{proof}
 
@@ -179,27 +248,33 @@ Limit of a convergent sequence $\{ a_n \}$ is point $a$ such that for arbitrary 
 \subsection*{Problem 7}
 
 \begin{tcolorbox}
-Find a sequence $\{ x_n \}$ with values in $[0, 1]$ that has the following property. For every $x \in [0, 1]$, we can find a subsequence $\{ x_{n_k} \}$ such that $x_{n_k} \to x$ as $k \to \infty$. Hint: Think about the rational numbers between $0$ and $1$.
-
-Any rational number 
+Find a sequence $\set{ x_n }$ with values in $[0, 1]$ that has the following property.
+For every $x \in [0, 1]$, we can find a subsequence $\set{ x_{n_k} }$ such that $x_{n_k} \to x$ as $k \to \infty$.
 \end{tcolorbox}
 
 \begin{proof}
 One such sequence will be:
-$$ \{ a_n \} = \left\{0, \frac{1}{1}, 0, \frac{1}{2}, \frac{2}{2}, 0, \frac{1}{3}, \frac{2}{3}, \frac{3}{3}, 0, \frac{1}{4}, \frac{2}{4}, \frac{3}{4}, \frac{4}{4}, 0 \dots \right\} $$
+\[ \set*{ a_n } = \set*{0, \frac{1}{1}, 0, \frac{1}{2}, \frac{2}{2}, 0, \frac{1}{3}, \frac{2}{3}, \frac{3}{3}, 0, \frac{1}{4}, \frac{2}{4}, \frac{3}{4}, \frac{4}{4}, 0 \dots } \]
 
-We notice that every rational number in $[0, 1]$ is repeated in $a_n$  infinitely many times. Therefore, for any rational number $x = \frac{p}{q}, x \in [0, 1]$ constant sequence
-$$ \left\{ \frac{pn}{qn} \right\}_{n \in \mathbb{N}} $$
-is a subsequence of $\{ a_n \}$ with limit $\frac{p}{q} = x$.
+We notice that every rational number in $[0, 1]$ is repeated in $a_n$  infinitely many times.
+Therefore, for any rational number $x = \frac{p}{q}, x \in [0, 1]$ constant sequence
+\[ \set*{ \frac{pn}{qn} }_{n \in \N} \]
+is a subsequence of $\set{ a_n }$ with limit $\frac{p}{q} = x$.
 
-Consider an irrational number $x \in [0, 1]$. For any given $n \in \mathbb{N}$ we can always find $k_{x, n} \in \mathbb{Z}_{\geq 0}, \> k_{x, n} < n$ such that
-$$ \frac{k_{x, n}}{n} < x < \frac{k_{x, n}+1}{n} $$
+Consider an irrational number $x \in [0, 1]$.
+For any given $n \in \N$ we can always find $k_{x, n} \in \Z_{\geq 0}, \> k_{x, n} < n$ such that
+\[ \frac{k_{x, n}}{n} < x < \frac{k_{x, n}+1}{n} \]
 by the Archimedean property. Consider sequence
-$$ \{ b(x)_n \} = \left\{ \frac{k_{x, n}}{n} \right\}_{n \in \mathbb{N}} $$
-This is clearly a subsequence of $\{ a_n \}$. Furthermore, the limit of $\{ b(x)_n \}$ is $x$. To prove it we notice that for any $x$ and $n \in \mathbb{N}$:
-$$ x - \frac{k_{x, n}}{n} < \frac{k_{x, n}+1}{n} - \frac{k_{x, n}}{n}$$ 
-$$ d \left( x, \frac{k_{x, n}}{n} \right) < \frac{1}{n} $$ 
-Which is equivalent to $x$ being the limit of sequence $\{ b(x)_n \}$ with $N = \frac{1}{\epsilon}$.
+\[ \set*{ b(x)_n } = \set*{ \frac{k_{x, n}}{n} }_{n \in \N} \]
+This is clearly a subsequence of $\set{ a_n }$.
+Furthermore, the limit of $\set*{ b(x)_n }$ is $x$.
+To prove it we notice that for any $x$ and $n \in \N$:
+\begin{gather*}
+    x - \frac{k_{x, n}}{n} < \frac{k_{x, n}+1}{n} - \frac{k_{x, n}}{n} \\
+    d \left( x, \frac{k_{x, n}}{n} \right) < \frac{1}{n}
+\end{gather*}
+Which is equivalent to $x$ being the limit of sequence $\set*{ b(x)_n }$ with $N = \frac{1}{\epsilon}$.
+
 \end{proof}
 
 
@@ -212,22 +287,33 @@ Are closures of connected sets always connected?
 Answer: Closure of connected set is always connected.
 
 \begin{proof}
-Consider connected set $C$. Suppose $\overline{C}$ is not connected. Consider two arbitrary sets $X, Y$ such that $X \cup Y = \overline{C}$. Since $\overline{C}$ is not connected, $X \cap \overline{Y} = \emptyset$ and $\overline{X} \cap Y = \emptyset$. We notice that
-$$ C \subseteq \overline{C} \iff C = C \cap \overline{C} $$
-$$ C \cap \overline{C} = C \cap (X \cup Y) = (C \cap X) \cup (C \cap Y) $$
+
+Consider connected set $C$.
+Suppose $\overline{C}$ is not connected.
+Consider two arbitrary sets $X, Y$ such that $X \cup Y = \overline{C}$.
+Since $\overline{C}$ is not connected, $X \cap \overline{Y} = \emptyset$ and $\overline{X} \cap Y = \emptyset$.
+We notice that
+\begin{gather*}
+    C \subseteq \overline{C} \iff C = C \cap \overline{C} \\
+    C \cap \overline{C} = C \cap (X \cup Y) = (C \cap X) \cup (C \cap Y)
+\end{gather*}
 Since $C$ is connected, either
 \begin{equation}\label{eq:1}
-(C \cap X) \cap \overline{(C \cap Y)} = E \neq \emptyset 
+    (C \cap X) \cap \overline{(C \cap Y)} = E \neq \emptyset 
 \end{equation}
 or
 \begin{equation}\label{eq:2}
-\overline{(C \cap X)} \cap (C \cap Y) = E \neq \emptyset
+    \overline{(C \cap X)} \cap (C \cap Y) = E \neq \emptyset
 \end{equation}
 Suppose, the former is true. We notice that 
-$$ \overline{(C \cap Y)} \subseteq \overline{C} \cap \overline{Y}, $$
+\[ \overline{(C \cap Y)} \subseteq \overline{C} \cap \overline{Y}, \]
 therefore
-$$ E = (C \cap X) \cap \overline{(C \cap Y)} = C \cap X \cap \overline{C} \cap \overline{Y} = C \cap (X \cap \overline{Y}) = C \cap \emptyset = \emptyset $$
-Contradiction. Therefore, equation \ref{eq:1} cannot be true. Using the same logic we conclude that equation \ref{eq:2} cannot be true. Therefore, $\overline{C}$ must be connected.
+\[ E = (C \cap X) \cap \overline{(C \cap Y)} = C \cap X \cap \overline{C} \cap \overline{Y} = C \cap (X \cap \overline{Y}) = C \cap \emptyset = \emptyset \]
+Contradiction.
+Therefore, (\ref{eq:1}) cannot be true.
+Using the same logic we conclude that (\ref{eq:2}) cannot be true.
+Therefore, $\overline{C}$ must be connected.
+
 \end{proof}
 
 \begin{tcolorbox}
@@ -237,7 +323,14 @@ Are interiors of connected sets always connected?
 Answer: Interior of connected set is not necessarily connected.
 
 \begin{proof}
-Counterexample: consider set $E \subset \mathbb{R}^n, n > 1$ that is the union of two closed balls $B_1[x]$ and $B_1[y]$ of radius 1 such that $d(x, y) = 2$. Set $E$ is connected (notice that balls $B_1[x]$ and $B_1[y]$ intersect at the halfway point between $x$ and $y$). Interior of $E$ can be represented by union of open balls $B_1(x)$ and $B_1(y)$. We notice that both $B_1(x) \cap \overline{B_1(y)} = \emptyset$ and $\overline{B_1(x)} \cap B_1(y) = \emptyset$. Thus, interior of connected set $E$ is not connected.
+
+Counterexample:
+consider set $E \subset \R^n, n > 1$ that is the union of two closed balls $B_1[x]$ and $B_1[y]$ of radius 1 such that $d(x, y) = 2$.
+Set $E$ is connected (notice that balls $B_1[x]$ and $B_1[y]$ intersect at the halfway point between $x$ and $y$).
+Interior of $E$ can be represented by union of open balls $B_1(x)$ and $B_1(y)$.
+We notice that both $B_1(x) \cap \overline{B_1(y)} = \emptyset$ and $\overline{B_1(x)} \cap B_1(y) = \emptyset$.
+Thus, interior of connected set $E$ is not connected.
+
 \end{proof}
 
 

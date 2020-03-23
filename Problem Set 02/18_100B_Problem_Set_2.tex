@@ -5,14 +5,26 @@
 \usepackage[]{amssymb} 
 \usepackage{amsmath}
 \usepackage{tcolorbox}
+\usepackage{mathtools}
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\vect}[1]{\mathbf{#1}}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\set}{ \{ }{ \} }
 
 
 \title{18.100B: Problem Set 2}
 \author{Dmitry Kaysin}
-\date\today
-
+\date{October 2019}
 \begin{document}
 \maketitle 
+
 
 \subsection*{Problem 1}
 
@@ -21,53 +33,72 @@ Prove that the empty set is a subset of every set.
 \end{tcolorbox}
 
 \begin{proof}
-By definition, set $E$ is a subset of set $A$ if and only if $\forall e \in E \Rightarrow e \in A$. For $E = \emptyset$ and a arbitrary set $A$ we have: $\forall e \in \emptyset \Rightarrow e \in A$. Since no element is a member of the empty set, LHS of this expression is always false. Then the expression as a whole is always true, as one can verify using the logic table for implication. Thus, $\emptyset$ is a subset of every set.
+
+By definition, set $E$ is a subset of set $A$ if and only if $\forall e \in E \Rightarrow e \in A$.
+For $E = \emptyset$ and a arbitrary set $A$ we have: $\forall e \in \emptyset \Rightarrow e \in A$.
+Since no element is a member of the empty set, LHS of this expression is always false.
+Then the expression as a whole is always true, as one can verify using the logic table for implication.
+Thus, $\emptyset$ is a subset of every set.
 
 \end{proof}
+
 
 \subsection*{Problem 2}
 
 \begin{tcolorbox}
 If $x, y$ are complex, prove that
-$$||x| - |y|| \leq |x - y|$$
+\[ \abs{\abs{x} - \abs{y}} \leq \abs{x - y} \]
 \end{tcolorbox}
 
 \begin{proof}
-Standard norm in $\mathbb{R}$ is defined as follows:
-$$|r| = 
-\begin{cases}
-r, & \text{if } r \geq 0 \\
--r, & \text{if } r < 0
-\end{cases}
-$$
+
+Working with $\C$, consider standard norm: $\norm{z} = \abs{z}$, absolute value of $z \in \C$.
+
+For real $r \in \R$:
+\[
+    \abs{r} = 
+    \begin{cases}
+        r, & \text{if } r \geq 0 \\
+        -r, & \text{if } r < 0
+    \end{cases}
+\]
 Thus
-$$||x|-|y|| = 
-\begin{cases}
-|x|-|y|, & \text{if } |x|-|y| \geq 0 \\
-|y|-|x|, & \text{if } |x|-|y| < 0
-\end{cases}
-$$
-We write triangle inequality for the first case:
-$$ |y+(x-y)| \leq |y|+|x-y|$$
-$$ |x| \leq |y|+|x-y|$$
-$$ |x| - |y| \leq |x-y|$$
-We also write triangle inequality for the second case:
-$$ |x+(y-x)| \leq |x|+|y-x|$$
-$$ |y| \leq |x|+|y-x|$$
-$$ |y| - |x| \leq |y-x|$$
-Since $|y - x| = |-(x - y)| = |x - y|$:
-$$ |y| - |x| \leq |x-y|$$
+\[
+    \abs{\abs{x}-\abs{y}} = 
+    \begin{cases}
+        \abs{x}-\abs{y}, & \text{if } \abs{x}-\abs{y} \geq 0 \\
+        \abs{y}-\abs{x}, & \text{if } \abs{x}-\abs{y} < 0
+    \end{cases}
+\]
+We write triangle inequality using the standard norm $\abs{\cdot}$ for the first case:
+\begin{gather*}
+    \abs{y+(x-y)} \leq \abs{y}+\abs{x-y} \\
+    \abs{x} \leq \abs{y}+\abs{x-y} \\
+    \abs{x} - \abs{y} \leq \abs{x-y}   
+\end{gather*}
+
+We also write triangle inequality using the standard norm $\abs{\cdot}$ for the second case:
+\begin{gather*}
+    \abs{x+(y-x)} \leq \abs{x}+\abs{y-x} \\
+    \abs{y} \leq \abs{x}+\abs{y-x} \\
+    \abs{y} - \abs{x} \leq \abs{y-x}
+\end{gather*}
+
+Since $\abs{y - x} = \abs{-(x - y)} = \abs{x - y}$:
+\[ \abs{y} - \abs{x} \leq \abs{x-y} \]
 In both cases
-$$||x|-|y|| \leq |x-y|$$
+\[ \abs{\abs{x} - \abs{y}} \leq \abs{x-y} \]
 which proves the argument.
+
 \end{proof}
+
 
 \subsection*{Problem 3}
 
 \begin{tcolorbox}
 Find $\sup M$ and $\inf M$ for:
 
-(a) $M = \left\{ \dfrac{|x|}{1+|x|} : x \in \mathbb{R} \right\}$.
+a) $M = \set*{ \dfrac{\abs{x}}{1+\abs{x}} : x \in \R }$.
 \end{tcolorbox}
 
 Answer: $\sup M = 1, \inf M = 0$
@@ -75,69 +106,85 @@ Answer: $\sup M = 1, \inf M = 0$
 \begin{proof}
 We use a well-known criterion that $s$ is supremum of $M$ if and only if $s$ is an upper bound of $M$ and for any $\epsilon > 0$ there exists $a \in M$ such that $s - \epsilon < a$.
 
-Since $0 \leq |a| < |a| + 1$ for any $a\in \mathbb{R}$:
-$$ \frac{|a|}{1+|a|} < 1,$$
+Since $0 \leq \abs{a} < \abs{a} + 1$ for any $a\in \R$:
+\[ \frac{\abs{a}}{1+\abs{a}} < 1, \]
 which proves that $1$ is an upper bound of $M$.
-We claim that for any $\epsilon > 0$ there exists $a \in \mathbb{R}$ such that:
-$$ 1 - \epsilon < \frac{|a|}{1+|a|}$$
+We claim that for any $\epsilon > 0$ there exists $a \in \R$ such that:
+\[ 1 - \epsilon < \frac{\abs{a}}{1+\abs{a}} \]
 We prove this by deriving an explicit rule for finding such $a$ given $\epsilon$:
-$$ (1+|a|)(1-\epsilon) < |a|$$
-$$ 1 - \epsilon + |a| - \epsilon |a| < |a| $$
-$$ 1 - \epsilon(1 + |a|) < 0$$
-$$ - \epsilon(1 + |a|) < -1$$
-$$ 1 + |a| > \frac{1}{\epsilon}$$
-$$ |a| > \frac{1}{\epsilon}-1.$$
+\begin{gather*}
+    (1 + \abs{a})(1-\epsilon) < \abs{a} \\
+    1 - \epsilon + \abs{a} - \epsilon \abs{a} < \abs{a} \\
+    1 - \epsilon(1 + \abs{a}) < 0 \\
+    - \epsilon(1 + \abs{a}) < -1 \\
+    1 + \abs{a} > \frac{1}{\epsilon} \\
+    \abs{a} > \frac{1}{\epsilon}-1.    
+\end{gather*}
 This rule is valid for all $\epsilon > 0$, thus $1$ is supremum of $M$.
 
-We also notice that $f: a \mapsto \frac{1}{1/a+1}$ is a monotone map where $a = |x|$. Therefore, if there exists minimum element of $\{ |a| : a \in \mathbb{R} \}$ its image under $f$ is minimum element of $f(|\mathbb{R}|) = M$.
-$$\min \{ |a| : a \in \mathbb{R} \} = 0 \Rightarrow \min M = f(0) = 0.$$
+We also notice that $f: a \mapsto \frac{1}{1/a+1}$ is a monotone map where $a = \abs{x}$.
+Therefore, if there exists minimum element of $\set{ \abs{a} : a \in \R }$ its image under $f$ is minimum element of $f(\abs{\R}) = M$.
+\[ \min \set{ \abs{a} : a \in \R } = 0 \Rightarrow \min M = f(0) = 0. \]
 Since $0$ is less than or equal to any element of $M$ and $0 \in M$: $\inf M = 0$.
 
 \end{proof}
 
 \begin{tcolorbox}
-(b) $M = \left\{ \dfrac{x}{1+x} : x > -1 \right\}$.
+b) $M = \set*{ \dfrac{x}{1+x} : x > -1 }$.
 \end{tcolorbox}
 
 Answer: $\sup M = 1$, $\inf M$ does not exist ($M$ is not bounded below).
 
 \begin{proof}
-We can prove that $1$ is supremum of $M$ using the same argument as in (a).
 
-We claim that no lower bound exists for $M$ since for any $u < \sup M = 1$ we can find such element $w = \dfrac{x}{1+x} \in M$ so that $w<u$. We prove this by deriving an explicit rule for finding $x$ given $u$ that provides us with suitable $w: w < u$:
-$$\frac{x}{1+x} < u $$
-$$ x < u + xu $$
-$$ x(1-u)<u $$
-$$ x < \frac{u}{1-u}. $$
+We can prove that $1$ is supremum of $M$ using the same argument as in a).
+
+We claim that no lower bound exists for $M$ since for any $u < \sup M = 1$ we can find such element $w = \dfrac{x}{1+x} \in M$ so that $w<u$.
+We prove this by deriving an explicit rule for finding $x$ given $u$ that provides us with suitable $w: w < u$:
+\begin{gather*}
+    \frac{x}{1+x} < u \\
+    x < u + xu \\
+    x(1-u)<u \\
+    x < \frac{u}{1-u}.    
+\end{gather*}
 This rule is valid for all $u < 1$.
 \end{proof}
 
 \begin{tcolorbox}
-(c) $M = \left\{ x + \dfrac{1}{x} : \dfrac{1}{2} < x < 2 \right\}$.
+c) $M = \set*{ x + \dfrac{1}{x} : \dfrac{1}{2} < x < 2 }$.
 \end{tcolorbox}
 
 Answer: $\sup M = \dfrac{5}{2}$, $\inf M = 2$.
 
 \begin{proof}
-First we note that $x+\dfrac{1}{x} \geq 2$. We prove this by comparing $x+\dfrac{1}{x}-2$ to zero:
-$$x+\frac{1}{x}-2 = \frac{x^2+1-2x}{x} = \frac{(x-1)^2}{x}$$
-which is non-negative as long as $x>0$. Thus, $x+\dfrac{1}{x} \geq 2$ and $2$ is a lower bound of $M$. We also note that $2 \in M$ for $x=1$, thus $2$ is infimum of $M$.
+First we note that $x+\dfrac{1}{x} \geq 2$.
+We prove this by comparing $x+\dfrac{1}{x}-2$ to zero:
+\[ x+\frac{1}{x}-2 = \frac{x^2+1-2x}{x} = \frac{(x-1)^2}{x} \]
+which is non-negative as long as $x>0$.
+Thus, $x+\dfrac{1}{x} \geq 2$ and $2$ is a lower bound of $M$.
+We also note that $2 \in M$ for $x=1$, thus $2$ is infimum of $M$.
 
-Let $E(a) = \{ x \mid \dfrac{1}{a} < x < a \}$ where $a>1$ without the loss of generality. We note that $M = f(E(2))$. We denote $f(x) = x+\dfrac{1}{x}$. We will now prove that $f(a) = \sup(E(a))$.
+Let $E(a) = \set*{ x : \dfrac{1}{a} < x < a }$ where $a>1$ without the loss of generality. We note that $M = f(E(2))$.
+We denote $f(x) = x+\dfrac{1}{x}$.
+We will now prove that $f(a) = \sup(E(a))$.
 
 First we show that $f(a)$ is an upper bound for $f(E(a))$ or
-$$\forall x \in E(a): f(a) \geq f(x)$$
+\[ \forall x \in E(a): f(a) \geq f(x) \]
 We evaluate
-$$ f(a)-f(x) = a+\frac{1}{a} - x - \frac{1}{x} = (a-x) - \frac{a-x}{ax}$$
-which is greater than or equal to zero if and only if $ax \geq 1$. Since $a>0$ and $x>0$ we conclude that $ax > 1$. This proves that $f(a)$ is an upper bound for $f(E(a))$.
+\[ f(a)-f(x) = a+\frac{1}{a} - x - \frac{1}{x} = (a-x) - \frac{a-x}{ax} \]
+which is greater than or equal to zero if and only if $ax \geq 1$.
+Since $a>0$ and $x>0$ we conclude that $ax > 1$.
+This proves that $f(a)$ is an upper bound for $f(E(a))$.
 
 We will now show that for a given $\epsilon>0$ there exists $x \in E(a)$ such that:
-$$f(a) - \epsilon < f(x)$$
+\[ f(a) - \epsilon < f(x) \]
 Let such $x$ be equal to $a - \epsilon$, then:
-$$f(x+\epsilon) - \epsilon < f(x)$$
-$$ (x+\epsilon) + \frac{1}{x+\epsilon} - \epsilon < x + \frac{1}{x}$$
-$$ \frac{x^2 + 2x \epsilon + \epsilon^2+1 - x \epsilon - \epsilon^2}{x+\epsilon} < \frac{x^2+1}{x}$$
-$$ \frac{x^2+x\epsilon+1}{x+\epsilon} < \frac{x^2+1}{x}$$
+\begin{gather*}
+    f(x+\epsilon) - \epsilon < f(x) \\
+    (x+\epsilon) + \frac{1}{x+\epsilon} - \epsilon < x + \frac{1}{x} \\
+    \frac{x^2 + 2x \epsilon + \epsilon^2+1 - x \epsilon - \epsilon^2}{x+\epsilon} < \frac{x^2+1}{x} \\
+    \frac{x^2+x\epsilon+1}{x+\epsilon} < \frac{x^2+1}{x}    
+\end{gather*}
 We can cross-multiply and keep the sign intact since $x>0$ and $x+\epsilon>0$.
 $$ x(x^2+x\epsilon+1) < (x+\epsilon)(x^2+1)$$
 $$ x^3+x^2\epsilon+x < x^3+x^2\epsilon+x+\epsilon$$
@@ -147,6 +194,7 @@ Since this expression is always true, $f(a)$ is the supremum of $f(E(a))$.
 Based on this we conclude that $\sup M = \sup E(2) = f(2) = \dfrac{5}{2}$.
 
 \end{proof}
+
 
 \subsection*{Problem 4}
 
@@ -158,12 +206,15 @@ c) $U$ be the set of all natural numbers that are less or equal than $200$.\\
 Determine $S \cap T \cap U$ explicitly.
 \end{tcolorbox}
 
-Answer: $S \cap T \cap U = \{ 30, 42, 66, 70, 78, 102, 105, 110, 114, 130, 138, 154, \\
-165, 170, 174, 182,186, 190, 195 \}$. 
+Answer: $S \cap T \cap U 
+= \set{ 30, 42, 66, 70, 78, 102, 105, 110, 114, 130, 138, 154, \\
+165, 170, 174, 182,186, 190, 195 }$. 
 
 \begin{proof}
 
-Elements of the intersection of sets have to belong to each set. Thus, we are looking for the set of natural numbers less than or equal to 200 that have exactly three distinct prime divisors. A simple Python program yields the answer:
+Elements of the intersection of sets have to belong to each set.
+Thus, we are looking for the set of natural numbers less than or equal to 200 that have exactly three distinct prime divisors.
+A simple Python program yields the answer:
 
 \begin{verbatim}
 from itertools import combinations
@@ -177,16 +228,56 @@ print(len(res))
 
 \end{proof}
 
-\subsection*{[TBD] Problem 5}
+
+\subsection*{Problem 5}
 
 \begin{tcolorbox}
-Let $X$ and $Y$ be two disjoint sets. Suppose further that $X \sim \mathbb{R}$ and that $Y \sim \mathbb{N}$
-(i. e. the set $Y$ is countable). Show that $Z = X \cup Y$ satisfies $Z \sim \mathbb{R}$.
+Let $X$ and $Y$ be two disjoint sets.
+Suppose further that $X \sim \R$ and that $Y \sim \N$ (i.\,e. the set $Y$ is countable).
+Show that $Z = X \cup Y$ satisfies $Z \sim \R$.
 \end{tcolorbox}
 
 \begin{proof}
 
+$X$ is uncountable, thus there exists bijection $\rho$ from $X$ to $\R$.
+$Y \setminus X$ is either countable or finite, therefore there exists bijection $\nu$ from $Y \setminus X$ to either $\N$ or to some finite set $F_n = \set{1,2,\dots,n}$.
+Consider function
+\[
+    f(x) =
+    \begin{cases}
+        (\rho(x), 1), & \text{ if $x \in X$}, \\
+        (\nu(x), 0),  & \text{ if $x \in Y \setminus X$}.
+    \end{cases}
+\]
+One can easily see that $f$ is a bijection.
+We will prove that there exists bijection $\varphi$ from $f(X \cup Y)$ to $\R$.
+
+Suppose, $Y \setminus X$ is countable. Consider
+\[
+    \varphi(x) = 
+    \begin{cases}
+        x, & \text{ if $x \in (\R \setminus \N) \times \set{1}$}, \\
+        2x, & \text{ if $x \in \N \times \set{1}$}, \\
+        2x-1, & \text{ if $x \in \N \times \set{0}$}.
+    \end{cases}
+\]
+One can see that $\varphi$ is bijective for countable $Y \setminus X$.
+
+Now suppose, $Y \setminus X$ is finite. Consider
+\[
+    \varphi(x) = 
+    \begin{cases}
+        x, & \text{ if $x \in (\R \setminus \N) \times \set{1}$}, \\
+        x + n, & \text{ if $x \in \N \times \set{1}$}, \\
+        x, & \text{ if $x \in F_n \times \set{0}$}.
+    \end{cases}
+\]
+One can see that $\varphi$ is bijective for finite $Y \setminus X$.
+
+Therefore, $\varphi \circ f$ is a bijection from $X \cup Y = Z$ to $\R$, thus $Z \sim \R$.
+
 \end{proof}
+
 
 \subsection*{Problem 6}
 
@@ -195,15 +286,20 @@ Construct a bounded set of real numbers with exactly three limit points.
 \end{tcolorbox}
 
 \begin{proof}
-One of the constructions of a bounded set with 3 limit points is as follows:
-$$ T = \{ \frac{1}{n} : n \in \mathbb{Z} \} \cup \{ 1+\frac{1}{n} : n \in \mathbb{Z}  \} \cup \{ 2+\frac{1}{n} : n \in \mathbb{Z} \}$$
 
-We can prove that $X$ is a limit point of $E(X) = \{ X + \frac{1}{n} : n \in \mathbb{Z} \}$. Indeed, $X$ is a lower bound of $E(X)$ by construction and for any $\epsilon > 0$ we can find a point of $E(X)$ of the form $\frac{1}{n}$ where $n \in \mathbb{N}$, such that
-$$X + \frac{1}{n} < X + \epsilon, \text{ or}$$
-$$\frac{1}{n} < \epsilon$$
+One of the constructions of a bounded set with 3 limit points is as follows:
+\[ T = \set*{ \frac{1}{n} : n \in \Z } \cup \set*{ 1+\frac{1}{n} : n \in \Z } \cup \set*{ 2+\frac{1}{n} : n \in \Z } \] 
+
+We can prove that $X$ is a limit point of $E(X) = \set{ X + \frac{1}{n} : n \in \Z }$.
+Indeed, $X$ is a lower bound of $E(X)$ by construction and for any $\epsilon > 0$ we can find a point of $E(X)$ of the form $\frac{1}{n}$ where $n \in \N$, such that
+\begin{gather*}
+    X + \frac{1}{n} < X + \epsilon, \text{ or} \\
+    \frac{1}{n} < \epsilon    
+\end{gather*}
 by the Archimedean property of the real line.
 
 Thus, points 1, 2 and 3 out of all real numbers are limit points of $T$.
+
 \end{proof}
 
 \begin{tcolorbox}
@@ -213,37 +309,48 @@ In addition, construct a bounded set of real numbers with countably many limit p
 \begin{proof}
 
 Denote
-$$A(k) =  \{ \dfrac{1}{k} + \dfrac{1}{n} : n \in \mathbb{Z} \}.$$
+\[ A(k) =  \set{ \dfrac{1}{k} + \dfrac{1}{n} : n \in \Z }. \]
 We claim that set
-$$T = \bigcup_{k=1}^{\infty} A(k)$$
+\[ T = \bigcup_{k=1}^{\infty} A(k) \]
 has countably many limit points.
 
-We can prove that $\frac{1}{k}$ is a limit point of $A(k)$. The proof is stated in the first part of this problem taking $X = \frac{1}{k}$. Then $\{ \frac{1}{k} : k \in \mathbb{N} \}$ are all limit points of $T$.
+We can prove that $\frac{1}{k}$ is a limit point of $A(k)$.
+The proof is stated in the first part of this problem taking $X = \frac{1}{k}$.
+Then $\set{ \frac{1}{k} : k \in \N }$ are all limit points of $T$.
 
-We can also prove that $0$ is a limit point of $T$. Indeed, $\forall x \in T: x > 0$ by construction (both $\frac{1}{k}$ and $\frac{1}{n}$ are strictly greater than $0$, so is their sum), so $0$ is not an element of $T$. Then we notice that for any $\epsilon > 0$ we can find a point of $T$ of the form $\frac{1}{k} + \frac{1}{n}$ where $k,n \in \mathbb{N}$, such that:
-$$\frac{1}{k} + \frac{1}{n} < \epsilon.$$
+We can also prove that $0$ is a limit point of $T$.
+Indeed, $\forall x \in T: x > 0$ by construction (both $\frac{1}{k}$ and $\frac{1}{n}$ are strictly greater than $0$, so is their sum), so $0$ is not an element of $T$.
+Then we notice that for any $\epsilon > 0$ we can find a point of $T$ of the form $\frac{1}{k} + \frac{1}{n}$ where $k,n \in \N$, such that:
+\[ \frac{1}{k} + \frac{1}{n} < \epsilon. \]
 For example for $k = n$
-$$\frac{1}{k} < \frac{\epsilon}{2}$$
-its existence follows from the Archimedean property of the real line. Therefore, there are points of $T$ in any neighbourhood of $0$, thus $0$ is a limit point of $T$.
+\[ \frac{1}{k} < \frac{\epsilon}{2} \]
+its existence follows from the Archimedean property of the real line.
+Therefore, there are points of $T$ in any neighbourhood of $0$, thus $0$ is a limit point of $T$.
 
-Then we prove that no other point of $\mathbb{R}$ is a limit point of $T$. Consider any point $w$ of the set  $T$ other than the points $\{ \frac{1}{k} : k \in \mathbb{N} \} \cup \{0\}$. All points $w$ have a form of $\frac{1}{k} + \frac{1}{n}: k,n \in \mathbb{N}$. We claim that there exists neighbourhood of $w$ that contains only finitely many (or none) points of $T$.
+Then we prove that no other point of $\R$ is a limit point of $T$. 
+Consider any point $w$ of the set $T$ other than the points $\set{ \frac{1}{k} : k \in \N } \cup \set{0}$.
+All points $w$ have a form of $\frac{1}{k} + \frac{1}{n}: k,n \in \N$.
+We claim that there exists neighbourhood of $w$ that contains only finitely many (or none) points of $T$.
 
 Consider neighbourhood
-$$ N(w) = \frac{1}{M+1} < w < \frac{1}{M} : \> M\in\mathbb{N}.$$
+\[ N(w) = \frac{1}{M+1} < w < \frac{1}{M} : M\in\N. \]
 
 All points of $T$ corresponding to $\frac{1}{k}+\frac{1}{n} : k \leq M \text{ or } n \leq M$ are greater than $\frac{1}{M}$, thus cannot be elements of $N(w)$.
 
-All points of $T$ corresponding to $\frac{1}{k}+\frac{1}{n} : k > M \text{ and } n \geq \frac{Mk}{M-k}$ are less than or equal to $\frac{1}{M+1}$, thus cannot be elements of $N(w)$. The same can be said about points of $T$ corresponding to $\frac{1}{k}+\frac{1}{n} : n > M \text{ and } k \geq \frac{Mn}{M-n}$.
+All points of $T$ corresponding to $\frac{1}{k}+\frac{1}{n} : k > M \text{ and } n \geq \frac{Mk}{M-k}$ are less than or equal to $\frac{1}{M+1}$, thus cannot be elements of $N(w)$.
+The same can be said about points of $T$ corresponding to $\frac{1}{k}+\frac{1}{n} : n > M \text{ and } k \geq \frac{Mn}{M-n}$.
 
-We now inspect the remaining points of $T$, which correspond to $\frac{1}{k}+\frac{1}{n}$ such that the following four conditions hold for $k, n \in \mathbb{N}$:
-$$ k > M, \>\> k < \frac{Mn}{M-n}, \>\> n > M, \>\> n < \frac{Mk}{M-k} $$ 
+We now inspect the remaining points of $T$, which correspond to $\frac{1}{k}+\frac{1}{n}$ such that the following four conditions hold for $k, n \in \N$:
+\[ k > M, \>\> k < \frac{Mn}{M-n}, \>\> n > M, \>\> n < \frac{Mk}{M-k} \]
 We can see that if there exist pairs of natural numbers $k, n$ that satisfy these inequalities, there should be only finitely many of such pairs.
 
 If no such $k, n$ exist, we have constructed a neighbourhood $N(x)$ that contains no points of $T$. 
 
-If $N(x)$ contains only finitely many points of $T$, we can choose from them a maximum point $p$ that is less than $x$ and a minimum point $q$ that is greater than $x$ and construct an $\epsilon$-neighbourhood of $x$ where $\epsilon = \min(p-x, x-q)$. This neighbourhood will contain no points of $T$.
+If $N(x)$ contains only finitely many points of $T$, we can choose from them a maximum point $p$ that is less than $x$ and a minimum point $q$ that is greater than $x$ and construct an $\epsilon$-neighbourhood of $x$ where $\epsilon = \min(p-x, x-q)$.
+This neighbourhood will contain no points of $T$.
 
-Since there exists a neighbourhood of $w$ such that it contains no points of $T$, $w$ is not a limit point of $T$. Therefore set $\{ \frac{1}{k} : k \in \mathbb{N} \} \cup \{0\}$ contains all limit points of $T$ and is countable.
+Since there exists a neighbourhood of $w$ such that it contains no points of $T$, $w$ is not a limit point of $T$.
+Therefore set $\set*{ \frac{1}{k} : k \in \N } \cup \set{0}$ contains all limit points of $T$ and is countable.
 
 \end{proof}
 
@@ -251,32 +358,46 @@ Since there exists a neighbourhood of $w$ such that it contains no points of $T$
 \subsection*{Problem 7}
 
 \begin{tcolorbox}
-Let $E$ be a subset of a metric space. The interior $E^\circ$ is defined by
-$$E^\circ = \{x \in E \mid x \text{ is an interior point} \}.$$
+Let $E$ be a subset of a metric space.
+The interior $E^\circ$ is defined by
+\[ E^\circ = \set{x \in E : x \text{ is an interior point} }. \]
 
-(a) Prove that $E^\circ$ is always open.
+a) Prove that $E^\circ$ is always open.
 \end{tcolorbox}
 
 \begin{proof}
-Since all points in $E^\circ$ are interior in $E$, for any given $p$ in $E^\circ$ there exists its open neighbourhood $N(p)$ such that $N(p) \subset E$. For any point $x \in N(p)$ there exists an open neighbourhood containing $x$, namely $N(p)$. Therefore $x$ is interior in $E$ or, equivalently, $x \in E^\circ$. This means that $N(p) \subset E^\circ$. Consequently, all points of $E^\circ$ are interior points of $E^\circ$; therefore $E^\circ$ is open.
+
+Since all points in $E^\circ$ are interior in $E$, for any given $p$ in $E^\circ$ there exists its open neighbourhood $N(p)$ such that $N(p) \subset E$.
+For any point $x \in N(p)$ there exists an open neighbourhood containing $x$, namely $N(p)$.
+Therefore $x$ is interior in $E$ or, equivalently, $x \in E^\circ$. This means that $N(p) \subset E^\circ$.
+Consequently, all points of $E^\circ$ are interior points of $E^\circ$; therefore $E^\circ$ is open.
+
 \end{proof}
 
 \begin{tcolorbox}
-(b) Prove that $E$ is open iff $E^\circ = E$.
+b) Prove that $E$ is open if and only if $E^\circ = E$.
 \end{tcolorbox}
 
 \begin{proof}
-($\Rightarrow$) If $E$ is open then all its points are interior, which means $E \subset E^\circ$. By definition, $E^\circ \subset E$. Therefore $E^\circ = E$.
-\\
-($\Leftarrow$) $E^\circ$ is always open as per (a). Therefore $E$ is also open.
+
+($\Rightarrow$) If $E$ is open then all its points are interior, which means $E \subset E^\circ$.
+By definition, $E^\circ \subset E$. Therefore $E^\circ = E$.
+
+($\Leftarrow$) $E^\circ$ is always open as per a).
+Therefore $E$ is also open.
+
 \end{proof}
 
 \begin{tcolorbox}
-(c) If $G \subset E$ and $G$ is open, prove that $G \subset E^\circ$
+c) If $G \subset E$ and $G$ is open, prove that $G \subset E^\circ$
 \end{tcolorbox}
 
 \begin{proof}
-Since $G$ is open, for any $g \in G$ exists neighbourhood $N(g) \subset G \subset E$. Therefore $g$ is an interior point of $E$ and $G \subset E^\circ$.
+
+Since $G$ is open, for any $g \in G$ exists neighbourhood $N(g) \subset G \subset E$.
+Therefore $g$ is an interior point of $E$ and $G \subset E^\circ$.
+
 \end{proof}
+
 
 \end{document}

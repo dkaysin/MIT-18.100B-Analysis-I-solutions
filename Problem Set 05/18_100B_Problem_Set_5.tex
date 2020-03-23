@@ -5,59 +5,93 @@
 \usepackage[]{amssymb} 
 \usepackage{amsmath}
 \usepackage{tcolorbox}
+\usepackage{mathtools}
 
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\set}{ \{ }{ \} }
 
 \title{18.100B: Problem Set 5}
 \author{Dmitry Kaysin}
-\date\today
-
+\date{November 2019}
 \begin{document}
 \maketitle 
+
 
 \subsection*{Problem 1}
 
 \begin{tcolorbox}
-Let $\mathcal{M}$ be a complete metric space, and let $X \subseteq \mathcal{M}$. Show that $X$ is complete if and only if $X$ is closed.
+Let $\mathcal{M}$ be a complete metric space, and let $X \subseteq \mathcal{M}$.
+Show that $X$ is complete if and only if $X$ is closed.
 \end{tcolorbox}
 
 \begin{proof}
-Suppose $X$ is complete. Any limit point of $X$ is the limit of some Cauchy sequence in $X$. Since any Cauchy sequence converges in $X$, its limit must be in $X$. Thus all limit points of $X$ are in $X$ and therefore $X$ must be closed.
 
-Now suppose $X$ is closed. Any Cauchy sequence in $\mathcal{M}$ that is also in $X$ must converge to some limit in $\mathcal{M}$. Limit of any Cauchy sequence in $X$ must be either a point of $X$ or a limit point of $X$. Since $X$ is closed, it contains all its limit points. Therefore, all Cauchy sequences in $X$ converge in $X$. Thus, $X$ is a complete metric space. 
+Suppose $X$ is complete.
+Any limit point of $X$ is the limit of some Cauchy sequence in $X$.
+Since any Cauchy sequence converges in $X$, its limit must be in $X$.
+Thus all limit points of $X$ are in $X$ and therefore $X$ must be closed.
+
+Now suppose $X$ is closed.
+Any Cauchy sequence in $\mathcal{M}$ that is also in $X$ must converge to some limit in $\mathcal{M}$.
+Limit of any Cauchy sequence in $X$ must be either a point of $X$ or a limit point of $X$. Since $X$ is closed, it contains all its limit points.
+Therefore, all Cauchy sequences in $X$ converge in $X$.
+Thus, $X$ is a complete metric space. 
+
 \end{proof}
 
 
 \subsection*{Problem 2}
 
 \begin{tcolorbox}
-a) Show that a sequence in an arbitrary metric space $\{x_n\}$ converges if and only if the ‘even’ and ‘odd’ subsequences $\{x_{2n}\}$ and $\{x_{2n-1}\}$ both converge to the same limit.
+a) Show that a sequence in an arbitrary metric space $\set{x_n}$ converges if and only if the ‘even’ and ‘odd’ subsequences $\set{x_{2n}}$ and $\set{x_{2n-1}}$ both converge to the same limit.
 \end{tcolorbox}
 
 \begin{proof}
-Suppose sequence $\{x_n\}$ converges to $x$. Then for any $\epsilon$ we can find $N \in \mathbb{N}$ such that for all $n > N: d(x, x_n) < \epsilon$. Clearly, $d(x, x_{2n}) < \epsilon$ and $d(x, x_{2n-1}) < \epsilon$. Therefore subsequence $\{x_{2n}\}$ and subsequence $\{x_{2n-1}\}$ must converge to $x$.
 
-Suppose both $\{x_{2n}\}$ and $\{x_{2n-1}\}$ converge to $x$. Then for any $\epsilon$ we can find $N, M \in \mathbb{N}$ such that for all $n > N: d(x, x_{2n}) < \epsilon$ and for all $n > M: d(x, x_{2n-1}) < \epsilon$. We notice that for all $n > 2N: d(x, x_n) < \epsilon$. Therefore, sequence $\{x_n\} $must converge to $x$.
+Suppose sequence $\set{x_n}$ converges to $x$.
+Then for any $\epsilon$ we can find $N \in \N$ such that for all $n > N: d(x, x_n) < \epsilon$.
+Clearly, $d(x, x_{2n}) < \epsilon$ and $d(x, x_{2n-1}) < \epsilon$.
+Therefore subsequence $\set{x_{2n}}$ and subsequence $\set{x_{2n-1}}$ must converge to $x$.
+
+Suppose both $\set{x_{2n}}$ and $\set{x_{2n-1}}$ converge to $x$.
+Then for any $\epsilon$ we can find $N, M \in \N$ such that for all $n > N: d(x, x_{2n}) < \epsilon$ and for all $n > M: d(x, x_{2n-1}) < \epsilon$.
+We notice that for all $n > 2N: d(x, x_n) < \epsilon$.
+Therefore, sequence $\set{x_n} $must converge to $x$.
+
 \end{proof}
 
-
 \begin{tcolorbox}
-b) Show that a sequence in an arbitrary metric space $\{x_n\}$ converges if and only if the subsequences $\{x_{2n}\}$, $\{x_{2n-1}\}$, and $\{x_{5n}\}$ all converge.
+b) Show that a sequence in an arbitrary metric space $\set{x_n}$ converges if and only if the subsequences $\set{x_{2n}}$, $\set{x_{2n-1}}$, and $\set{x_{5n}}$ all converge.
 \end{tcolorbox}
 
 \begin{proof}
-Consider $\{x_{n}\}$ and its subsequence $\{x_{f(n)}\}$ where $n$ and $f(n)$ are natural numbers and $f(n) \geq n$. Suppose $\{x_{n}\}$ converges to $x$. Then for any $\epsilon > 0$ there exists $N$ such that for all $n > N: d(x, x_n) < \epsilon$. For any given $n$ we notice that $n>N \Rightarrow f(n) 
-geq n > N$. Therefore $d(x, x_{f(n)}) < \epsilon$ and thus subsequence $\{x_{f(n)}\}$ converges to $x$.
 
-Conversely, suppose that $\{x_{f(n)}\}$ converges to $x$. Then for any $\epsilon > 0$ there exists $N$ such that for all $n: f(n) > N: d(x, x_{f(n)}) < \epsilon$. We notice that for any $N$ there exists $K$ such that $K > f(N)$ by the Archimedean property. Then $K > f(N) > N$. Therefore for all $n > K : d(x, x_n) < \epsilon$ and thus sequence $\{x_n\}$ converges to $x$.
+Consider $\set{x_{n}}$ and its subsequence $\set{x_{f(n)}}$ where $n$ and $f(n)$ are natural numbers and $f(n) \geq n$.
+Suppose $\set{x_{n}}$ converges to $x$.
+Then for any $\epsilon > 0$ there exists $N$ such that for all $n > N: d(x, x_n) < \epsilon$.
+For any given $n$ we notice that $n>N \Rightarrow f(n) 
+geq n > N$.
+Therefore $d(x, x_{f(n)}) < \epsilon$ and thus subsequence $\set{x_{f(n)}}$ converges to $x$.
 
-We conclude that sequence converges to $x$ if and only if all its subsequences converge to $x$. Case in hand is a special case of this general theorem for three chosen subsequences.
+Conversely, suppose that $\set{x_{f(n)}}$ converges to $x$.
+Then for any $\epsilon > 0$ there exists $N$ such that for all $n: f(n) > N: d(x, x_{f(n)}) < \epsilon$.
+We notice that for any $N$ there exists $K$ such that $K > f(N)$ by the Archimedean property.
+Then $K > f(N) > N$.
+Therefore for all $n > K : d(x, x_n) < \epsilon$ and thus sequence $\set{x_n}$ converges to $x$.
+
+We conclude that sequence converges to $x$ if and only if all its subsequences converge to $x$.
+Case in hand is a special case of this general theorem for three chosen subsequences.
+
 \end{proof}
 
 
 \subsection*{Problem 3}
 
 \begin{tcolorbox}
-If $\{x_n\}$ and $\{y_n\}$ are two bounded sequences of real numbers, show that:
+If $\set{x_n}$ and $\set{y_n}$ are two bounded sequences of real numbers, show that:
 \begin{itemize}
     \item $\lim \sup (x_n + y_n) \leq \lim \sup x_n + \lim \sup y_n$;
     \item $\lim \inf (x_n + y_n) \geq \lim \inf x_n + \lim \inf y_n$.
@@ -65,59 +99,91 @@ If $\{x_n\}$ and $\{y_n\}$ are two bounded sequences of real numbers, show that:
 \end{tcolorbox}
 
 \begin{proof}
-Let $x = \lim \sup x_n, \>\> y = \lim \sup y_n$. Since sequences $x_n$ and $y_n$ are bounded, $(x_n+y_n)$ must be also bounded, thus we can find a convergent subsequence $s_{n_k} = (x_{n_k} + y_{n_k}); \>\> s_{n_k} \to s$. Since sequence $x_{n_k}$ is bounded, there must exist its subsequence that is convergent; denote it $x_{n_a} \to a$. Now consider a bounded sequence $y_{n_a}$, which must contain a convergent subsequence $y_{n_b} \to b$. We note that $x_{n_b}$ is a subsequence of convergent sequence, thus $x_{n_b} \to a$. Now consider sequence $(x_{n_b}+y_{n_b})$, which must converge to $a+b$. At the same time, $(x_{n_b}+y_{n_b})$ is a subsequence of convergent sequence $s_{n_k}$. Therefore $s_{n_k}$ must also converge to $a+b$, which means $s=a+b$. We notice that $a \leq x$ and $b \leq y$. Therefore:
-$$ s \leq x + y $$
-We can see that limit of any convergent subsequence of $(x_n+y_n)$ must be strictly less than $x+y$. In other words, $x+y$ is an upper bound of the set of subsequential limits of $s_n$. Supremum of the set of subsequential limits of $s_n$ is its least upper bound, therefore:
-$$ \lim \sup (x_n + y_n) \leq \lim \sup x_n + \lim \sup y_n. $$
+
+Let $x = \lim \sup x_n, \>\> y = \lim \sup y_n$.
+Since sequences $x_n$ and $y_n$ are bounded, $(x_n+y_n)$ must be also bounded, thus we can find a convergent subsequence
+$s_{n_k} = (x_{n_k} + y_{n_k}); \>\> s_{n_k} \to s$.
+Since sequence $x_{n_k}$ is bounded, there must exist its subsequence that is convergent; denote it $x_{n_a} \to a$.
+Now consider a bounded sequence $y_{n_a}$, which must contain a convergent subsequence $y_{n_b} \to b$.
+We note that $x_{n_b}$ is a subsequence of convergent sequence, thus $x_{n_b} \to a$.
+Now consider sequence $(x_{n_b}+y_{n_b})$, which must converge to $a+b$.
+At the same time, $(x_{n_b}+y_{n_b})$ is a subsequence of convergent sequence $s_{n_k}$.
+Therefore $s_{n_k}$ must also converge to $a+b$, which means $s=a+b$.
+We notice that $a \leq x$ and $b \leq y$.
+Therefore:
+\[ s \leq x + y \]
+We can see that limit of any convergent subsequence of $(x_n+y_n)$ must be strictly less than $x+y$.
+In other words, $x+y$ is an upper bound of the set of subsequential limits of $s_n$.
+Supremum of the set of subsequential limits of $s_n$ is its least upper bound, therefore:
+\[ \lim \sup (x_n + y_n) \leq \lim \sup x_n + \lim \sup y_n. \]
 Similar logic can be used to show that
-$$ \lim \inf (x_n + y_n) \geq \lim \inf x_n + \lim \inf y_n. $$
+\[ \lim \inf (x_n + y_n) \geq \lim \inf x_n + \lim \inf y_n. \]
 
 \end{proof}
 
 \begin{tcolorbox}
-Moreover, show that if $\{x_n\}$ converges, then both inequalities are actually equalitites.
+Moreover, show that if $\set{x_n}$ converges, then both inequalities are actually equalitites.
 \end{tcolorbox}
-\begin{proof}
-Suppose $\{x_n\}$ converges to $p$. Then its every subsequence converges to $p$. For $\lim \sup \{y_n\} = a$ there must exist a subsequence $\{y_{n_a}\}$ of $\{y_n\}$ that converges to $a$. Consider subsequence $\{ x_{n_a} + y_{n_a} \}$ of the sequence $\{ x_n + y_n \}$ for which:
-$$ \lim \sup \{ x_{n_a} + y_{n_a} \} \leq \lim \sup \{ x_n + y_n \} $$
-We note that  subsequence $\{ x_{n_a} + y_{n_a} \}$ converges to $p+a$, therefore:
-$$ p + a \leq \lim \sup \{ x_n + y_n \} $$
-$$ \lim \sup \{ x_n \} + \lim \sup \{y_n\} \leq \lim \sup \{ x_n + y_n \} $$
-At the same time, using the result from the first part of the problem we can see that
-$$ \lim \sup \{ x_n + y_n \} \leq \lim \sup \{ x_n \} + \lim \sup \{y_n\} $$
-From this follows the equality
-$$ \lim \sup \{ x_n + y_n \} = \lim \sup \{ x_n \} + \lim \sup \{y_n\} $$
 
-Using the same logic we can prove that for convergent $\{ x_n \}$ and bounded $\{ y_n \}$ that
-$$ \lim \inf \{ x_n \} + \lim \inf \{ y_n \} = \lim \inf \{ x_n + y_n\} $$
+\begin{proof}
+
+Suppose $\set{x_n}$ converges to $p$.
+Then its every subsequence converges to $p$.
+For $\lim \sup \set{y_n} = a$ there must exist a subsequence $\set{y_{n_a}}$ of $\set{y_n}$ that converges to $a$.
+Consider subsequence $\set{ x_{n_a} + y_{n_a} }$ of the sequence $\set{ x_n + y_n }$ for which:
+\[ \lim \sup \set{ x_{n_a} + y_{n_a} } \leq \lim \sup \set{ x_n + y_n } \]
+We note that  subsequence $\set{ x_{n_a} + y_{n_a} }$ converges to $p+a$, therefore:
+\[ p + a \leq \lim \sup \set{ x_n + y_n } \]
+\[ \lim \sup \set{ x_n } + \lim \sup \set{y_n} \leq \lim \sup \set{ x_n + y_n } \]
+At the same time, using the result from the first part of the problem we can see that
+\[ \lim \sup \set{ x_n + y_n } \leq \lim \sup \set{ x_n } + \lim \sup \set{y_n} \]
+From this follows the equality
+\[ \lim \sup \set{ x_n + y_n } = \lim \sup \set{ x_n } + \lim \sup \set{y_n} \]
+
+Using the same logic we can prove that for convergent $\set{ x_n }$ and bounded $\set{ y_n }$ that
+\[ \lim \inf \set{ x_n } + \lim \inf \set{ y_n } = \lim \inf \set{ x_n + y_n} \]
+
 \end{proof}
+
 
 \subsection*{Problem 4}
 
 \begin{tcolorbox}
-The ‘sequence of averages’ of a sequence of real numbers $\{x_n\}$ is the sequence $\{a_n\}$ defined by
-$$ a_n = \frac{x_1+x_2+\dots+x_n}{n} $$
-If $\{x_n\}$ is a bounded sequence of real numbers, then show that
-$$ \lim \inf x_n \leq \lim \inf a_n \leq \lim \sup a_n \leq \lim \sup x_n. $$
+The ‘sequence of averages’ of a sequence of real numbers $\set{x_n}$ is the sequence $\set{a_n}$ defined by
+\[ a_n = \frac{x_1+x_2+\dots+x_n}{n} \]
+If $\set{x_n}$ is a bounded sequence of real numbers, then show that
+\[ \lim \inf x_n \leq \lim \inf a_n \leq \lim \sup a_n \leq \lim \sup x_n. \]
 \end{tcolorbox}
+
 \begin{proof}
-Denote $x^* = \lim \sup x_n$. For a given $\epsilon>0$ consider $K = \{ k \in \mathbb{N} : x_k \geq x^*+\epsilon \}$ . Suppose $K$ is infinite. Then bounded sequence $\{ x_k \}_{k \in K}$ must contain a convergent subsequence $x_{k_c} \to c$. Limit of $x_{k_c}$ must lie in the closed interval:
-$$ \lim \inf x_{k_c} \leq c \leq \lim \sup x_{k_c} $$
-Since $x^*+\epsilon < \lim \inf x_{k_c}$ we've found a subsequence of $x_n$ that converges to a point that is strictly greater than $\lim \sup x_n$. Contradiction. Therefore, $K$ must be finite.
 
-Define $\mathcal{S}_n = \{ i \in \mathbb{N} : i \in K, i \leq n \}$ and $\mathcal{T}_n = \{ i \in \mathbb{N} : i \notin K, i \leq n \}$ and define sequences $s_n$ and $t_n$ by:
-$$ s_n = \sum_{i \in \mathcal{S}_n}x_i, \>\>\> t_n = \sum_{i \in \mathcal{T}_n}x_i $$
+Denote $x^* = \lim \sup x_n$.
+For a given $\epsilon>0$ consider $K = \set{ k \in \N : x_k \geq x^*+\epsilon }$ . Suppose $K$ is infinite. 
+Then bounded sequence $\set{ x_k }_{k \in K}$ must contain a convergent subsequence $x_{k_c} \to c$.
+Limit of $x_{k_c}$ must lie in the closed interval:
+\[ \lim \inf x_{k_c} \leq c \leq \lim \sup x_{k_c} \]
+Since $x^*+\epsilon < \lim \inf x_{k_c}$ we've found a subsequence of $x_n$ that converges to a point that is strictly greater than $\lim \sup x_n$. Contradiction.
+Therefore, $K$ must be finite.
 
-Since $\mathcal{S}_n \cup \mathcal{T}_n = \{ i \in \mathbb{N} : i \leq n \}$, the set of the first $n$ natural numbers, $s_n+t_n$ is equal to the sum of first $n$ elements of the sequence $x_n$. Therefore:
-$$ a_n = \frac{s_n}{n}+\frac{t_n}{n}. $$
-We notice that $\frac{s_n}{n} \to 0$ since $s_n \to s$, some finite number, and $n \to \infty$. Furthermore, we notice that every element of $\{ x_k \}_{k \in \mathbb{N}, k \notin K}$ is less than $x^* + \epsilon$. Then the sum of any $n$ elements from $\{ x_k \}_{k \in \mathbb{N}, k \notin K}$ is less than $n(x^* + \epsilon)$ for any $n \in \mathbb{N}$. Therefore:
-$$ \frac{t_n}{n} < x^* + \epsilon $$
+Define $\mathcal{S}_n = \set{ i \in \N : i \in K, i \leq n }$ and $\mathcal{T}_n = \set{ i \in \N : i \notin K, i \leq n }$ and define sequences $s_n$ and $t_n$ by:
+\[ s_n = \sum_{i \in \mathcal{S}_n}x_i, \>\>\> t_n = \sum_{i \in \mathcal{T}_n}x_i \]
+
+Since $\mathcal{S}_n \cup \mathcal{T}_n = \set{ i \in \N : i \leq n }$, the set of the first $n$ natural numbers, $s_n+t_n$ is equal to the sum of first $n$ elements of the sequence $x_n$.
+Therefore:
+\[ a_n = \frac{s_n}{n}+\frac{t_n}{n}. \]
+We notice that $\frac{s_n}{n} \to 0$ since $s_n \to s$, some finite number, and $n \to \infty$.
+Furthermore, we notice that every element of $\set{ x_k }_{k \in \N, k \notin K}$ is less than $x^* + \epsilon$.
+Then the sum of any $n$ elements from $\set{ x_k }_{k \in \N, k \notin K}$ is less than $n(x^* + \epsilon)$ for any $n \in \N$.
+Therefore:
+\[ \frac{t_n}{n} < x^* + \epsilon \]
 Using the result from problem 3 we find that:
-$$ \lim \sup (\frac{s_n}{n}+\frac{t_n}{n}) \leq \lim \sup \frac{s_n}{n} + \lim \sup \frac{t_n}{n} $$
+\[ \lim \sup (\frac{s_n}{n}+\frac{t_n}{n}) \leq \lim \sup \frac{s_n}{n} + \lim \sup \frac{t_n}{n} \]
 Since $\lim \sup \frac{s_n}{n} = 0$ and $\lim \sup \frac{t_n}{n} \leq x^* + \epsilon$:
-$$ \lim \sup a_n \leq x^* + \epsilon $$
-We notice that $\lim \sup x_n$ is a lower bound for the set $\{ x^*+\epsilon : \epsilon>0 \}$, therefore it cannot be greater than $x^*$. Thus $\lim \sup x_n \leq x^*$. We conclude that:
-$$ \lim \sup a_n \leq \lim \sup x_n $$
+\[ \lim \sup a_n \leq x^* + \epsilon \]
+We notice that $\lim \sup x_n$ is a lower bound for the set $\set{ x^*+\epsilon : \epsilon>0 }$, therefore it cannot be greater than $x^*$.
+Thus $\lim \sup x_n \leq x^*$.
+We conclude that:
+\[ \lim \sup a_n \leq \lim \sup x_n \]
 
 Similar logic can be employed to show that $\lim \inf x_n \leq \lim \inf a_n$.
 
@@ -126,127 +192,179 @@ Similar logic can be employed to show that $\lim \inf x_n \leq \lim \inf a_n$.
 \begin{tcolorbox}
 In particular, if $x_n \to x$ then show that $a_n \to x$.
 \end{tcolorbox}
+
 \begin{proof}
-If $x_n \to x$ then $\lim \inf x_n = \lim \sup x_n = x$. Therefore $\lim \inf a_n = \lim \sup a_n = x$. From this $a_n \to x$.
+
+If $x_n \to x$ then $\lim \inf x_n = \lim \sup x_n = x$.
+Therefore $\lim \inf a_n = \lim \sup a_n = x$.
+From this $a_n \to x$.
+
 \end{proof}
 
 \begin{tcolorbox}
-Does the convergence of $\{a_n\}$ imply the convergence of $\{x_n\}$?
+Does the convergence of $\set{a_n}$ imply the convergence of $\set{x_n}$?
 \end{tcolorbox}
-Answer: Convergence of $a_n$ does not necessarily imply the convergence of $x_n$.
-\begin{proof}
-Counterexample: Consider sequence $\{ x_n \} = \{ (-1)^n : n \in \mathbb{N} \}$. Sequence $a_n$ for such $x_n$ converges to $0$. Indeed $a_n$ can be rewritten as:
-$$ a_n = \frac{0 \cdot k + (-1)^{n-2k}}{n} = \frac{0}{n} + \frac{(-1)^{n-2k}}{n} $$
-where $k = \left \lfloor \frac{n}{2} \right \rfloor$.
-From this it is clear that $\frac{(-1)^{n-2k}}{n} \to 0$ as $n \to 0$.
 
-At the same time, $x_n$ clearly does not converge.
+Answer: Convergence of $a_n$ does not necessarily imply the convergence of $x_n$.
+
+\begin{proof}
+
+Counterexample: Consider sequence $\set{ x_n } = \set{ (-1)^n : n \in \N }$. Sequence $a_n$ for such $x_n$ converges to $0$. Indeed $a_n$ can be rewritten as:
+\[ a_n = \frac{0 \cdot k + (-1)^{n-2k}}{n} = \frac{0}{n} + \frac{(-1)^{n-2k}}{n} \]
+where $k = \left \lfloor \frac{n}{2} \right \rfloor$.
+From this it is clear that $\frac{(-1)^{n-2k}}{n} \to 0$ as $n \to 0$. At the same time, $x_n$ clearly does not converge.
+
 \end{proof}
 
 
 \subsection*{Problem 5}
 
 \begin{tcolorbox}
-Consider any sequence $(x_n)$ defined by choosing $0 < x_1 < 1$ and then defining $x_{n+1} = 1-\sqrt{1 - x_n}$ for $n \geq 0$. Show that $x_n$ is a decreasing sequence converging to zero.
+Consider any sequence $(x_n)$ defined by choosing $0 < x_1 < 1$ and then defining $x_{n+1} = 1-\sqrt{1 - x_n}$ for $n \geq 0$.
+Show that $x_n$ is a decreasing sequence converging to zero.
 \end{tcolorbox}
 
 \begin{proof}
+
 Suppose that $0 < x_n < 1$. Then
-$$ 0<1-x_n<1 $$
-$$ 0<\sqrt{1-x_n}<1 $$
-$$ 0<1-\sqrt{1-x_n}<1 $$
-$$ 0<x_{n+1}<1 $$
+\begin{gather*}
+    0<1-x_n<1 \\
+    0<\sqrt{1-x_n}<1 \\
+    0<1-\sqrt{1-x_n}<1 \\
+    0<x_{n+1}<1
+\end{gather*}
+
 By induction with $0 < x_1 < 1$ we conclude that all elements of sequence $x_n$ are between $0$ and $1$.
 
-Furthermore, $x_n$ is decreasing. To prove this, consider the difference:
-$$ d = x_{n+1} - x_n = 1-\sqrt{1-x_n} - x_n = 1-x_n - \sqrt{1-x_n} = \sqrt{1-x_n} \left(\sqrt{1-x_n}-1\right) $$
-We notice that $0 < \sqrt{1-x_n} < 1$, then $d < 0$, thus for any $n\in\mathbb{N}: x_{n+1} < x_n$. Therefore, limit of $x_n$ must lie in $[0,1)$.
+Furthermore, $x_n$ is decreasing.
+To prove this, consider the difference:
+\[ d = x_{n+1} - x_n = 1-\sqrt{1-x_n} - x_n = 1-x_n - \sqrt{1-x_n} = \sqrt{1-x_n} \left(\sqrt{1-x_n}-1\right) \]
+We notice that $0 < \sqrt{1-x_n} < 1$, then $d < 0$, thus for any $n\in\N: x_{n+1} < x_n$.
+Therefore, limit of $x_n$ must lie in $[0,1)$.
 
-Suppose that $\lim x_n = L > 0$. Then for all $x_n$:
-$$ x_n > L $$
-$$ x_{n+1} > L $$
-$$ 1-\sqrt{1-x_n} > L $$
-$$ \sqrt{1-x_n} < 1-L $$
-$$ 1-x_n < (1-L)^2 $$
-$$ x_n-1 > -(1-L)^2 $$
-$$ x_n > 1-(1-L)^2 $$
+Suppose that $\lim x_n = L > 0$.
+Then for all $x_n$:
+\begin{gather*}
+    x_n > L \\
+    x_{n+1} > L \\
+    1-\sqrt{1-x_n} > L \\
+    \sqrt{1-x_n} < 1-L \\
+    1-x_n < (1-L)^2 \\
+    x_n-1 > -(1-L)^2 \\
+    x_n > 1-(1-L)^2   
+\end{gather*}
+
 We then examine the difference
-$$ 1-(1-L)^2 - L = (1-L) - (1-L)^2 = (1-L)(1-1+L) = L(1-L),$$
+\[ 1-(1-L)^2 - L = (1-L) - (1-L)^2 = (1-L)(1-1+L) = L(1-L), \]
 which is greater than $0$ for any $0<L<1$. Therefore
-$$ x_n > 1-(1-L)^2 > L $$
-However, we then can find $\epsilon$-neighbourhood of $L$ that contains no points of $x_n$. Therefore $L>0$ cannot be a limit of $x_n$. Contradiction. We conclude that $\lim x_n = 0$.
+\[ x_n > 1-(1-L)^2 > L \]
+However, we then can find $\epsilon$-neighbourhood of $L$ that contains no points of $x_n$.
+Therefore $L>0$ cannot be a limit of $x_n$.
+Contradiction.
+We conclude that $\lim x_n = 0$.
 
 Another way to see that the limit of sequence $x_n$ is $0$ is to evaluate its first few elements:
-$$ x_2 = 1-\sqrt{1-x_1} = 1-(1-x_1)^{\left(\frac{1}{2}\right)^1} $$
-$$ x_3 = 1-\sqrt{1-x_2} = 1-\sqrt{1-\left(1-\sqrt{1-x_1}\right)} = 1-(1-x_1)^{\left(\frac{1}{2}\right)^2} $$
+\begin{align*}
+    x_2 & = 1-\sqrt{1-x_1} = 1-(1-x_1)^{\left(\frac{1}{2}\right)^1} \\
+    x_3 & = 1-\sqrt{1-x_2} = 1-\sqrt{1-\left(1-\sqrt{1-x_1}\right)} = 1-(1-x_1)^{\left(\frac{1}{2}\right)^2}
+\end{align*}
+    
 It is easy to see that:
-$$ x_n = 1-(1-x_1)^{\left(\frac{1}{2}\right)^n} $$
-For $0 < x_1 <1$ we notice that $(1-x_1)^p \to 1$ as $p \to 0$. Therefore $x_n \to 0$ as $n \to \infty$.
+\[ x_n = 1-(1-x_1)^{\left(\frac{1}{2}\right)^n} \]
+For $0 < x_1 <1$ we notice that $(1-x_1)^p \to 1$ as $p \to 0$.
+Therefore $x_n \to 0$ as $n \to \infty$.
 
 \end{proof}
-
 
 \begin{tcolorbox}
 Also, show that $\frac{x_{n+1}}{x_n} \to \frac{1}{2}$.
 \end{tcolorbox}
 
 \begin{proof}
-$$ \frac{x_{n+1}}{x_n} = \frac{1-\sqrt{1-x_n}}{x_n} = \frac{x_n}{x_n \left( 1+\sqrt{1-x_n} \right) } = \frac{1}{1+\sqrt{1-x_n}}$$
-\end{proof}
+
+\[ \frac{x_{n+1}}{x_n} = \frac{1-\sqrt{1-x_n}}{x_n} = \frac{x_n}{x_n \left( 1+\sqrt{1-x_n} \right) } = \frac{1}{1+\sqrt{1-x_n}} \]
+
 As $x_n \to 0$ we can see that limit of the denominator of the above expression is $2$. Thus, $\frac{x_{n+1}}{x_n} = \frac{1}{2}$.
+
+\end{proof}
+
 
 \subsection*{Problem 6}
 
 \begin{tcolorbox}
-The Greeks thought that the number $\Phi$, known as the Golden Mean, was the ratio of the sides
-of the most aesthetically pleasing rectangles.
-Imagine a line segment $A$ divided into two smaller line segments $B$ and $C$, with lengths $a$, $b$,
-and $c$ respectively and $b > c$. If the proportion between $a$ and $b$ is the same as the proportion
-between $b$ and $c$, then we call this proportion $\Phi$.
+The Greeks thought that the number $\Phi$, known as the Golden Mean, was the ratio of the sides of the most aesthetically pleasing rectangles.
+Imagine a line segment $A$ divided into two smaller line segments $B$ and $C$, with lengths $a$, $b$, and $c$ respectively and $b > c$.
+If the proportion between $a$ and $b$ is the same as the proportion between $b$ and $c$, then we call this proportion $\Phi$.
 
-a) Show that with $a, b, c$ as above, $\Phi = \frac{b}{c}$ satisfies $\Phi^2 = \Phi + 1$. Conclude that $\Phi = \frac{1+\sqrt{5}}{2}$
+a) Show that with $a, b, c$ as above, $\Phi = \frac{b}{c}$ satisfies $\Phi^2 = \Phi + 1$.
+Conclude that $\Phi = \frac{1+\sqrt{5}}{2}$
 \end{tcolorbox}
 
 \begin{proof}
-$$ \Phi = \frac{a}{b} = \frac{b}{c} $$
-$$ ac=b^2 $$
-$$ ac^2 = b^2 c $$
-$$ \frac{b^2}{c^2} = \frac{a}{c} $$
-$$ \frac{b^2}{c^2} = \frac{b+c}{c} $$
-$$ \frac{b^2}{c^2} = \frac{b}{c} + 1 $$
-$$ \Phi^2 = \Phi + 1 $$
-Solving for $\Phi$ we get:
-$$ \Phi = \frac{1 \pm \sqrt{5}}{2} $$
-Since $\Phi$ is a ratio between lengths of line segments, it cannot be negative. Thus, $\Phi = \frac{1 + \sqrt{5}}{2}$.
-\end{proof}
 
+\begin{gather*}
+    \Phi = \frac{a}{b} = \frac{b}{c} \\
+    ac=b^2 \\
+    ac^2 = b^2 c \\
+    \frac{b^2}{c^2} = \frac{a}{c} \\
+    \frac{b^2}{c^2} = \frac{b+c}{c} \\
+    \frac{b^2}{c^2} = \frac{b}{c} + 1 \\
+    \Phi^2 = \Phi + 1
+\end{gather*}
+
+Solving for $\Phi$ we get:
+\[ \Phi = \frac{1 \pm \sqrt{5}}{2} \]
+Since $\Phi$ is a ratio between lengths of line segments, it cannot be negative.
+Thus, $\Phi = \frac{1 + \sqrt{5}}{2}$.
+
+\end{proof}
 
 \begin{tcolorbox}
 b) Show that:
-$$ \Phi = 1+\frac{1}{1+\frac{1}{1+\frac{1}{1+\dots}}}$$
+\[ \Phi = 1+\frac{1}{1+\frac{1}{1+\frac{1}{1+\dots}}} \]
 \end{tcolorbox}
 
 \begin{proof}
+
 Consider sequence $x_n$, which is defined by a recurrence relation:
-$$ x_1 = 1, \>\>\>\>\> x_{n+1} = 1+\frac{1}{x_n} $$
-Sequence $x_n$ is positive and bounded. Indeed, for any $n \in \mathbb{N}$: $1 \leq x_n \leq 2 $.
+\[ x_1 = 1, \>\>\>\>\> x_{n+1} = 1+\frac{1}{x_n} \]
+Sequence $x_n$ is positive and bounded.
+Indeed, for any $n \in \N$: $1 \leq x_n \leq 2 $.
 
 Now consider two subsequences of $x_n$: odd $x^o_n$ and even $x^e_n$:
-$$ x^o_n = x_n, \>\>\> x^o_{n+1} = 1+\frac{1}{1+\frac{1}{x_n}} $$
-$$ x^e_n = x_{n+1}, \>\>\> x^e_{n+1} = 1 + \frac{1}{1+\frac{1}{x_{n+1}}} $$
+\begin{align*}
+    x^o_n & = x_n, \quad\>\>\> x^o_{n+1} = 1+\frac{1}{1+\frac{1}{x_n}} \\
+    x^e_n & = x_{n+1}, \>\>\> x^e_{n+1} = 1 + \frac{1}{1+\frac{1}{x_{n+1}}}
+\end{align*}
 We examine difference between two subsequent elements of subsequence $x^o_{n}$:
-$$ x^o_{n+1} - x^o_{n} = 1+\frac{1}{1+\frac{1}{x_n}} - x_n = - \frac{x_n^2 - x_n - 1}{x_n + 1} = -\frac{(x_n-\Phi)(x_n-\frac{1-\sqrt{5}}{2})}{x_n+1} = $$
-\begin{equation} \label{eq:1}
-= \frac{(\Phi-x_n)(x_n+\frac{\sqrt{5}}{2}-1)}{x_n+1}
-\end{equation}
+\begin{multline} \label{eq:1}
+    x^o_{n+1} - x^o_{n} 
+    = 1 + \frac{1}{1+\frac{1}{x_n}} - x_n 
+    = - \frac{x_n^2 - x_n - 1}{x_n + 1} \\
+    = -\frac{(x_n-\Phi)(x_n-\frac{1-\sqrt{5}}{2})}{x_n+1} 
+    = \frac{(\Phi-x_n)(x_n+\frac{\sqrt{5}}{2}-1)}{x_n+1}    
+\end{multline}
 
-We notice that expression $\ref{eq:1}$ is positive only if $x_n < \Phi$. Furthermore we claim that if $x^o_n < \Phi$ then $x^o_{n+1} < \Phi$. To prove that we consider the difference 
-$$ x^o_{n+1} - \Phi = \frac{2x_n+1}{x_n+1} - \frac{1+\sqrt{5}}{2} = \frac{4x_n+2-(x+\sqrt{5}x_n + 1 + \sqrt{5})}{2(x_n+1)} = $$
-$$ = \frac{x_n(3-\sqrt{5})+(1-\sqrt{5})}{2(x_n+1)} = \frac{4x_n + 3 + \sqrt{5} - 3\sqrt{5}-5}{2(x_n+1)(3+\sqrt{5})} = \frac{2x_n-1-\sqrt{5}}{(x_n+1)(3+\sqrt{5})}, $$
-which is positive if and only if $x_n < \Phi$. Therefore $x^o_n < \Phi \Rightarrow x^o_{n+1} < \Phi$. We notice that $x^o_1 = 1 < \Phi$, therefore the whole sequence $x^o_n$ is increasing.
+We notice that expression $\ref{eq:1}$ is positive only if $x_n < \Phi$.
+Furthermore we claim that if $x^o_n < \Phi$ then $x^o_{n+1} < \Phi$.
+To prove that we consider the difference 
+\begin{multline*}
+    x^o_{n+1} - \Phi = \frac{2x_n+1}{x_n+1} - \frac{1+\sqrt{5}}{2} \\
+    = \frac{4x_n+2-(x+\sqrt{5}x_n + 1 + \sqrt{5})}{2(x_n+1)}
+    = \frac{x_n(3-\sqrt{5})+(1-\sqrt{5})}{2(x_n+1)} \\
+    = \frac{4x_n + 3 + \sqrt{5} - 3\sqrt{5}-5}{2(x_n+1)(3+\sqrt{5})} = \frac{2x_n-1-\sqrt{5}}{(x_n+1)(3+\sqrt{5})},    
+\end{multline*}
+which is positive if and only if $x_n < \Phi$.
+Therefore $x^o_n < \Phi \Rightarrow x^o_{n+1} < \Phi$.
+We notice that $x^o_1 = 1 < \Phi$, therefore the whole sequence $x^o_n$ is increasing.
 
-Moreover, subsequence $x^o_n$ is bounded by boundedness of $x_n$; therefore, it must converge. Any convergent sequence in complete metric space is a Cauchy sequence. Therefore expression $\ref{eq:1}$ must be equal to zero as $n \to \infty$.
-$$ \lim_{n \to \infty} \frac{(\Phi-x_n)(x_n+\frac{\sqrt{5}}{2}-1)}{x_n+1} = \frac{(\Phi-\lim x^o_n)(\lim x^o_n+\frac{\sqrt{5}}{2}-1)}{\lim x^o_n+1} = 0, $$
+Moreover, subsequence $x^o_n$ is bounded by boundedness of $x_n$; therefore, it must converge.
+Any convergent sequence in complete metric space is a Cauchy sequence.
+Therefore expression $\ref{eq:1}$ must be equal to zero as $n \to \infty$.
+\[
+    \lim_{n \to \infty} \frac{(\Phi-x_n)(x_n+\frac{\sqrt{5}}{2}-1)}{x_n+1} 
+    = \frac{(\Phi-\lim x^o_n)(\lim x^o_n+\frac{\sqrt{5}}{2}-1)}{\lim x^o_n+1} = 0,
+\]
 which is true if and only if $\lim x^o_n = \Phi$.
 
 We can prove in a similar way that subsequence $x^e_n$ also converges to $\Phi$.
@@ -257,32 +375,49 @@ Since odd and even subsequences of sequence $x_n$ converge to $\Phi$, $x_n$ itse
 
 \begin{tcolorbox}
 c) Show that:
-$$ \Phi = \sqrt{1+\sqrt{1+\sqrt{1+\sqrt{1+\sqrt{1+\dots}}}}} $$
+\[ \Phi = \sqrt{1+\sqrt{1+\sqrt{1+\sqrt{1+\sqrt{1+\dots}}}}} \]
 \end{tcolorbox}
 
 \begin{proof}
 Consider sequence $y_n$, which is defined by a recurrence relation:
-$$ y_1 = 1, \>\>\>\>\> y_{n+1} = \sqrt{1 + y_n} $$
+\[ y_1 = 1, \quad\quad y_{n+1} = \sqrt{1 + y_n} \]
 \end{proof}
 
 We consider the ratio of two subsequent elements of $y_n$:
-$$ \frac{y_{n+1}}{y_n} = \frac{\sqrt{1+y_n}}{y_n} $$
-$$ y_{n+1} > y_n \iff \frac{\sqrt{1+y_n}}{y_n} > 1 \iff \frac{1+y_n}{y_n^2} -1 > 0 \iff $$
-$$ \iff -\frac{y_n^2-y_n-1}{y_n^2} > 0 \iff \frac{(\Phi-y_n)(y_n+\frac{\sqrt{5}}{2}-1)}{y_n^2} > 0. $$
-This expression is true if and only if $y_n < \Phi$. Furthermore, we can prove that $y_n < \Phi \Rightarrow y_{n+1} < \Phi$ (the same argument as in part (c) of the problem). We also note that $y_1 = 1 < \Phi$. We conclude that $y_n$ is increasing. Furthermore, $y_n$ is bounded, therefore it must converge and, furthermore, it must be a Cauchy sequence. Therefore, denoting $\lim y_n = L$:
-$$ \lim_{n \to \infty} \frac{\sqrt{1+y_n}}{y_n} = 1 \iff \frac{\sqrt{1+L}}{L} = 1 $$
-$$ L^2 - L - 1 = 0 $$
-From this we find that $L = \frac{1 \pm \sqrt{5}}{2}$. Since all $y_n$ are positive, $\lim y_n = \frac{1+\sqrt{5}}{2} = \Phi$.
+\[ \frac{y_{n+1}}{y_n} = \frac{\sqrt{1+y_n}}{y_n} \]
+\begin{multline*}
+    y_{n+1} > y_n \iff \frac{\sqrt{1+y_n}}{y_n} > 1 \iff \frac{1+y_n}{y_n^2} -1 > 0 \iff \\
+    \iff -\frac{y_n^2-y_n-1}{y_n^2} > 0 \iff \frac{(\Phi-y_n)(y_n+\frac{\sqrt{5}}{2}-1)}{y_n^2} > 0. 
+\end{multline*}
 
+This expression is true if and only if $y_n < \Phi$.
+Furthermore, we can prove that $y_n < \Phi \Rightarrow y_{n+1} < \Phi$ (the same argument as in part (c) of the problem).
+We also note that $y_1 = 1 < \Phi$.
+We conclude that $y_n$ is increasing.
+Furthermore, $y_n$ is bounded, therefore it must converge and, furthermore, it must be a Cauchy sequence.
+Therefore, denoting $\lim y_n = L$:
+\begin{gather*}
+    \lim_{n \to \infty} \frac{\sqrt{1+y_n}}{y_n} = 1 \iff \frac{\sqrt{1+L}}{L} = 1 \\
+    L^2 - L - 1 = 0    
+\end{gather*}
+
+From this we find that $L = \dfrac{1 \pm \sqrt{5}}{2}$. Since all $y_n$ are positive:
+\[ \lim y_n = \dfrac{1+\sqrt{5}}{2} = \Phi. \]
 
 \begin{tcolorbox}
-d) The Fibonacci sequence is defined by $z_1 = 1, z_2 = 1, z_{n+2} = z_{n+1} + z_n$. Show that the
-sequence of ratios of successive elements, $\frac{z_{n+1}}{z_n}$, converges to $\Phi$.
+d) The Fibonacci sequence is defined by $z_1 = 1, z_2 = 1, z_{n+2} = z_{n+1} + z_n$.
+Show that the sequence of ratios of successive elements, $\frac{z_{n+1}}{z_n}$, converges to $\Phi$.
 \end{tcolorbox}
+
 \begin{proof}
-Consider sequence $x_n = \frac{z_{n+1}}{z_n}$. We can rewrite this as
-$$ x_n = \frac{z_{n+1}}{z_n} = \frac{z_{n}+z_{n-1}}{z_n} = 1 + \frac{z_{n-1}}{z_n} = 1 + \frac{1}{\frac{z_n}{z_{n-1}}} = 1+\frac{1}{x_{n-1}}$$
-We also notice that $x_1 = 1$. Thus, by 6b), sequence $x_n$ must converge to $\Phi$.
+
+Consider sequence $x_n = \frac{z_{n+1}}{z_n}$.
+We can rewrite this as
+\[ x_n = \frac{z_{n+1}}{z_n} = \frac{z_{n}+z_{n-1}}{z_n} = 1 + \frac{z_{n-1}}{z_n} = 1 + \frac{1}{\frac{z_n}{z_{n-1}}} = 1+\frac{1}{x_{n-1}} \]
+We also notice that $x_1 = 1$.
+Thus, by 6b), sequence $x_n$ must converge to $\Phi$.
+
 \end{proof}
+
 
 \end{document}

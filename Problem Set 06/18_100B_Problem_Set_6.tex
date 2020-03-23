@@ -10,6 +10,7 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 
 \theoremstyle{remark}
 \newtheorem{claim}{Claim}
@@ -17,7 +18,7 @@
 
 \title{18.100B: Problem Set 6}
 \author{Dmitry Kaysin}
-\date{January 2020}
+\date{December 2019}
 \begin{document}
 \maketitle 
 
@@ -25,21 +26,21 @@
 \subsection*{Problem 1}
 
 \begin{tcolorbox}
-Prove that if $\sum |a_n|$ converges, then $\sum |a_n|^2$ also converges.
+Prove that if $\sum \abs{a_n}$ converges, then $\sum \abs{a_n}^2$ also converges.
 \end{tcolorbox}
 
 \begin{proof}
 
-Since  $\sum |a_n|$ converges $\lim_{n \to \infty} |a_n|$ must be equal to $0$, which implies that for any $\epsilon>0$ there exists $N \in \N$ such that $|a_n| - 0 < \epsilon$ for all $n > N$.
+Since  $\sum \abs{a_n}$ converges $\lim_{n \to \infty} \abs{a_n}$ must be equal to $0$, which implies that for any $\epsilon>0$ there exists $N \in \N$ such that $\abs{a_n} - 0 < \epsilon$ for all $n > N$.
 Consider such $N$ for $\epsilon = 1$.
 
-Since series $\sum |a_n|$ converges, its subseries $\sum_{n=N+1}^{\infty}|a_n|$ must also converge.
-We notice that $|a_n|^2 < |a_n|$ for all $n>N$ since $|a_n| < 1$. Therefore $\sum_{n=N+1}^{\infty}|a_n|^2$ must also converge.
+Since series $\sum \abs{a_n}$ converges, its subseries $\sum_{n=N+1}^{\infty}\abs{a_n}$ must also converge.
+We notice that $\abs{a_n}^2 < \abs{a_n}$ for all $n>N$ since $\abs{a_n} < 1$. Therefore $\sum_{n=N+1}^{\infty}\abs{a_n}^2$ must also converge.
 
-We then notice that series $\sum |a_n|^2$ can be written as a sum of two expressions: 
-$$ \sum_{n=1}^{\infty} |a_n|^2 = \sum_{n=1}^{N} |a_n|^2 + \sum_{n=N+1}^{\infty} |a_n|^2 $$.
+We then notice that series $\sum \abs{a_n}^2$ can be written as a sum of two expressions: 
+$$ \sum_{n=1}^{\infty} \abs{a_n}^2 = \sum_{n=1}^{N} \abs{a_n}^2 + \sum_{n=N+1}^{\infty} \abs{a_n}^2 $$.
 
-The second expression is a convergent series, as we have just proved. The first expression must be finite since $N$ is finite. We conclude that $\sum |a_n|^2$ converges.
+The second expression is a convergent series, as we have just proved. The first expression must be finite since $N$ is finite. We conclude that $\sum \abs{a_n}^2$ converges.
 
 \end{proof}
 

@@ -5,12 +5,18 @@
 \usepackage[]{amsthm} 
 \usepackage[]{amssymb} 
 \usepackage{tcolorbox}
+\usepackage{mathtools}
 
 \newcommand{\R}{\mathbb{R}}
-\newcommand{\Q}{\mathbb{Q}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\vect}[1]{\mathbf{#1}}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\set}{ \{ }{ \} }
 
 
 \title{18.100B: Problem Set 1}
@@ -58,6 +64,7 @@ Therefore $s \leq u < u+\frac{1}{n}$ for any $n \in \N$ and $u+\frac{1}{n}$ is a
 
 \end{proof}
 
+
 \subsection*{Problem 3}
 
 \begin{tcolorbox}
@@ -93,9 +100,9 @@ Thus, $x = \max (\sup A, \sup B)$ is the least upper bound of the combined set $
 \begin{tcolorbox}
 Fix $b>1$.
 
-(a) If $m, n, p, q$ are integers, $n > 0$, $q > 0$, and $r = m/n = p/q$, prove that
+a) If $m, n, p, q$ are integers, $n > 0$, $q > 0$, and $r = m/n = p/q$, prove that
 \begin{equation} \label{eq:1}
-(b^m)^{\frac{1}{n}} = (b^p)^{\frac{1}{q}}
+    (b^m)^{\frac{1}{n}} = (b^p)^{\frac{1}{q}}
 \end{equation}
 \end{tcolorbox}
 
@@ -132,7 +139,7 @@ This means that there is only one rational number $b^r$ for $b>1$ and any given 
 \end{proof}
 
 \begin{tcolorbox}
-(b) Prove that $b^{r+s} = b^r b^s$ if $r, s$ are rational.
+b) Prove that $b^{r+s} = b^r b^s$ if $r, s$ are rational.
 \end{tcolorbox}
 
 \begin{proof}
@@ -151,13 +158,14 @@ Therefore $b^{r+s} = b^r b^s$.
 \end{proof}
 
 \begin{tcolorbox}
-(c) If $x$ is real, define $B(x)$ to be the set of all numbers $b^t$, where $t$ is rational and $t \leq x$.
+c) If $x$ is real, define $B(x)$ to be the set of all numbers $b^t$, where $t$ is rational and $t \leq x$.
 Prove that
-$$b^r = \sup B(r)$$
+\[ b^r = \sup B(r) \]
 when $r$ is rational.
 \end{tcolorbox}
 
 \begin{proof}
+
 First we prove that for $b>1 : t \leq r \Rightarrow b^t \leq b^r$.
 We note that $(b^n)^{-1} = \frac{1}{b^n} = b^{-n}$ for $n \in \Q$.
 Then $b^m \leq b^n \iff b^n b^{-m} \geq 1 \iff b^{n-m} \geq 1$.
@@ -166,7 +174,7 @@ Then $b^{n-m} = (b^p)^{\frac{1}{q}}$ is larger than or equal to $1$ as long as $
 Thus, $n-m \geq 0 \iff m \leq n \iff b^m \leq b^n$ for $b>1$.
 In other words, $f: t \mapsto b^t$ is a monotone (order preserving) map for $r \in \Q$.
 
-Denote $R(r) = \{t \mid t \in \Q, t \leq r \}$, all rational numbers less than or equal to $r$.
+Denote $R(r) = \set{t \mid t \in \Q, t \leq r }$, all rational numbers less than or equal to $r$.
 The monotone map $f$ maps the largest element of $R(r)$ to the largest element of $B(r)$, or $\forall t \in R(r): b^t \leq b^r$.
 Since all elements of $B(r)$ are less or equal to $b^r$, then it is an upper bound for $B(r)$.
 Since $b^r$ is an element of $B(r)$, it is the least upper bound.
@@ -174,7 +182,7 @@ Since $b^r$ is an element of $B(r)$, it is the least upper bound.
 \end{proof}
 
 \begin{tcolorbox}
-(d) Prove that $b^{x+y} = b^x b^y$ for all real $x$ and $y$.
+d) Prove that $b^{x+y} = b^x b^y$ for all real $x$ and $y$.
 \end{tcolorbox}
 
 \begin{proof}
@@ -187,7 +195,7 @@ Since map $t \mapsto b^t$ is monotone for $b>1$, $\forall m \in R(x) : b^m \leq 
 By definition $b^x = \sup B(x)$ and $b^y = \sup B(y)$, then:
 \[ \forall m \in R(x), \forall n \in R(y) : b^{m+n} \leq b^x b^y \]
 We note that $x = \sup R(x)$ and $y = \sup R(y)$ by definition.
-Then $\sup \{ m+n \mid m \in R(x), n \in R(y)\} = x+y$, and:
+Then $\sup \set{ m+n \mid m \in R(x), n \in R(y)} = x+y$, and:
 \[ \forall t \in B(x+y): t \leq b^x b^y \]
 
 Thus, $b^x b^y$ is an upper bound for $B(x+y)$.
@@ -213,55 +221,76 @@ Prove that no order can be defined in the complex field that turns it into an or
 \begin{proof}
 Suppose there exists an order that turns $\C$ into an ordered field.
 Then, the following must hold for any ordered field:
-$$\forall a \in \mathbb{F} : a^2 \geq 0$$
-Note that $-1$ cannot be equal to $0$ since only one distinct additive identity is possible in a field. Thus:
-$$-1 = i^2 > 0$$
- The following must also hold for any ordered field:
-$$ a > 0 \iff -a < 0$$
-$$ -1 > 0 \iff 1 < 0$$
+\[ \forall a \in \F : a^2 \geq 0 \]
+Note that $-1$ cannot be equal to $0$ since only one distinct additive identity is possible in a field.
+Thus:
+\[ -1 = i^2 > 0 \]
+The following must also hold for any ordered field:
+\begin{gather*}
+    a > 0 \iff -a < 0 \\
+    -1 > 0 \iff 1 < 0    
+\end{gather*}
 However the following must also hold:
-$$1 = (-1)^2 > 0$$
-Contradiction. Thus, no order can be defined in the complex field that turns it into an ordered field.
+\[ 1 = (-1)^2 > 0 \]
+Contradiction.
+Thus, no order can be defined in the complex field that turns it into an ordered field.
 
 \end{proof}
+
 
 \subsection*{Problem 6}
 
 \begin{tcolorbox}
-Suppose $z = a + bi$, $w = c + di$. Define $z < w$ if $a < c$ or $a = c, b < d$. Prove that this turns the set of all complex numbers into an ordered set. (This is known as a dictionary order, or lexicographic order)
+Suppose $z = a + bi$, $w = c + di$.
+Define $z < w$ if $a < c$ or $a = c, b < d$.
+Prove that this turns the set of all complex numbers into an ordered set.
+(This is known as a dictionary order, or lexicographic order)
 \end{tcolorbox}
 
 \begin{proof}
-Consider $z = a + bi$, $w = c + di$. We can see that only one of the following can be true: $z<w$, $z>w$ or $z=w$:
+
+Consider $z = a + bi$, $w = c + di$.
+We can see that only one of the following can be true: $z<w$, $z>w$ or $z=w$:
 \begin{itemize}
-\item If $a > c$ then $z>w, z \neq w, z \not< w$;
-\item If $a < c$ then $z<w, z \neq w, z \not> w$;
-\item if $a = c$ and $b = d$ then $z \not> w, z = w, z \not< w$;
-\item If $a = c$ and $b > d$ then $z > w, z \neq w, z \not< w$
-\item if $a = c$ and $b < d$ then $z \not> w, z \neq w, z < w$
+    \item If $a > c$ then $z>w, z \neq w, z \not< w$;
+    \item If $a < c$ then $z<w, z \neq w, z \not> w$;
+    \item if $a = c$ and $b = d$ then $z \not> w, z = w, z \not< w$;
+    \item If $a = c$ and $b > d$ then $z > w, z \neq w, z \not< w$
+    \item if $a = c$ and $b < d$ then $z \not> w, z \neq w, z < w$
 \end{itemize}
 
-Consider $z = a + bi$, $w = c + di$, $u = e + fi$, such that $z<w, w<u$. Since $z<w$  then either $a<c$ or $a=c, b<d$. Since $w<u$  then either $c<e$ or $c=e, d<f$. Transitivity of the given order ($z<u$) follows from transitivity of standard ordering of real numbers $a,b,c,d,e,f$.
+Consider $z = a + bi$, $w = c + di$, $u = e + fi$, such that $z<w, w<u$. Since $z<w$  then either $a<c$ or $a=c, b<d$.
+Since $w<u$  then either $c<e$ or $c=e, d<f$.
+Transitivity of the given order ($z<u$) follows from transitivity of standard ordering of real numbers $a,b,c,d,e,f$.
+
 \end{proof}
 
 \begin{tcolorbox}
 Does this ordered set have the least-upper-bound
 property? 
 \end{tcolorbox}
+
 Answer: No.
 
 \begin{proof}
-Consider the set $E(x) = \{ a+bi \mid a<x, b \in \R \}$ with the given order. All upper bounds of set $E(x)$ are $U = \{a+bi \mid a \geq x b \in \R\}$. However, for any upper bound $u = (a+bi) \in U$ there exists an upper bound $g \in U$ such that $g > u$, for example $g = a+(b+d)i$ where $d>0$. Therefore, no least upper bound exists for $E(x)$.
+
+Consider the set $E(x) = \set{ a+bi \mid a<x, b \in \R }$ with the given order.
+All upper bounds of set $E(x)$ are $U = \set{a+bi \mid a \geq x b \in \R}$. 
+However, for any upper bound $u = (a+bi) \in U$ there exists an upper bound $g \in U$ such that $g > u$, for example $g = a+(b+d)i$ where $d>0$. 
+Therefore, no least upper bound exists for $E(x)$.
+
 \end{proof}
+
 
 \subsection*{Problem 7}
 
 \begin{tcolorbox}
 Prove that
 \begin{equation} \label{eq:2}
-    |x + y|^2 + |x - y|^2 = 2|x|^2 + 2|y|^2    
+    \abs{ x + y }^2 + \abs{ x - y }^2 = 2\abs{x}^2 + 2\abs{y}^2    
 \end{equation}
-if $x \in \R^k$ and $y \in \R^k$. Interpret this geometrically, as a statement about parallelograms.
+if $x \in \R^k$ and $y \in \R^k$.
+Interpret this geometrically, as a statement about parallelograms.
 \end{tcolorbox}
 
 \begin{proof}
